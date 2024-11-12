@@ -1,0 +1,26 @@
+{
+    "name": "GameTemplate",
+    "rootNamespace": "",
+    "references": [
+        "VContainer",
+        "UnityEngine.UI.Tests",
+        "Unity.TextMeshPro",
+        "UISwitcher",
+        "DOTween.Modules",
+        "Flexalon",
+        "ParticleImage",
+        "Unity.Addressables",
+        "Unity.ResourceManager",
+        "UniTask",
+        "UniTask.Addressables"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
