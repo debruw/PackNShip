@@ -23,6 +23,14 @@ namespace GameTemplate._Game.Scripts.Inventory
             }
         }
 
+        public int SmallestSide
+        {
+            get
+            {
+                return Height >= Width ? Height : Width;
+            }
+        }
+
         public int onGridPositionX, onGridPositionY;
 
         public bool rotated;

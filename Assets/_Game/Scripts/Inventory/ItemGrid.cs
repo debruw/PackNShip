@@ -11,7 +11,7 @@ namespace GameTemplate._Game.Scripts.Inventory
         private InventoryItem[,] inventoryItemSlot;
         bool isInitialized;
 
-        private void Start()
+        private void Awake()
         {
             rectTransform = GetComponent<RectTransform>();
             if (isInitialized == false)
@@ -34,10 +34,11 @@ namespace GameTemplate._Game.Scripts.Inventory
             inventoryItemSlot = new InventoryItem[width, height];
             Vector2 size = new Vector2(width * tileSizeWidth, height * tileSizeHeight);
             rectTransform.sizeDelta = size;
-            
+
             if (parentBox != null)
             {
-                parentBox.sizeDelta = size + new Vector2(150, 150);
+                parentBox.sizeDelta = size + new Vector2(50 * width, 50 * height);
+                rectTransform.anchoredPosition = new Vector2((50f * width) / 2, -((50f * height) / 2));
             }
         }
 

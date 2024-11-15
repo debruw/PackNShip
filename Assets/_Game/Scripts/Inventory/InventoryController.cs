@@ -87,12 +87,20 @@ namespace GameTemplate._Game.Scripts.Inventory
             selectedItem.Rotate();
         }
 
-        private void InsertRandomItem()
+        public void InsertRandomItem()
         {
             CreateRandomItem();
             InventoryItem itemToInsert = selectedItem;
             selectedItem = null;
             InsertItem(itemToInsert);
+        }
+        
+        public void InsertRandomItem(ItemGrid grid)
+        {
+            CreateRandomItem();
+            InventoryItem itemToInsert = selectedItem;
+            selectedItem = null;
+            InsertItem(itemToInsert, grid);
         }
 
         private void InsertItem(InventoryItem itemToInsert)
@@ -101,9 +109,28 @@ namespace GameTemplate._Game.Scripts.Inventory
 
             Vector2Int? posOnGrid = selectedItemGrid.FindSpaceForObject(itemToInsert);
 
-            if (posOnGrid == null) return;
+            if (posOnGrid == null)
+            {
+                Destroy(itemToInsert.gameObject);
+                return;
+            }
 
             selectedItemGrid.PlaceItem(itemToInsert, posOnGrid.Value.x, posOnGrid.Value.y);
+        }
+        
+        private void InsertItem(InventoryItem itemToInsert, ItemGrid grid)
+        {
+            if (grid == null) return;
+
+            Vector2Int? posOnGrid = grid.FindSpaceForObject(itemToInsert);
+
+            if (posOnGrid == null)
+            {
+                Destroy(itemToInsert.gameObject);
+                return;
+            }
+
+            grid.PlaceItem(itemToInsert, posOnGrid.Value.x, posOnGrid.Value.y);
         }
 
         private Vector2Int oldPosition;
