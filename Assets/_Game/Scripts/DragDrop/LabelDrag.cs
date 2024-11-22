@@ -10,6 +10,12 @@ namespace GameTemplate._Game.Scripts
         {
             base.OnEndDrag(eventData);
             
+            if (RaycastHandler.RaycastTrash())
+            {
+                Destroy(gameObject);
+                return;
+            }
+            
             Box box = RaycastHandler.RaycastBox();
             if (box != null)
             {

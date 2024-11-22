@@ -11,9 +11,9 @@ namespace GameTemplate._Game.Scripts
 
         private GameObject spawnedLabel;
 
-        public void SpawnLabel(InventoryItem item)
+        public bool SpawnLabel(InventoryItem item)
         {
-            if (spawnedLabel != null) return;
+            if (spawnedLabel != null) return false;
 
             spawnedLabel = Instantiate(labelPrefab, spawnPoint);
             spawnedLabel.GetComponent<Label>().SetSprite(item.itemData.itemIcon);
@@ -21,6 +21,7 @@ namespace GameTemplate._Game.Scripts
             Vector2 size = item.SmallestSide == 1 ? new Vector2(80, 80) : new Vector2(100, 100);
             spawnedLabel.GetComponent<RectTransform>().sizeDelta = size;
             spawnedLabel.transform.DOLocalMoveY(-125f, 1f);
+            return true;
         }
     }
 }

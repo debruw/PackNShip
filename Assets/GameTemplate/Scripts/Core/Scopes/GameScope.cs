@@ -17,7 +17,7 @@ namespace GameTemplate.Core.Scopes
         public override GameState ActiveState => GameState.Game;
         public static Action OnFirstTouch;
 
-        [SerializeField] private Transform _levelPrefabParent;
+        //[SerializeField] private Transform _levelPrefabParent;
         [SerializeField] private UIGameCanvas _uiGameCanvas;
         [SerializeField] private EarningsUI _earningsUI;
         [SerializeField] private ParticleImage _winParticleImage;
@@ -27,7 +27,7 @@ namespace GameTemplate.Core.Scopes
         private const float k_LoseDelay = 2.0f;
 
         [Inject] PersistentGameState m_PersistentGameState;
-        [Inject] LevelService _levelService;
+        //[Inject] LevelService _levelService;
         [Inject] ICurrencyService _currencyManager;
         [Inject] ISceneService _SceneService;
         [Inject] SoundService _soundService;
@@ -39,9 +39,9 @@ namespace GameTemplate.Core.Scopes
 
             m_PersistentGameState.Reset();
             //Do some things here
-            _levelService.SpawnLevel(_levelPrefabParent);
+            //_levelService.SpawnLevel(_levelPrefabParent);
 
-            _uiGameCanvas.Initialize(_levelService.UILevelId);
+            //_uiGameCanvas.Initialize(_levelService.UILevelId);
 
             LevelPrefab.OnGameFinished += OnGameFinished;
         }
@@ -82,7 +82,7 @@ namespace GameTemplate.Core.Scopes
             if (m_PersistentGameState.WinState == WinState.Win)
             {
                 _soundService.PlayWinSound();
-                _levelService.SetNextLevel();
+                //_levelService.SetNextLevel();
             }
             else
             {
@@ -92,8 +92,8 @@ namespace GameTemplate.Core.Scopes
 
         public void NextButtonClick()
         {
-            if (_levelService.LevelId < 2)
-            {
+            /*if (_levelService.LevelId < 2)
+            {*/
                 _SceneService.LoadScene(new SceneLoadData
                 {
                     sceneName = "Game",
@@ -101,7 +101,7 @@ namespace GameTemplate.Core.Scopes
                     activateLoadingCanvas = true,
                     setActiveScene = false
                 });
-            }
+            /*}
             else
             {
                 _SceneService.LoadScene(new SceneLoadData
@@ -111,7 +111,7 @@ namespace GameTemplate.Core.Scopes
                     activateLoadingCanvas = true,
                     setActiveScene = false
                 });
-            }
+            }*/
         }
 
         public void RetryButtonClick()
@@ -130,13 +130,13 @@ namespace GameTemplate.Core.Scopes
         {
             if (Input.GetKeyDown(KeyCode.N))
             {
-                _levelService.SetNextLevel();
+                //_levelService.SetNextLevel();
                 RetryButtonClick();
             }
 
             if (Input.GetKeyDown(KeyCode.P))
             {
-                _levelService.SetPreviousLevel();
+                //_levelService.SetPreviousLevel();
                 RetryButtonClick();
             }
         }

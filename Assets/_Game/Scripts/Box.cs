@@ -13,24 +13,26 @@ namespace GameTemplate._Game.Scripts
         public Sprite ClosedBox;
         public TextMeshProUGUI WarningText;
 
-        ItemGrid itemGrid;
+        ItemGrid _itemGrid;
         public bool isClosed, isTaped, isLabeled;
+
+        public bool IsEmpty => _itemGrid.IsEmpty();
 
         private void Awake()
         {
-            itemGrid = GetComponentInChildren<ItemGrid>();
+            _itemGrid = GetComponentInChildren<ItemGrid>();
         }
 
         public void PackButtonClick()
         {
-            if (itemGrid.IsEmpty())
+            if (_itemGrid.IsEmpty())
             {
                 ShowWarning("Not Full!");
                 return;
             }
 
             GetComponent<Image>().sprite = ClosedBox;
-            itemGrid.gameObject.SetActive(false);
+            _itemGrid.gameObject.SetActive(false);
             packButton.SetActive(false);
             isClosed = true;
         }

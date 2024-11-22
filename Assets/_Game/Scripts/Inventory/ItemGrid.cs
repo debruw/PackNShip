@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace GameTemplate._Game.Scripts.Inventory
@@ -8,7 +9,7 @@ namespace GameTemplate._Game.Scripts.Inventory
         public int gridSizeWidth = 15, gridSizeHeight = 10;
         public RectTransform parentBox;
         RectTransform rectTransform;
-        private InventoryItem[,] inventoryItemSlot;
+        public InventoryItem[,] inventoryItemSlot;
         bool isInitialized;
 
         private void Awake()
@@ -241,6 +242,17 @@ namespace GameTemplate._Game.Scripts.Inventory
             }
 
             return true;
+        }
+
+        public void CheckBasket()
+        {
+            if (GetComponentInParent<Basket>())
+            {
+                if (IsEmpty())
+                {
+                    GetComponentInParent<Basket>().Empty();
+                }
+            }
         }
     }
 }

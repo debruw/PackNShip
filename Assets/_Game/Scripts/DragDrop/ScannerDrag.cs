@@ -1,8 +1,6 @@
 using System;
 using GameTemplate._Game.Scripts.Inventory;
-using GameTemplate._Game.Utils;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 namespace GameTemplate._Game.Scripts
 {
@@ -14,7 +12,10 @@ namespace GameTemplate._Game.Scripts
         {
             if (other.TryGetComponent(out InventoryItem item))
             {
-                LabelSpawner.SpawnLabel(item);
+                if (LabelSpawner.SpawnLabel(item))
+                {
+                    item.FlashRed();
+                }
             }
         }
     }

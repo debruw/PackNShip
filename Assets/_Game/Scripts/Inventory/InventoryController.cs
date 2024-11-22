@@ -9,8 +9,11 @@ namespace GameTemplate._Game.Scripts.Inventory
     {
         private static InventoryController _instance;
 
-        public static InventoryController Instance { get { return _instance; } }
-        
+        public static InventoryController Instance
+        {
+            get { return _instance; }
+        }
+
         private ItemGrid selectedItemGrid;
 
         public ItemGrid SelectedItemGrid
@@ -37,10 +40,12 @@ namespace GameTemplate._Game.Scripts.Inventory
             if (_instance != null && _instance != this)
             {
                 Destroy(this.gameObject);
-            } else {
+            }
+            else
+            {
                 _instance = this;
             }
-            
+
             inventoryHighlight = GetComponent<InventoryHighlight>();
         }
 
@@ -48,7 +53,7 @@ namespace GameTemplate._Game.Scripts.Inventory
         {
             ItemIconDrag();
 
-            if (Input.GetKeyDown(KeyCode.Space))
+            /*if (Input.GetKeyDown(KeyCode.Space))
             {
                 if (selectedItem == null)
                 {
@@ -64,7 +69,7 @@ namespace GameTemplate._Game.Scripts.Inventory
             if (Input.GetKeyDown(KeyCode.R))
             {
                 RotateItem();
-            }
+            }*/
 
             if (selectedItemGrid == null)
             {
@@ -76,7 +81,11 @@ namespace GameTemplate._Game.Scripts.Inventory
 
             if (Input.GetMouseButtonDown(0))
             {
-                LeftMouseButtonPress();
+                LeftMouseButtonDown();
+            }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                LeftMouseButtonUp();
             }
         }
 
@@ -94,12 +103,18 @@ namespace GameTemplate._Game.Scripts.Inventory
             selectedItem = null;
             InsertItem(itemToInsert);
         }
-        
+
         public void InsertRandomItem(ItemGrid grid)
         {
             CreateRandomItem();
             InventoryItem itemToInsert = selectedItem;
             selectedItem = null;
+            
+            // add random rotation to the object
+            if (Random.Range(0, 10) < 5)
+            {
+                itemToInsert.Rotate();
+            }
             InsertItem(itemToInsert, grid);
         }
 
@@ -117,7 +132,7 @@ namespace GameTemplate._Game.Scripts.Inventory
 
             selectedItemGrid.PlaceItem(itemToInsert, posOnGrid.Value.x, posOnGrid.Value.y);
         }
-        
+
         private void InsertItem(InventoryItem itemToInsert, ItemGrid grid)
         {
             if (grid == null) return;
@@ -183,15 +198,22 @@ namespace GameTemplate._Game.Scripts.Inventory
             inventoryItem.Set(items[selectedItemID]);
         }
 
-        private void LeftMouseButtonPress()
+        private void LeftMouseButtonDown()
         {
             var tileGridPosition = GetTileGridPosition();
 
             if (selectedItem == null)
             {
                 PickUpItem(tileGridPosition);
+                selectedItemGrid.CheckBasket();
             }
-            else
+        }
+
+        private void LeftMouseButtonUp()
+        {
+            var tileGridPosition = GetTileGridPosition();
+
+            if (selectedItem != null && tileGridPosition != null)
             {
                 PlaceItem(tileGridPosition);
             }

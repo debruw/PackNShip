@@ -32,7 +32,7 @@ namespace GameTemplate.Gameplay.UI
             _levelService = levelService;
             _CurrencyManager = currencyManager;
 
-            GetComponentInChildren<LevelTextSetter>().SetLevelText(_levelService.UILevelId);
+            //GetComponentInChildren<LevelTextSetter>().SetLevelText(_levelService.UILevelId);
             
             List<Currency> currencies = _CurrencyManager.GetCurrencies();
 
