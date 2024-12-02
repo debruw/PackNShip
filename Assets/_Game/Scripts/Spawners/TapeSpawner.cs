@@ -21,7 +21,7 @@ namespace GameTemplate._Game.Scripts
             sizeVec.x = size * ItemGrid.tileSizeWidth;
             rectTransform.sizeDelta = sizeVec;
             rectTransform.anchoredPosition = new Vector2(sizeVec.x / 2, rectTransform.anchoredPosition.y);
-            rectTransform.DOAnchorPosX(-sizeVec.x / 2, 1f);
+            rectTransform.DOAnchorPosX(-sizeVec.x / 2, .5f);
         }
     }
 }

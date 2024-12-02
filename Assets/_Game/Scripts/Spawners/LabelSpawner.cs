@@ -16,7 +16,7 @@ namespace GameTemplate._Game.Scripts
             if (spawnedLabel != null) return false;
 
             spawnedLabel = Instantiate(labelPrefab, spawnPoint);
-            spawnedLabel.GetComponent<Label>().SetSprite(item.itemData.itemIcon);
+            spawnedLabel.GetComponent<Label>().SetSprite(item.itemData);
             
             Vector2 size = item.SmallestSide == 1 ? new Vector2(80, 80) : new Vector2(100, 100);
             spawnedLabel.GetComponent<RectTransform>().sizeDelta = size;

@@ -10,7 +10,8 @@ namespace GameTemplate.Systems.Level
     {
         None,
         Scene,
-        Prefab
+        Prefab,
+        Continuous
     }
 
     public class LevelService
@@ -19,6 +20,14 @@ namespace GameTemplate.Systems.Level
         {
             get => UserPrefs.GetLevelId();
             set => UserPrefs.SetLevelId(value);
+        }
+
+        public LevelData CurrentLevelData
+        {
+            get
+            {
+                return _levelDataHolder.levels[_levelId];
+            }
         }
 
         ISceneService _SceneService;
@@ -60,41 +69,40 @@ namespace GameTemplate.Systems.Level
             int currentId = _levelId % _levelDataHolder.levels.Length;
             LevelData currentData = _levelDataHolder.levels[currentId];
             
-            if (_levelDataHolder.levelType == LevelTypes.Scene)
+            
+            switch (_levelDataHolder.levelType)
             {
-                if (lastLoadedLevelScene != "")
+                case LevelTypes.Scene:
                 {
-                    SceneManager.UnloadSceneAsync(lastLoadedLevelScene);
-                }
+                    if (lastLoadedLevelScene != "")
+                    {
+                        SceneManager.UnloadSceneAsync(lastLoadedLevelScene);
+                    }
                 
-                lastLoadedLevelScene = currentData.levelScene.sceneName;
-                //load scene additive
-                _SceneService.LoadScene(new SceneLoadData
+                    lastLoadedLevelScene = currentData.levelScene.sceneName;
+                    //load scene additive
+                    _SceneService.LoadScene(new SceneLoadData
+                    {
+                        sceneName = currentData.levelScene.sceneName,
+                        unloadCurrent = false,
+                        activateLoadingCanvas = false,
+                        setActiveScene = false
+                    });
+                    break;
+                }
+                case LevelTypes.Prefab:
                 {
-                    sceneName = currentData.levelScene.sceneName,
-                    unloadCurrent = false,
-                    activateLoadingCanvas = false,
-                    setActiveScene = false
-                });
+                    lastLoadedLevelPrefab = currentData.levelPrefab;
+                    //instantiate scene prefab
+                    lastLoadedLevelPrefab = Object.Instantiate(lastLoadedLevelPrefab, levelPrefabParent);
+                    break;
+                }
+                case LevelTypes.Continuous:
+                {
+                    
+                    break;
+                }
             }
-            else
-            {
-                lastLoadedLevelPrefab = currentData.levelPrefab;
-                //instantiate scene prefab
-                lastLoadedLevelPrefab = Object.Instantiate(lastLoadedLevelPrefab, levelPrefabParent);
-            }
-        }
-
-        public void SetNextLevel()
-        {
-            _levelId++;
-            UserPrefs.SetLevelId(_levelId);
-        }
-
-        public void SetPreviousLevel()
-        {
-            _levelId--;
-            UserPrefs.SetLevelId(_levelId);
         }
     }
 }

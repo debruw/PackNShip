@@ -1117,7 +1117,7 @@ PrefabInstance:
     - target: {fileID: 3784755042116073450, guid: 54777abe90f9c0a4faebffe40bd2a6ea,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4629301544744335344, guid: 54777abe90f9c0a4faebffe40bd2a6ea,
         type: 3}
@@ -1144,6 +1144,16 @@ PrefabInstance:
       propertyPath: parentReference.TypeName
       value: GameTemplate.Core.Scopes.ApplicationScope
       objectReference: {fileID: 0}
+    - target: {fileID: 4629301544744335344, guid: 54777abe90f9c0a4faebffe40bd2a6ea,
+        type: 3}
+      propertyPath: autoInjectGameObjects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4629301544744335344, guid: 54777abe90f9c0a4faebffe40bd2a6ea,
+        type: 3}
+      propertyPath: 'autoInjectGameObjects.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1332074794}
     - target: {fileID: 6148815505135786069, guid: 54777abe90f9c0a4faebffe40bd2a6ea,
         type: 3}
       propertyPath: m_LocalPosition.x

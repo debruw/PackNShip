@@ -1,6 +1,7 @@
 using GameTemplate._Game.Scripts.Inventory;
 using TMPro;
 using UnityEngine;
+using VContainer;
 
 namespace GameTemplate._Game.Scripts
 {
@@ -11,11 +12,21 @@ namespace GameTemplate._Game.Scripts
         public TextMeshProUGUI sizeText;
 
         public Vector2Int boxSize = new Vector2Int(0, 0);
+        
+        InventoryController _inventoryController;
+
+        [Inject]
+        public void Construct(InventoryController InventoryController)
+        {
+            Debug.Log("Construct BoxSpawner");
+            _inventoryController = InventoryController;
+        }
 
         public void SpawnBox()
         {
             GameObject box = Instantiate(boxPrefab, spawnPoint);
             ItemGrid itemGrid = box.GetComponentInChildren<ItemGrid>();
+            itemGrid.GetComponent<GridInteract>().SetInventory(_inventoryController);
             itemGrid.SetSize(boxSize.x, boxSize.y);
         }
 

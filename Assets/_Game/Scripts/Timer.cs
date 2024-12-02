@@ -11,7 +11,6 @@ namespace GameTemplate._Game.Scripts
     public class Timer : MonoBehaviour
     {
         public static Action<bool> OnTimesUp;
-        public static Action<float> OnSetTimer;
 
         [SerializeField] private TextMeshProUGUI txtTimer;
         [SerializeField] private Color timerTextColorForFast;
@@ -21,21 +20,20 @@ namespace GameTemplate._Game.Scripts
 
         private bool timerPaused;
         private bool firstTick = true;
-        
-        private void Awake()
+
+        private LevelService _levelService;
+
+        [Inject]
+        public void Contruct(LevelService LevelService)
         {
-            OnSetTimer += SetTimer;
+            Debug.Log("Construct timer");
+            _levelService = LevelService;
+            SetTimer(_levelService.CurrentLevelData.LevelTime);
         }
 
         private void Start()
         {
-            OnSetTimer?.Invoke(120);
             StartTimer();
-        }
-
-        private void OnDestroy()
-        {
-            OnSetTimer -= SetTimer;
         }
 
         public void SetTimer(float durationInSeconds)

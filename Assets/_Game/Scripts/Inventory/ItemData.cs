@@ -9,5 +9,10 @@ namespace GameTemplate._Game.Scripts.Inventory
         public int height = 1;
 
         public Sprite itemIcon;
+
+        public float GetBigSide()
+        {
+            return width >= height ? width : height;
+        }
     }
 }

@@ -7,12 +7,12 @@ namespace GameTemplate._Game.Scripts.Inventory
 {
     public class InventoryController : MonoBehaviour
     {
-        private static InventoryController _instance;
+        /*private static InventoryController _instance;
 
         public static InventoryController Instance
         {
             get { return _instance; }
-        }
+        }*/
 
         private ItemGrid selectedItemGrid;
 
@@ -37,14 +37,14 @@ namespace GameTemplate._Game.Scripts.Inventory
 
         private void Awake()
         {
-            if (_instance != null && _instance != this)
+            /*if (_instance != null && _instance != this)
             {
                 Destroy(this.gameObject);
             }
             else
             {
                 _instance = this;
-            }
+            }*/
 
             inventoryHighlight = GetComponent<InventoryHighlight>();
         }

@@ -9,5 +9,6 @@ namespace GameTemplate.Systems.Level
     {
         public GameObject levelPrefab;
         public SceneNameData levelScene;
+        public int LevelTime;
     }
 }

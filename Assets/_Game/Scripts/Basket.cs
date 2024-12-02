@@ -6,8 +6,8 @@ namespace GameTemplate._Game.Scripts
 {
     public class Basket : MonoBehaviour
     {
-        public InventoryController inventoryController;
         ItemGrid itemGrid;
+        InventoryController _inventoryController;
 
         private void Start()
         {
@@ -17,10 +17,9 @@ namespace GameTemplate._Game.Scripts
 
         void InitObjects()
         {
-            inventoryController = GetComponentInParent<InventoryController>();
             for (int i = 0; i < 10; i++)
             {
-                inventoryController.InsertRandomItem(itemGrid);
+                _inventoryController.InsertRandomItem(itemGrid);
             }
         }
 
@@ -28,6 +27,12 @@ namespace GameTemplate._Game.Scripts
         {
             transform.DOLocalMoveY(500, 1f).OnComplete(()=>Destroy(gameObject));
             GetComponentInParent<BasketSpawner>().SpawnNewBasket();
+        }
+
+        public void SetInventory(InventoryController InventoryController)
+        {
+            _inventoryController = InventoryController;
+            GetComponentInChildren<GridInteract>().SetInventory(InventoryController);
         }
     }
 }

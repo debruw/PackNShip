@@ -1,6 +1,9 @@
 using System;
 using AssetKits.ParticleImage;
 using Cysharp.Threading.Tasks;
+using GameTemplate._Game.Scripts;
+using GameTemplate._Game.Scripts.Inventory;
+using GameTemplate._Game.Scripts.Views;
 using GameTemplate.Systems.Audio;
 using GameTemplate.Systems.Currencies;
 using GameTemplate.Systems.Level;
@@ -8,6 +11,7 @@ using GameTemplate.Systems.Scene;
 using GameTemplate.UI;
 using UnityEngine;
 using VContainer;
+using VContainer.Unity;
 using SceneLoadData = GameTemplate.Systems.Scene.SceneLoadData;
 
 namespace GameTemplate.Core.Scopes
@@ -17,7 +21,7 @@ namespace GameTemplate.Core.Scopes
         public override GameState ActiveState => GameState.Game;
         public static Action OnFirstTouch;
 
-        //[SerializeField] private Transform _levelPrefabParent;
+        [SerializeField] private Transform _levelPrefabParent;
         [SerializeField] private UIGameCanvas _uiGameCanvas;
         [SerializeField] private EarningsUI _earningsUI;
         [SerializeField] private ParticleImage _winParticleImage;
@@ -27,7 +31,7 @@ namespace GameTemplate.Core.Scopes
         private const float k_LoseDelay = 2.0f;
 
         [Inject] PersistentGameState m_PersistentGameState;
-        //[Inject] LevelService _levelService;
+        [Inject] LevelService _levelService;
         [Inject] ICurrencyService _currencyManager;
         [Inject] ISceneService _SceneService;
         [Inject] SoundService _soundService;
@@ -39,7 +43,7 @@ namespace GameTemplate.Core.Scopes
 
             m_PersistentGameState.Reset();
             //Do some things here
-            //_levelService.SpawnLevel(_levelPrefabParent);
+            _levelService.SpawnLevel(_levelPrefabParent);
 
             //_uiGameCanvas.Initialize(_levelService.UILevelId);
 
@@ -50,6 +54,15 @@ namespace GameTemplate.Core.Scopes
         {
             base.Configure(builder);
 
+            builder.RegisterComponentInHierarchy<InventoryController>();
+
+            builder.RegisterComponentInHierarchy<BoxSpawner>();
+            builder.RegisterComponentInHierarchy<BasketSpawner>();
+            builder.RegisterComponentInHierarchy<TapeSpawner>();
+            builder.RegisterComponentInHierarchy<LabelSpawner>();
+
+            builder.RegisterComponentInHierarchy<DayText>();
+            builder.RegisterComponentInHierarchy<Timer>();
         }
 
         protected override void OnDestroy()
