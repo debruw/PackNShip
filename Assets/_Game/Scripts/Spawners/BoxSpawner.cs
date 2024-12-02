@@ -25,6 +25,7 @@ namespace GameTemplate._Game.Scripts
         public void SpawnBox()
         {
             GameObject box = Instantiate(boxPrefab, spawnPoint);
+            box.GetComponent<Box>().SetSize(boxSize);
             ItemGrid itemGrid = box.GetComponentInChildren<ItemGrid>();
             itemGrid.GetComponent<GridInteract>().SetInventory(_inventoryController);
             itemGrid.SetSize(boxSize.x, boxSize.y);

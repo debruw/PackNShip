@@ -47,10 +47,27 @@ namespace GameTemplate._Game.Scripts.Inventory
             }*/
 
             inventoryHighlight = GetComponent<InventoryHighlight>();
+
+            Timer.OnTimesUp += OnTimesUp;
+        }
+
+        private void OnDestroy()
+        {
+            Timer.OnTimesUp -= OnTimesUp;
+        }
+
+        private bool isPlaying = true;
+
+        private void OnTimesUp()
+        {
+            isPlaying = false;
         }
 
         private void Update()
         {
+            if (!isPlaying)
+                return;
+
             ItemIconDrag();
 
             /*if (Input.GetKeyDown(KeyCode.Space))
@@ -109,12 +126,13 @@ namespace GameTemplate._Game.Scripts.Inventory
             CreateRandomItem();
             InventoryItem itemToInsert = selectedItem;
             selectedItem = null;
-            
+
             // add random rotation to the object
             if (Random.Range(0, 10) < 5)
             {
                 itemToInsert.Rotate();
             }
+
             InsertItem(itemToInsert, grid);
         }
 

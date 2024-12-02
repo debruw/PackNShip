@@ -55,6 +55,7 @@ namespace GameTemplate.Core.Scopes
             base.Configure(builder);
 
             builder.RegisterComponentInHierarchy<InventoryController>();
+            builder.RegisterComponentInHierarchy<Statistics>();
 
             builder.RegisterComponentInHierarchy<BoxSpawner>();
             builder.RegisterComponentInHierarchy<BasketSpawner>();
@@ -63,6 +64,9 @@ namespace GameTemplate.Core.Scopes
 
             builder.RegisterComponentInHierarchy<DayText>();
             builder.RegisterComponentInHierarchy<Timer>();
+            
+            builder.RegisterComponentInHierarchy<UIGameCanvas>();
+            builder.RegisterComponentInHierarchy<LevelEndView>();
         }
 
         protected override void OnDestroy()

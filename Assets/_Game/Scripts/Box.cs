@@ -9,12 +9,16 @@ namespace GameTemplate._Game.Scripts
 {
     public class Box : MonoBehaviour
     {
+        public static Action<BoxStatistic> OnBoxDelivered;
+
         [SerializeField] private GameObject packButton;
         public Sprite ClosedBox;
         public TextMeshProUGUI WarningText;
 
         ItemGrid _itemGrid;
         public bool isClosed, isTaped, isLabeled;
+        public bool isTapeRight, isLabelRight;
+        Vector2Int boxSize;
 
         public bool IsEmpty => _itemGrid.IsEmpty();
 
@@ -47,16 +51,22 @@ namespace GameTemplate._Game.Scripts
 
             isTaped = true;
             tapeTransform.SetParent(transform);
+
+            isTapeRight = Mathf.Approximately((tapeTransform.GetComponent<RectTransform>().rect.width /
+                                               ItemGrid.tileSizeWidth), boxSize.x);
+
             return true;
         }
 
-        public bool PutLabel(Transform labelTransform)
+        public bool PutLabel(Transform labelTransform, Label label)
         {
             if (!isTaped)
             {
                 ShowWarning("Not Taped!");
                 return false;
             }
+
+            isLabelRight = label._itemData.itemType == _itemGrid.GetItemInside().itemType;
 
             isLabeled = true;
             labelTransform.SetParent(transform);
@@ -68,6 +78,29 @@ namespace GameTemplate._Game.Scripts
             WarningText.text = warning;
             WarningText.DOFade(1, 0);
             WarningText.DOFade(0, .5f).SetDelay(1f);
+        }
+
+        public void DeliverBox()
+        {
+            //empty count
+            //wrong tape
+            //wrong label
+            BoxStatistic boxStatistic = new BoxStatistic();
+            boxStatistic.EmptyCount = _itemGrid.GetEmptyCount();
+            boxStatistic.IsRightTape = isTapeRight;
+            boxStatistic.IsRightLabel = isLabelRight;
+
+            OnBoxDelivered?.Invoke(boxStatistic);
+        }
+
+        public ItemData GetItemInside()
+        {
+            return _itemGrid.GetItemInside();
+        }
+
+        public void SetSize(Vector2Int vector2Int)
+        {
+            boxSize = vector2Int;
         }
     }
 }

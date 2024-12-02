@@ -24,10 +24,7 @@ namespace GameTemplate.Systems.Level
 
         public LevelData CurrentLevelData
         {
-            get
-            {
-                return _levelDataHolder.levels[_levelId];
-            }
+            get { return _levelDataHolder.levels[_levelId]; }
         }
 
         ISceneService _SceneService;
@@ -58,7 +55,7 @@ namespace GameTemplate.Systems.Level
 
         private string lastLoadedLevelScene = "";
         private GameObject lastLoadedLevelPrefab;
-        
+
         public void SpawnLevel(Transform levelPrefabParent)
         {
             LoadLevel(levelPrefabParent);
@@ -68,8 +65,8 @@ namespace GameTemplate.Systems.Level
         {
             int currentId = _levelId % _levelDataHolder.levels.Length;
             LevelData currentData = _levelDataHolder.levels[currentId];
-            
-            
+
+
             switch (_levelDataHolder.levelType)
             {
                 case LevelTypes.Scene:
@@ -78,7 +75,7 @@ namespace GameTemplate.Systems.Level
                     {
                         SceneManager.UnloadSceneAsync(lastLoadedLevelScene);
                     }
-                
+
                     lastLoadedLevelScene = currentData.levelScene.sceneName;
                     //load scene additive
                     _SceneService.LoadScene(new SceneLoadData
@@ -99,10 +96,14 @@ namespace GameTemplate.Systems.Level
                 }
                 case LevelTypes.Continuous:
                 {
-                    
                     break;
                 }
             }
+        }
+
+        public void SetNextLevel()
+        {
+            UserPrefs.SetLevelId(_levelId + 1);
         }
     }
 }

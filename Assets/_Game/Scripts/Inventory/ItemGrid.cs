@@ -254,5 +254,37 @@ namespace GameTemplate._Game.Scripts.Inventory
                 }
             }
         }
+
+        public int GetEmptyCount()
+        {
+            int count = 0;
+            for (int x = 0; x < gridSizeWidth; x++)
+            {
+                for (int y = 0; y < gridSizeHeight; y++)
+                {
+                    if (inventoryItemSlot[x, y] == null)
+                    {
+                        count++;
+                    }
+                }
+            }
+
+            return count;
+        }
+
+        public ItemData GetItemInside()
+        {
+            for (int x = 0; x < gridSizeWidth; x++)
+            {
+                for (int y = 0; y < gridSizeHeight; y++)
+                {
+                    if (inventoryItemSlot[x, y] != null)
+                    {
+                        return inventoryItemSlot[x, y].itemData;
+                    }
+                }
+            }
+            return null;
+        }
     }
 }

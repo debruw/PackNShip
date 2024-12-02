@@ -3,9 +3,10 @@ using GameTemplate.Systems.Audio;
 using GameTemplate.Systems.Currencies;
 using GameTemplate.Systems.Level;
 using GameTemplate.Systems.Scene;
-using GameTemplate.UI;
 using GameTemplate.UI.Currency;
+using GameTemplate.Utils;
 using UnityEngine;
+using UnityEngine.UI;
 using VContainer;
 using SceneLoadData = GameTemplate.Systems.Scene.SceneLoadData;
 
@@ -15,6 +16,8 @@ namespace GameTemplate.Gameplay.UI
     {
         [SerializeField] private Transform currencyParent;
         [SerializeField] private GameObject CurrencyUIPrefab;
+        [SerializeField] Button ContinueButton;
+        [SerializeField] GameObject ConfirmPanel;
         public List<CurrencyUI> currencyPanels = new List<CurrencyUI>();
 
         ISceneService _SceneService;
@@ -33,7 +36,7 @@ namespace GameTemplate.Gameplay.UI
             _CurrencyManager = currencyManager;
 
             //GetComponentInChildren<LevelTextSetter>().SetLevelText(_levelService.UILevelId);
-            
+
             List<Currency> currencies = _CurrencyManager.GetCurrencies();
 
             for (int i = 0; i < currencies.Count; i++)
@@ -43,9 +46,35 @@ namespace GameTemplate.Gameplay.UI
                 currencyPanels[i].Initialize(currencies[i].currencyImage, currencies[i].currencySign,
                     currencies[i].currencyAmount, currencies[i].isBuyable);
             }
+
+            ContinueButton.interactable = !UserPrefs.IsFirstPlay();
         }
 
         public void PlayButtonClick()
+        {
+            if (!UserPrefs.IsFirstPlay())
+            {
+                ConfirmPanel.SetActive(true);
+                return;
+            }
+
+            UserPrefs.SetFirstPlayFalse();
+
+            LoadLevelScene();
+        }
+
+        public void ContinueButtonClick()
+        {
+            LoadLevelScene();
+        }
+
+        public void StartOverClick()
+        {
+            UserPrefs.DeleteAll();
+            PlayButtonClick();
+        }
+
+        public void LoadLevelScene()
         {
             _soundService.StopThemeMusic();
             _SceneService.LoadScene(new SceneLoadData

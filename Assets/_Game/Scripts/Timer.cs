@@ -10,7 +10,7 @@ namespace GameTemplate._Game.Scripts
 {
     public class Timer : MonoBehaviour
     {
-        public static Action<bool> OnTimesUp;
+        public static Action OnTimesUp;
 
         [SerializeField] private TextMeshProUGUI txtTimer;
         [SerializeField] private Color timerTextColorForFast;
@@ -72,12 +72,10 @@ namespace GameTemplate._Game.Scripts
 
             //Game Finished LOSE
             txtTimer.text = "00:00";
-            OnTimesUp?.Invoke(false);
+            OnTimesUp?.Invoke();
             txtTimer.color = Color.white;
             txtTimer.transform.localScale = Vector3.one;
         }
-
-        private bool coin0Lose, coin1Lose, coin2Lose;
 
         private void UpdateTimerText()
         {

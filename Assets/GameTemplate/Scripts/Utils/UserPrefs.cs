@@ -9,10 +9,21 @@ namespace GameTemplate.Utils
     /// </summary>
     public static class UserPrefs
     {
+        const string k_FirstPlayKey = "FirtPlay";
         const string k_SoundStateKey = "SoundState";
         const string k_MusicStateKey = "MusicState";
         const string k_LevelIdKey = "LevelId";
         const string k_CurrencyKey = "Currency";
+
+        public static void SetFirstPlayFalse()
+        {
+            PlayerPrefs.SetInt(k_FirstPlayKey, 0);
+        }
+        
+        public static bool IsFirstPlay()
+        {
+            return PlayerPrefs.GetInt(k_FirstPlayKey, 1) == 1;
+        }
 
         public static bool GetSoundState()
         {
@@ -52,6 +63,11 @@ namespace GameTemplate.Utils
         public static void SetCurrency(int currencyId, int newCurrencyAmount)
         {
             PlayerPrefs.SetInt(k_CurrencyKey + currencyId, newCurrencyAmount);
+        }
+
+        public static void DeleteAll()
+        {
+            PlayerPrefs.DeleteAll();
         }
     }
 }

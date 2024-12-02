@@ -7,8 +7,6 @@ namespace GameTemplate._Game.Scripts
 {
     public class BoxDrag : DragableUI
     {
-        public static Action OnBoxDelivered;
-
         Box _box;
 
         private void Start()
@@ -54,8 +52,7 @@ namespace GameTemplate._Game.Scripts
 
             if (RaycastHandler.RaycastConveyor())
             {
-                //add count
-                OnBoxDelivered?.Invoke();
+                _box.DeliverBox();
 
                 transform.DOMoveY(transform.position.y - 1080, 3f).OnComplete(() => { Destroy(gameObject); });
                 this.enabled = false;

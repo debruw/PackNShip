@@ -19,7 +19,7 @@ namespace GameTemplate._Game.Scripts
             Box box = RaycastHandler.RaycastBox();
             if (box != null)
             {
-                if (box.PutLabel(transform))
+                if (box.PutLabel(transform, GetComponent<Label>()))
                 {
                     GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
                     GetComponent<Shadow>().enabled = false;

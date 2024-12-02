@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceb90fee8ec94f3592c09aeb48b79e26, type: 3}
   m_Name: Clock
   m_EditorClassIdentifier: 
+  itemType: 2
   width: 1
   height: 1
   itemIcon: {fileID: 21300000, guid: a16b44debcb393b488dcda6ad305d867, type: 3}
