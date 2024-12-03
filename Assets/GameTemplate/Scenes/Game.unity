@@ -565,9 +565,9 @@ RectTransform:
   - {fileID: 13890081}
   - {fileID: 376804491}
   - {fileID: 4223405896963443170}
-  - {fileID: 1717999726719923053}
-  - {fileID: 4987038842116428172}
   - {fileID: 1332074795}
+  - {fileID: 4987038842116428172}
+  - {fileID: 1717999726719923053}
   - {fileID: 188521506}
   - {fileID: 800289681}
   - {fileID: 1864772078}
@@ -591,6 +591,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3fd47c725af4fc981e82eeafe6487cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _itemsDataList: {fileID: 0}
+  mainItemGrid: {fileID: 1332074797}
   itemPrefab: {fileID: 3300352228747199836, guid: e91db9d66bd810c43893386cd0f35f97,
     type: 3}
   canvasTransform: {fileID: 276335671}

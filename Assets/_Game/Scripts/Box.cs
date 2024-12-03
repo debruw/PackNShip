@@ -4,10 +4,12 @@ using GameTemplate._Game.Scripts.Inventory;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using VContainer;
+using VContainer.Unity;
 
 namespace GameTemplate._Game.Scripts
 {
-    public class Box : MonoBehaviour
+    public class Box : MonoBehaviour, IStartable
     {
         public static Action<BoxStatistic> OnBoxDelivered;
 
@@ -16,13 +18,15 @@ namespace GameTemplate._Game.Scripts
         public TextMeshProUGUI WarningText;
 
         ItemGrid _itemGrid;
-        public bool isClosed, isTaped, isLabeled;
+        public bool isClosed;
         public bool isTapeRight, isLabelRight;
         Vector2Int boxSize;
 
         public bool IsEmpty => _itemGrid.IsEmpty();
 
-        private void Awake()
+        [HideInInspector] public InventoryController _inventoryController;
+
+        public void Start()
         {
             _itemGrid = GetComponentInChildren<ItemGrid>();
         }
@@ -49,7 +53,7 @@ namespace GameTemplate._Game.Scripts
                 return false;
             }
 
-            isTaped = true;
+            //isTaped = true;
             tapeTransform.SetParent(transform);
 
             isTapeRight = Mathf.Approximately((tapeTransform.GetComponent<RectTransform>().rect.width /
@@ -60,15 +64,15 @@ namespace GameTemplate._Game.Scripts
 
         public bool PutLabel(Transform labelTransform, Label label)
         {
-            if (!isTaped)
+            /*if (!isTaped)
             {
                 ShowWarning("Not Taped!");
                 return false;
-            }
+            }*/
 
             isLabelRight = label._itemData.itemType == _itemGrid.GetItemInside().itemType;
 
-            isLabeled = true;
+            //isLabeled = true;
             labelTransform.SetParent(transform);
             return true;
         }
@@ -82,6 +86,7 @@ namespace GameTemplate._Game.Scripts
 
         public void DeliverBox()
         {
+            transform.DOMoveY(transform.position.y - 1080, 3f).OnComplete(DestroyBox);
             //empty count
             //wrong tape
             //wrong label
@@ -101,6 +106,22 @@ namespace GameTemplate._Game.Scripts
         public void SetSize(Vector2Int vector2Int)
         {
             boxSize = vector2Int;
+        }
+
+        public void DestroyBox()
+        {
+            _inventoryController.GetHighlighterFromBox();
+            Destroy(gameObject);
+        }
+
+        public void BeginDrag()
+        {
+            _inventoryController.isMovingBox = true;
+        }
+
+        public void EndDrag()
+        {
+            _inventoryController.isMovingBox = false;
         }
     }
 }

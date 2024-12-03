@@ -11,15 +11,25 @@ namespace GameTemplate._Game.Scripts
 
         private void Start()
         {
-            _box = GetComponent<Box>();
+            _box = GetComponentInParent<Box>();
+        }
+
+        public override void OnBeginDrag(PointerEventData eventData)
+        {
+            base.OnBeginDrag(eventData);
+            _box.BeginDrag();
         }
 
         public override void OnDrag(PointerEventData eventData)
         {
-            if (!_box.isClosed)
+            /*if (!_box.isClosed)
             {
+                if (_box.IsEmpty)
+                {
+                    base.OnDrag(eventData);
+                }
                 return;
-            }
+            }*/
 
             base.OnDrag(eventData);
         }
@@ -27,35 +37,36 @@ namespace GameTemplate._Game.Scripts
         public override void OnEndDrag(PointerEventData eventData)
         {
             base.OnEndDrag(eventData);
-            if (_box.IsEmpty)
+            _box.EndDrag();
+            
+            if (RaycastHandler.RaycastTrash())
             {
-                if (RaycastHandler.RaycastTrash())
+                if (!_box.IsEmpty)
                 {
-                    if (transform.childCount > 0)
-                    {
-                        foreach (Transform child in transform)
-                        {
-                            child.SetParent(transform.parent);
-                        }
-                    }
-
-                    Destroy(gameObject);
+                    _box.ShowWarning("Not empty!");
                     return;
                 }
-            }
+                
+                if (transform.childCount > 0)
+                {
+                    foreach (Transform child in transform)
+                    {
+                        child.SetParent(transform.parent);
+                    }
+                }
 
-            if (!_box.isLabeled)
+                _box.DestroyBox();
+            }
+            
+            if (!_box.isClosed)
             {
-                _box.ShowWarning("Not labeled!");
                 return;
             }
 
             if (RaycastHandler.RaycastConveyor())
             {
                 _box.DeliverBox();
-
-                transform.DOMoveY(transform.position.y - 1080, 3f).OnComplete(() => { Destroy(gameObject); });
-                this.enabled = false;
+                gameObject.SetActive(false);
             }
         }
     }

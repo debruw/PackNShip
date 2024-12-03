@@ -1040,7 +1040,7 @@ PrefabInstance:
     - target: {fileID: 1981489920779186351, guid: f086c8bb71868fe4895f2e7cbafa4d64,
         type: 3}
       propertyPath: m_text
-      value: Wrong sized tapes
+      value: Tape penalty
       objectReference: {fileID: 0}
     - target: {fileID: 1981489920779186351, guid: f086c8bb71868fe4895f2e7cbafa4d64,
         type: 3}
@@ -1379,7 +1379,7 @@ PrefabInstance:
     - target: {fileID: 1981489920779186351, guid: f086c8bb71868fe4895f2e7cbafa4d64,
         type: 3}
       propertyPath: m_text
-      value: Wrong labels
+      value: Label panelty
       objectReference: {fileID: 0}
     - target: {fileID: 1981489920779186351, guid: f086c8bb71868fe4895f2e7cbafa4d64,
         type: 3}
@@ -1666,7 +1666,7 @@ PrefabInstance:
     - target: {fileID: 1981489920779186351, guid: f086c8bb71868fe4895f2e7cbafa4d64,
         type: 3}
       propertyPath: m_text
-      value: Empty spots on boxes
+      value: Empty spots panelty
       objectReference: {fileID: 0}
     - target: {fileID: 1981489920779186351, guid: f086c8bb71868fe4895f2e7cbafa4d64,
         type: 3}

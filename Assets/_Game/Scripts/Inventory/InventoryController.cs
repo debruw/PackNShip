@@ -15,6 +15,7 @@ namespace GameTemplate._Game.Scripts.Inventory
             get { return _instance; }
         }*/
         public ItemsDataList _itemsDataList;
+        public ItemGrid mainItemGrid;
 
         private ItemGrid selectedItemGrid;
 
@@ -31,7 +32,7 @@ namespace GameTemplate._Game.Scripts.Inventory
         InventoryItem selectedItem;
         InventoryItem overlapItem;
         RectTransform rectTransform;
-        
+
         public GameObject itemPrefab;
         public RectTransform canvasTransform;
         private InventoryHighlight inventoryHighlight;
@@ -64,6 +65,8 @@ namespace GameTemplate._Game.Scripts.Inventory
         }
 
         private bool isPlaying = true;
+        [HideInInspector]
+        public bool isMovingBox = false;
 
         private void OnTimesUp()
         {
@@ -73,6 +76,9 @@ namespace GameTemplate._Game.Scripts.Inventory
         private void Update()
         {
             if (!isPlaying)
+                return;
+            
+            if (isMovingBox)
                 return;
 
             ItemIconDrag();
@@ -280,6 +286,7 @@ namespace GameTemplate._Game.Scripts.Inventory
             if (selectedItem != null)
             {
                 rectTransform = selectedItem.GetComponent<RectTransform>();
+                rectTransform.SetParent(transform);
                 rectTransform.SetAsLastSibling();
             }
         }
@@ -292,6 +299,13 @@ namespace GameTemplate._Game.Scripts.Inventory
             }
         }
 
+        public void GetHighlighterFromBox()
+        {
+            SelectedItemGrid = null;
+            inventoryHighlight.SetParent(mainItemGrid);
+            isMovingBox = false;
+        }
+
 #if UNITY_EDITOR
         public void InsertAllItemsEditor(ItemGrid grid)
         {
@@ -300,7 +314,7 @@ namespace GameTemplate._Game.Scripts.Inventory
                 InsertItemEditor(grid, i);
             }
         }
-        
+
         private void InsertItemEditor(ItemGrid grid, int id)
         {
             CreateItemEditor(id);
@@ -323,6 +337,5 @@ namespace GameTemplate._Game.Scripts.Inventory
             inventoryItem.Set(_itemsDataList.itemDatas[selectedItemID]);
         }
 #endif
-        
     }
 }
