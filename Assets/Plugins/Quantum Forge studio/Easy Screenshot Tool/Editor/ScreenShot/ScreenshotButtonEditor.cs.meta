@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: b93d57f7d099511468c3b50efe2e3e1f
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 296926
+  packageName: Easy Screenshot Tool
+  packageVersion: 1.0
+  assetPath: Assets/Plugins/Quantum Forge studio/Easy Screenshot Tool/Editor/ScreenShot/ScreenshotButtonEditor.cs
+  uploadId: 696325
