@@ -1,9 +1,14 @@
 using GameTemplate._Game.Scripts.Inventory;
+
+#if UNITY_EDITOR
 using Sirenix.OdinInspector;
+#endif
+
 using UnityEngine;
 
 namespace GameTemplate._Game.Scripts
 {
+#if UNITY_EDITOR
     public class ItemsCreatorForTest : MonoBehaviour
     {
         public ItemGrid mainTableGrid;
@@ -15,4 +20,5 @@ namespace GameTemplate._Game.Scripts
             _inventoryController.InsertAllItemsEditor(mainTableGrid);
         }
     }
+#endif
 }
