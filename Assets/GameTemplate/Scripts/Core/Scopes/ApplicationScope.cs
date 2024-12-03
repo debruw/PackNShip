@@ -1,3 +1,4 @@
+using GameTemplate._Game.Scripts.Inventory;
 using UnityEngine;
 using GameTemplate.Systems.Audio;
 using GameTemplate.Systems.Currencies;
@@ -20,6 +21,7 @@ namespace GameTemplate.Core.Scopes
         public SceneData sceneData;
         public LevelDataHolder levelData;
         public PoolingData poolingData;
+        public ItemsDataList itemsDataList;
 
         protected override void Configure(IContainerBuilder builder)
         {
@@ -30,6 +32,7 @@ namespace GameTemplate.Core.Scopes
             builder.RegisterInstance(sceneData);
             builder.RegisterInstance(levelData);
             builder.RegisterInstance(poolingData);
+            builder.RegisterInstance(itemsDataList);
 
             builder.Register<CurrencyService>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<SoundService>(Lifetime.Singleton);

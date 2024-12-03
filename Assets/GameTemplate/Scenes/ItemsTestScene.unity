@@ -591,6 +591,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3fd47c725af4fc981e82eeafe6487cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _itemsDataList: {fileID: 11400000, guid: e579cd5c909d52b4a97798e85b2e48aa, type: 2}
   itemPrefab: {fileID: 3300352228747199836, guid: e91db9d66bd810c43893386cd0f35f97,
     type: 3}
   canvasTransform: {fileID: 276335671}
@@ -1131,7 +1132,7 @@ PrefabInstance:
     - target: {fileID: 3784755042116073450, guid: 54777abe90f9c0a4faebffe40bd2a6ea,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4629301544744335344, guid: 54777abe90f9c0a4faebffe40bd2a6ea,
         type: 3}
@@ -1627,8 +1628,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -460, y: 16}
-  m_SizeDelta: {x: 500, y: 500}
+  m_AnchoredPosition: {x: -460, y: 116}
+  m_SizeDelta: {x: 1000, y: 600}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1332074797
 MonoBehaviour:
@@ -1642,8 +1643,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e42b37a20ce74478bf7a95d3f491bf07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridSizeWidth: 5
-  gridSizeHeight: 5
+  gridSizeWidth: 10
+  gridSizeHeight: 6
   parentBox: {fileID: 0}
 --- !u!114 &1332074798
 MonoBehaviour:
@@ -2076,6 +2077,52 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 5, y: -10}
   m_UseGraphicAlpha: 1
+--- !u!1 &1561502149
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1561502151}
+  - component: {fileID: 1561502150}
+  m_Layer: 0
+  m_Name: ItemCreatorForTest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1561502150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1561502149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69144ce5f116442eb117f3e372c33a45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainTableGrid: {fileID: 1332074797}
+  _inventoryController: {fileID: 276335672}
+--- !u!4 &1561502151
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1561502149}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &1864772078 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 625808743352786922, guid: f45f3df3fcc188541ac29d2f57dfe03c,
@@ -4223,3 +4270,4 @@ SceneRoots:
   - {fileID: 276335671}
   - {fileID: 1409482619}
   - {fileID: 1418995011}
+  - {fileID: 1561502151}

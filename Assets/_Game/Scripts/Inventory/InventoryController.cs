@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using VContainer;
 using Random = UnityEngine.Random;
 
 namespace GameTemplate._Game.Scripts.Inventory
@@ -13,6 +14,7 @@ namespace GameTemplate._Game.Scripts.Inventory
         {
             get { return _instance; }
         }*/
+        public ItemsDataList _itemsDataList;
 
         private ItemGrid selectedItemGrid;
 
@@ -29,11 +31,16 @@ namespace GameTemplate._Game.Scripts.Inventory
         InventoryItem selectedItem;
         InventoryItem overlapItem;
         RectTransform rectTransform;
-
-        public List<ItemData> items;
+        
         public GameObject itemPrefab;
         public RectTransform canvasTransform;
         private InventoryHighlight inventoryHighlight;
+
+        [Inject]
+        public void Construct(ItemsDataList ItemsDataList)
+        {
+            _itemsDataList = ItemsDataList;
+        }
 
         private void Awake()
         {
@@ -81,12 +88,12 @@ namespace GameTemplate._Game.Scripts.Inventory
             if (Input.GetKeyDown(KeyCode.W))
             {
                 InsertRandomItem();
-            }
+            }*/
 
             if (Input.GetKeyDown(KeyCode.R))
             {
                 RotateItem();
-            }*/
+            }
 
             if (selectedItemGrid == null)
             {
@@ -212,8 +219,8 @@ namespace GameTemplate._Game.Scripts.Inventory
             rectTransform.SetParent(canvasTransform);
             rectTransform.SetAsLastSibling();
 
-            int selectedItemID = Random.Range(0, items.Count);
-            inventoryItem.Set(items[selectedItemID]);
+            int selectedItemID = Random.Range(0, _itemsDataList.itemDatas.Count);
+            inventoryItem.Set(_itemsDataList.itemDatas[selectedItemID]);
         }
 
         private void LeftMouseButtonDown()
@@ -284,5 +291,38 @@ namespace GameTemplate._Game.Scripts.Inventory
                 rectTransform.transform.position = Input.mousePosition;
             }
         }
+
+#if UNITY_EDITOR
+        public void InsertAllItemsEditor(ItemGrid grid)
+        {
+            for (int i = 0; i < _itemsDataList.itemDatas.Count; i++)
+            {
+                InsertItemEditor(grid, i);
+            }
+        }
+        
+        private void InsertItemEditor(ItemGrid grid, int id)
+        {
+            CreateItemEditor(id);
+            InventoryItem itemToInsert = selectedItem;
+            selectedItem = null;
+
+            InsertItem(itemToInsert, grid);
+        }
+
+        private void CreateItemEditor(int id)
+        {
+            InventoryItem inventoryItem = Instantiate(itemPrefab, transform).GetComponent<InventoryItem>();
+            selectedItem = inventoryItem;
+
+            rectTransform = inventoryItem.GetComponent<RectTransform>();
+            rectTransform.SetParent(canvasTransform);
+            rectTransform.SetAsLastSibling();
+
+            int selectedItemID = id;
+            inventoryItem.Set(_itemsDataList.itemDatas[selectedItemID]);
+        }
+#endif
+        
     }
 }

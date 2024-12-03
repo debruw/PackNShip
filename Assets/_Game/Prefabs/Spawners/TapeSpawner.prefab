@@ -276,6 +276,11 @@ PrefabInstance:
 
 '
       objectReference: {fileID: 0}
+    - target: {fileID: 5828272296937321900, guid: 018f354e20f8e7f4eb5747cab03bea07,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 62.1
+      objectReference: {fileID: 0}
     - target: {fileID: 6648216498246878638, guid: 018f354e20f8e7f4eb5747cab03bea07,
         type: 3}
       propertyPath: m_Pivot.x
@@ -305,16 +310,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6648216498246878638, guid: 018f354e20f8e7f4eb5747cab03bea07,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 54
-      objectReference: {fileID: 0}
-    - target: {fileID: 6648216498246878638, guid: 018f354e20f8e7f4eb5747cab03bea07,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 6648216498246878638, guid: 018f354e20f8e7f4eb5747cab03bea07,
         type: 3}
@@ -590,6 +585,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 5828272296937321900, guid: 018f354e20f8e7f4eb5747cab03bea07,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 62.1
+      objectReference: {fileID: 0}
     - target: {fileID: 6648216498246878638, guid: 018f354e20f8e7f4eb5747cab03bea07,
         type: 3}
       propertyPath: m_Pivot.x
@@ -619,16 +619,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6648216498246878638, guid: 018f354e20f8e7f4eb5747cab03bea07,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 54
-      objectReference: {fileID: 0}
-    - target: {fileID: 6648216498246878638, guid: 018f354e20f8e7f4eb5747cab03bea07,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 6648216498246878638, guid: 018f354e20f8e7f4eb5747cab03bea07,
         type: 3}
@@ -765,6 +755,11 @@ PrefabInstance:
       propertyPath: m_text
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5828272296937321900, guid: 018f354e20f8e7f4eb5747cab03bea07,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 62.1
+      objectReference: {fileID: 0}
     - target: {fileID: 6648216498246878638, guid: 018f354e20f8e7f4eb5747cab03bea07,
         type: 3}
       propertyPath: m_Pivot.x
@@ -794,16 +789,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6648216498246878638, guid: 018f354e20f8e7f4eb5747cab03bea07,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 54
-      objectReference: {fileID: 0}
-    - target: {fileID: 6648216498246878638, guid: 018f354e20f8e7f4eb5747cab03bea07,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 6648216498246878638, guid: 018f354e20f8e7f4eb5747cab03bea07,
         type: 3}

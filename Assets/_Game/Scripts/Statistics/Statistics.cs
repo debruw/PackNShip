@@ -26,7 +26,11 @@ namespace GameTemplate._Game.Scripts
 
         public int MoneyCount
         {
-            get { return _moneyCount; }
+            get
+            {
+                _moneyCount = _deliveredBoxCount * 50;
+                return _moneyCount;
+            }
         }
 
         public int TotalEmptyCountCount

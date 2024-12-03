@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb90fee8ec94f3592c09aeb48b79e26, type: 3}
-  m_Name: Bow
+  m_Name: Cutlery
   m_EditorClassIdentifier: 
-  itemType: 1
-  width: 3
+  itemType: 9
+  width: 1
   height: 2
-  itemIcon: {fileID: 21300000, guid: 8f90c5da79119584c93974b55fc62d07, type: 3}
+  itemIcon: {fileID: 21300000, guid: 7e659e6e21a9bca42a0fe329ccd36c60, type: 3}

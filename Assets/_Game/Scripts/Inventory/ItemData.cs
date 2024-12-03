@@ -20,8 +20,15 @@ namespace GameTemplate._Game.Scripts.Inventory
     public enum ItemType
     {
         None,
-        Bow,
-        Clock,
-        Potion
+        Thumbler,
+        Lipstick,
+        Parfume,
+        Slippers,
+        Hoodie,
+        Speaker,
+        Remote,
+        Mug,
+        Cutlery,
+        Glue
     }
 }
