@@ -291,11 +291,16 @@ namespace GameTemplate._Game.Scripts.Inventory
             }
         }
 
+        private Vector2 _pos;
         private void ItemIconDrag()
         {
             if (selectedItem != null)
             {
-                rectTransform.transform.position = Input.mousePosition;
+                _pos = Input.mousePosition;
+                _pos.x = Mathf.Clamp(_pos.x, rectTransform.rect.width / 2, Screen.width - (rectTransform.rect.width / 2));
+                _pos.y = Mathf.Clamp(_pos.y, rectTransform.rect.height / 2, Screen.height - (rectTransform.rect.height / 2));
+                
+                rectTransform.transform.position = _pos;
             }
         }
 

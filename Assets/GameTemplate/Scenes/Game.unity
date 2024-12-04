@@ -161,7 +161,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &162593528
 RectTransform:
   m_ObjectHideFlags: 0
@@ -561,7 +561,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 162593528}
-  - {fileID: 1529531098}
+  - {fileID: 304986611}
+  - {fileID: 9073254886902697608}
   - {fileID: 13890081}
   - {fileID: 376804491}
   - {fileID: 4223405896963443170}
@@ -1794,6 +1795,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1282236270}
+  - {fileID: 1529531098}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2032,10 +2034,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 304986611}
-  - {fileID: 9073254886902697608}
-  m_Father: {fileID: 276335671}
+  m_Children: []
+  m_Father: {fileID: 1400676697}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
@@ -2107,7 +2107,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1529531098}
+    m_TransformParent: {fileID: 276335671}
     m_Modifications:
     - target: {fileID: 325445937559797614, guid: b5ec661cb9ed9de4f97b8e46c23229bb,
         type: 3}
@@ -2187,12 +2187,12 @@ PrefabInstance:
     - target: {fileID: 325445937559797614, guid: b5ec661cb9ed9de4f97b8e46c23229bb,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 123
+      value: 590.6
       objectReference: {fileID: 0}
     - target: {fileID: 325445937559797614, guid: b5ec661cb9ed9de4f97b8e46c23229bb,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -272.06067
+      value: -297.06067
       objectReference: {fileID: 0}
     - target: {fileID: 325445937559797614, guid: b5ec661cb9ed9de4f97b8e46c23229bb,
         type: 3}
@@ -2553,7 +2553,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1529531098}
+    m_TransformParent: {fileID: 276335671}
     m_Modifications:
     - target: {fileID: 2145294496588635407, guid: 035902eaa72519b43b54f51ac1aa70fa,
         type: 3}
@@ -2638,12 +2638,12 @@ PrefabInstance:
     - target: {fileID: 2908986137908225820, guid: 035902eaa72519b43b54f51ac1aa70fa,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 121.93933
+      value: 589.5393
       objectReference: {fileID: 0}
     - target: {fileID: 2908986137908225820, guid: 035902eaa72519b43b54f51ac1aa70fa,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -114
+      value: -139
       objectReference: {fileID: 0}
     - target: {fileID: 2908986137908225820, guid: 035902eaa72519b43b54f51ac1aa70fa,
         type: 3}
