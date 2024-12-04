@@ -23,7 +23,7 @@ namespace GameTemplate._Game.Scripts
 
         public bool SpawnLabel(InventoryItem item)
         {
-            if (spawnedLabel != null) return false;
+            //if (spawnedLabel != null) return false;
 
             spawnedLabel = _poolingService.GetGameObjectById(PoolID.LabelPrefab);
             spawnedLabel.transform.SetParent(spawnPoint);
