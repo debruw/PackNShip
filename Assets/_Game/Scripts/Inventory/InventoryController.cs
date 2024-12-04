@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using VContainer;
 using Random = UnityEngine.Random;
@@ -130,6 +131,7 @@ namespace GameTemplate._Game.Scripts.Inventory
         {
             CreateRandomItem();
             InventoryItem itemToInsert = selectedItem;
+            selectedItem.transform.DOScale(1f, .1f);
             selectedItem = null;
             InsertItem(itemToInsert);
         }
@@ -138,6 +140,7 @@ namespace GameTemplate._Game.Scripts.Inventory
         {
             CreateRandomItem();
             InventoryItem itemToInsert = selectedItem;
+            selectedItem.transform.DOScale(1f, .1f);
             selectedItem = null;
 
             // add random rotation to the object
@@ -269,10 +272,12 @@ namespace GameTemplate._Game.Scripts.Inventory
                 selectedItemGrid.PlaceItem(selectedItem, tileGridPosition.x, tileGridPosition.y, ref overlapItem);
             if (complete)
             {
+                selectedItem.transform.DOScale(1, .1f);
                 selectedItem = null;
                 if (overlapItem != null)
                 {
                     selectedItem = overlapItem;
+                    selectedItem.transform.DOScale(1.1f, .1f);
                     overlapItem = null;
                     rectTransform = selectedItem.GetComponent<RectTransform>();
                     rectTransform.SetAsLastSibling();
@@ -285,6 +290,7 @@ namespace GameTemplate._Game.Scripts.Inventory
             selectedItem = selectedItemGrid.PickUpItem(tileGridPosition.x, tileGridPosition.y);
             if (selectedItem != null)
             {
+                selectedItem.transform.DOScale(1.1f, .1f);
                 rectTransform = selectedItem.GetComponent<RectTransform>();
                 rectTransform.SetParent(transform);
                 rectTransform.SetAsLastSibling();
