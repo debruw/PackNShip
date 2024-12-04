@@ -1,4 +1,5 @@
 using GameTemplate._Game.Scripts.Inventory;
+using GameTemplate.Systems.Pooling;
 using TMPro;
 using UnityEngine;
 using VContainer;
@@ -7,24 +8,27 @@ namespace GameTemplate._Game.Scripts
 {
     public class BoxSpawner : MonoBehaviour
     {
-        public GameObject boxPrefab;
         public Transform spawnPoint;
         public TextMeshProUGUI sizeText;
 
         public Vector2Int boxSize = new Vector2Int(0, 0);
         
         InventoryController _inventoryController;
+        PoolingService _poolingService;
 
         [Inject]
-        public void Construct(InventoryController InventoryController)
+        public void Construct(InventoryController inventoryController, PoolingService poolingService)
         {
             Debug.Log("Construct BoxSpawner");
-            _inventoryController = InventoryController;
+            _inventoryController = inventoryController;
+            _poolingService = poolingService;
         }
 
         public void SpawnBox()
         {
-            GameObject box = Instantiate(boxPrefab, spawnPoint);
+            GameObject box = _poolingService.GetGameObjectById(PoolID.BoxPrefab);
+            box.transform.SetParent(spawnPoint);
+            box.transform.localPosition = Vector3.zero;
             box.GetComponent<Box>().SetSize(boxSize);
             box.GetComponent<Box>()._inventoryController = _inventoryController;
             ItemGrid itemGrid = box.GetComponentInChildren<ItemGrid>();

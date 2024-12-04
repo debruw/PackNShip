@@ -12,4 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06b0dd107206401db1a85c44adeccc4f, type: 3}
   m_Name: PoolingData
   m_EditorClassIdentifier: 
-  poolObjects: []
+  poolObjects:
+  - objectPrefab: {fileID: 709528546707997484, guid: 0a33288538cc7474dba5a6b522b7fc2b,
+      type: 3}
+    poolName: BasketPrefab
+    objectCount: 10
+    goBackOnDisable: 0
+  - objectPrefab: {fileID: 1263888429219676067, guid: fb998ec4970066d47b4e0e343f57c687,
+      type: 3}
+    poolName: BoxPrefab
+    objectCount: 20
+    goBackOnDisable: 0
+  - objectPrefab: {fileID: 2750746876408593398, guid: 27be25929f29d3848986b68f926d57a2,
+      type: 3}
+    poolName: LabelPrefab
+    objectCount: 20
+    goBackOnDisable: 0
+  - objectPrefab: {fileID: 7936984349627189546, guid: b19c6fc0e47d67742bc16b2bd74e753e,
+      type: 3}
+    poolName: TapePrefab
+    objectCount: 20
+    goBackOnDisable: 0

@@ -25,14 +25,17 @@ namespace GameTemplate._Game.Scripts
 
         public void Empty()
         {
-            transform.DOLocalMoveY(500, 1f).OnComplete(()=>Destroy(gameObject));
+            transform.DOLocalMoveY(500, 1f).SetDelay(1).OnComplete(() => Destroy(gameObject));
             GetComponentInParent<BasketSpawner>().SpawnNewBasket();
         }
 
-        public void SetInventory(InventoryController InventoryController)
+        public void InitInventory(InventoryController InventoryController)
         {
             _inventoryController = InventoryController;
             GetComponentInChildren<GridInteract>().SetInventory(InventoryController);
+            
+            GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 500);
+            transform.DOLocalMoveY(0, 1f).SetDelay(.5f);
         }
     }
 }

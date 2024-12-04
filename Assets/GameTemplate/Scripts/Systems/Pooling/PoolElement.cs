@@ -46,12 +46,12 @@ namespace GameTemplate.Systems.Pooling
             _poolingService.GoBackToPool(this);
         }
 
-        private void OnTransformParentChanged()
+        /*private void OnTransformParentChanged()
         {
             if(transform.parent != _poolingService.poolParent)
             {
                 _poolingService.PoolElementParentChanged(this);
             }
-        }
+        }*/
     }
 }

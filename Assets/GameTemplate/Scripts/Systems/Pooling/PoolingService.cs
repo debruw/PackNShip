@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using GameTemplate._Game.Scripts.Inventory;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using VContainer;
@@ -7,7 +8,7 @@ using VContainer.Unity;
 
 namespace GameTemplate.Systems.Pooling
 {
-    public class PoolingService : IInitializable
+    public class PoolingService 
     {
         [HideInInspector] public Transform poolParent;
         PoolID testPoolId = 0;
@@ -15,21 +16,29 @@ namespace GameTemplate.Systems.Pooling
         [SerializeField] private List<PoolElement> parentsChangedPoolObjects = new List<PoolElement>();
         private Dictionary<PoolID, Queue<GameObject>> objectPools = new Dictionary<PoolID, Queue<GameObject>>();
 
-        [Inject] PoolingData poolingDataData;
+        PoolingData _poolingDataData;
+
+        [Inject]
+        public void Construct(PoolingData poolingDataData)
+        {
+            Debug.Log("Construct PoolingService");
+            _poolingDataData = poolingDataData;
+            SpawnObjects();
+        }
         
-        public void Initialize()
+        void SpawnObjects()
         {
             Debug.Log("Initialize PoolingService");
             poolParent = new GameObject("_PoolParent").transform;
-            for (int i = 0; i < poolingDataData.poolObjects.Length; i++)
+            for (int i = 0; i < _poolingDataData.poolObjects.Length; i++)
             {
                 objectPools.Add((PoolID)i, new Queue<GameObject>());
-                for (int z = 0; z < poolingDataData.poolObjects[i].objectCount; z++)
+                for (int z = 0; z < _poolingDataData.poolObjects[i].objectCount; z++)
                 {
-                    GameObject newObject = Object.Instantiate(poolingDataData.poolObjects[i].objectPrefab, poolParent);
+                    GameObject newObject = Object.Instantiate(_poolingDataData.poolObjects[i].objectPrefab, poolParent);
                     newObject.SetActive(false);
                     newObject.GetComponent<PoolElement>()
-                        .Initialize(poolingDataData.poolObjects[i].goBackOnDisable, (PoolID)i);
+                        .Initialize(_poolingDataData.poolObjects[i].goBackOnDisable, (PoolID)i);
                     objectPools[(PoolID)i].Enqueue(newObject);
                 }
             }
@@ -118,7 +127,7 @@ namespace GameTemplate.Systems.Pooling
             }
 
             PoolObject selectedPoolObject =
-                poolingDataData.poolObjects.Where(x => x.poolName.Equals(poolId.ToString())).First();
+                _poolingDataData.poolObjects.Where(x => x.poolName.Equals(poolId.ToString())).First();
 
             if (selectedPoolObject != null)
             {
@@ -150,7 +159,7 @@ namespace GameTemplate.Systems.Pooling
             }
 
             PoolObject selectedPoolObject =
-                poolingDataData.poolObjects.Where(x => x.poolName.Equals(poolId.ToString())).First();
+                _poolingDataData.poolObjects.Where(x => x.poolName.Equals(poolId.ToString())).First();
 
             if (selectedPoolObject != null)
             {

@@ -14,7 +14,7 @@ namespace GameTemplate.Systems.Pooling
         [Button("Apply Pool")]
         public void Generate()
         {
-            string filePathAndName = "Assets/Scripts/Managers/Pool/PoolId.cs"; //The folder Scripts/Enums/ is expected to exist
+            string filePathAndName = "Assets/GameTemplate/Scripts/Systems/Pooling/PoolId.cs"; //The folder Scripts/Enums/ is expected to exist
 
             using (StreamWriter streamWriter = new StreamWriter(filePathAndName))
             {

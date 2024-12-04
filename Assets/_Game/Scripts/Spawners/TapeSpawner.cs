@@ -1,22 +1,34 @@
 using DG.Tweening;
 using GameTemplate._Game.Scripts.Inventory;
+using GameTemplate.Systems.Pooling;
 using UnityEngine;
+using VContainer;
 
 namespace GameTemplate._Game.Scripts
 {
     public class TapeSpawner : MonoBehaviour
     {
-        public GameObject tapePrefab;
         public Transform spawnPoint;
 
         GameObject spawnedTape;
+        
+        PoolingService _poolingService;
+
+        [Inject]
+        public void Construct(PoolingService poolingService)
+        {
+            Debug.Log("Construct TapeSpawner");
+            _poolingService = poolingService;
+        }
 
         public void SpawnTape(int size)
         {
             //if (spawnedTape != null) return;
 
-            spawnedTape = Instantiate(tapePrefab, spawnPoint);
+            spawnedTape = _poolingService.GetGameObjectById(PoolID.TapePrefab);
             RectTransform rectTransform = spawnedTape.GetComponent<RectTransform>();
+            rectTransform.SetParent(spawnPoint);
+            rectTransform.anchoredPosition = Vector2.zero;
             Vector2 sizeVec = rectTransform.sizeDelta;
             sizeVec.x = size * ItemGrid.tileSizeWidth;
             rectTransform.sizeDelta = sizeVec;

@@ -15,16 +15,15 @@ namespace GameTemplate._Game.Scripts
         RectTransform _rectTransform;
         int _siblingIndex;
 
-        private void Start()
-        {
-            _rectTransform = targetObject.GetComponent<RectTransform>();
-            _siblingIndex = targetObject.GetSiblingIndex();
-        }
-
         public virtual void OnBeginDrag(PointerEventData eventData)
         {
             _canDrag = true;
             targetObject.SetAsLastSibling();
+            if (_rectTransform == null)
+            {
+                _rectTransform = targetObject.GetComponent<RectTransform>();
+                _siblingIndex = targetObject.GetSiblingIndex();
+            }
         }
 
         public virtual void OnDrag(PointerEventData eventData)
@@ -34,7 +33,8 @@ namespace GameTemplate._Game.Scripts
             _pos = eventData.position;
 
             _pos.x = Mathf.Clamp(_pos.x, _rectTransform.rect.width / 2, Screen.width - (_rectTransform.rect.width / 2));
-            _pos.y = Mathf.Clamp(_pos.y, _rectTransform.rect.height / 2, Screen.height - (_rectTransform.rect.height / 2));
+            _pos.y = Mathf.Clamp(_pos.y, _rectTransform.rect.height / 2,
+                Screen.height - (_rectTransform.rect.height / 2));
 
             targetObject.position = _pos;
         }

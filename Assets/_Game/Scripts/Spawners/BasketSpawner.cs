@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using GameTemplate._Game.Scripts.Inventory;
+using GameTemplate.Systems.Pooling;
 using UnityEngine;
 using VContainer;
 
@@ -8,16 +9,17 @@ namespace GameTemplate._Game.Scripts
 {
     public class BasketSpawner : MonoBehaviour
     {
-        public GameObject basketPrefab;
-        private GameObject basket;
-        
+        private Basket basket;
+
         InventoryController _inventoryController;
+        PoolingService _poolingService;
 
         [Inject]
-        public void Construct(InventoryController InventoryController)
+        public void Construct(InventoryController inventoryController, PoolingService poolingService)
         {
             Debug.Log("Construct BasketSpawner");
-            _inventoryController = InventoryController;
+            _inventoryController = inventoryController;
+            _poolingService = poolingService;
         }
 
         private void Awake()
@@ -27,9 +29,9 @@ namespace GameTemplate._Game.Scripts
 
         void SpawnBox()
         {
-            basket = Instantiate(basketPrefab, transform);
-            basket.GetComponent<Basket>().SetInventory(_inventoryController);
-            basket.transform.DOLocalMoveY(0, 1f);
+            basket = _poolingService.GetGameObjectById(PoolID.BasketPrefab).GetComponent<Basket>();
+            basket.transform.SetParent(transform);
+            basket.GetComponent<Basket>().InitInventory(_inventoryController);
         }
 
         public async UniTask SpawnNewBasket()

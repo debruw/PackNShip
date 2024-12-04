@@ -33,7 +33,7 @@ namespace GameTemplate.Systems.Level
         [Inject]
         public void Construct(ISceneService sceneService, LevelDataHolder levelDataHolder)
         {
-            Debug.Log("construct LevelService");
+            Debug.Log("Construct LevelService");
             _SceneService = sceneService;
             _levelDataHolder = levelDataHolder;
         }
