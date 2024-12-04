@@ -22,10 +22,18 @@ namespace GameTemplate.Systems.Level
             set => UserPrefs.SetLevelId(value);
         }
 
+        [HideInInspector]
         public LevelData CurrentLevelData
         {
-            get { return _levelDataHolder.levels[_levelId]; }
+            get
+            {
+                int currentId = _levelId % _levelDataHolder.levels.Length;
+                _currentLevelData = _levelDataHolder.levels[currentId];
+                return _currentLevelData;
+            }
         }
+
+        private LevelData _currentLevelData;
 
         ISceneService _SceneService;
         LevelDataHolder _levelDataHolder;
@@ -63,10 +71,6 @@ namespace GameTemplate.Systems.Level
 
         public void LoadLevel(Transform levelPrefabParent)
         {
-            int currentId = _levelId % _levelDataHolder.levels.Length;
-            LevelData currentData = _levelDataHolder.levels[currentId];
-
-
             switch (_levelDataHolder.levelType)
             {
                 case LevelTypes.Scene:
@@ -76,11 +80,11 @@ namespace GameTemplate.Systems.Level
                         SceneManager.UnloadSceneAsync(lastLoadedLevelScene);
                     }
 
-                    lastLoadedLevelScene = currentData.levelScene.sceneName;
+                    lastLoadedLevelScene = _currentLevelData.levelScene.sceneName;
                     //load scene additive
                     _SceneService.LoadScene(new SceneLoadData
                     {
-                        sceneName = currentData.levelScene.sceneName,
+                        sceneName = _currentLevelData.levelScene.sceneName,
                         unloadCurrent = false,
                         activateLoadingCanvas = false,
                         setActiveScene = false
@@ -89,7 +93,7 @@ namespace GameTemplate.Systems.Level
                 }
                 case LevelTypes.Prefab:
                 {
-                    lastLoadedLevelPrefab = currentData.levelPrefab;
+                    lastLoadedLevelPrefab = _currentLevelData.levelPrefab;
                     //instantiate scene prefab
                     lastLoadedLevelPrefab = Object.Instantiate(lastLoadedLevelPrefab, levelPrefabParent);
                     break;

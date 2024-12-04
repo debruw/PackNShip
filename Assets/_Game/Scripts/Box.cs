@@ -69,6 +69,12 @@ namespace GameTemplate._Game.Scripts
                 ShowWarning("Not Taped!");
                 return false;
             }*/
+            
+            if (!isClosed)
+            {
+                ShowWarning("Not Closed!");
+                return false;
+            }
 
             isLabelRight = label._itemData.itemType == _itemGrid.GetItemInside().itemType;
 

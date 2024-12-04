@@ -1,14 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
-using GameTemplate._Game.Scripts.Inventory;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using VContainer;
-using VContainer.Unity;
 
 namespace GameTemplate.Systems.Pooling
 {
-    public class PoolingService 
+    public class PoolingService : MonoBehaviour
     {
         [HideInInspector] public Transform poolParent;
         PoolID testPoolId = 0;
@@ -25,11 +23,13 @@ namespace GameTemplate.Systems.Pooling
             _poolingDataData = poolingDataData;
             SpawnObjects();
         }
-        
+
         void SpawnObjects()
         {
             Debug.Log("Initialize PoolingService");
             poolParent = new GameObject("_PoolParent").transform;
+            DontDestroyOnLoad(poolParent.gameObject);
+            
             for (int i = 0; i < _poolingDataData.poolObjects.Length; i++)
             {
                 objectPools.Add((PoolID)i, new Queue<GameObject>());
