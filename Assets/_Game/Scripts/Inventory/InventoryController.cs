@@ -30,14 +30,15 @@ namespace GameTemplate._Game.Scripts.Inventory
             }
         }
 
-        [HideInInspector]
-        public InventoryItem selectedItem;
+        [HideInInspector] public InventoryItem selectedItem;
         InventoryItem overlapItem;
         RectTransform rectTransform;
 
         public GameObject itemPrefab;
         public RectTransform canvasTransform;
         private InventoryHighlight inventoryHighlight;
+
+        private Vector2 offset;
 
         [Inject]
         public void Construct(ItemsDataList ItemsDataList)
@@ -261,6 +262,7 @@ namespace GameTemplate._Game.Scripts.Inventory
             {
                 position.x -= (selectedItem.Width - 1) * ItemGrid.tileSizeWidth / 2;
                 position.y += (selectedItem.Height - 1) * ItemGrid.tileSizeHeight / 2;
+                position = position + offset;
             }
 
             return selectedItemGrid.GetTileGridPosition(position);
@@ -277,6 +279,7 @@ namespace GameTemplate._Game.Scripts.Inventory
                 if (overlapItem != null)
                 {
                     selectedItem = overlapItem;
+                    offset = selectedItem.transform.position - Input.mousePosition;
                     selectedItem.transform.DOScale(1.1f, .1f);
                     overlapItem = null;
                     rectTransform = selectedItem.GetComponent<RectTransform>();
@@ -285,14 +288,13 @@ namespace GameTemplate._Game.Scripts.Inventory
             }
         }
 
-        //private Vector3 offset;
         private void PickUpItem(Vector2Int tileGridPosition)
         {
             selectedItem = selectedItemGrid.PickUpItem(tileGridPosition.x, tileGridPosition.y);
-            //offset = selectedItem.transform.position - Input.mousePosition;
 
             if (selectedItem != null)
             {
+                offset = selectedItem.transform.position - Input.mousePosition;
                 selectedItem.transform.DOScale(1.1f, .1f);
                 rectTransform = selectedItem.GetComponent<RectTransform>();
                 rectTransform.SetParent(transform);
@@ -306,7 +308,7 @@ namespace GameTemplate._Game.Scripts.Inventory
         {
             if (selectedItem != null)
             {
-                _pos = Input.mousePosition; //+ offset;
+                _pos = Input.mousePosition + (Vector3)offset;
                 _pos.x = Mathf.Clamp(_pos.x, rectTransform.rect.width / 2,
                     Screen.width - (rectTransform.rect.width / 2));
                 _pos.y = Mathf.Clamp(_pos.y, rectTransform.rect.height / 2,
