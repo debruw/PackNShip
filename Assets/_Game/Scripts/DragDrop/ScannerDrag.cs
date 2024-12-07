@@ -10,11 +10,11 @@ namespace GameTemplate._Game.Scripts
         
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.TryGetComponent(out InventoryItem item))
+            if (other.TryGetComponent(out Barcode barcode))
             {
-                if (LabelSpawner.SpawnLabel(item))
+                if (LabelSpawner.SpawnLabel(barcode.GetComponentInParent<Basket>()._order))
                 {
-                    item.FlashRed();
+                    barcode.FlashRed();
                 }
             }
         }

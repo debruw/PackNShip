@@ -21,17 +21,17 @@ namespace GameTemplate._Game.Scripts
             _poolingService = poolingService;
         }
 
-        public bool SpawnLabel(InventoryItem item)
+        public bool SpawnLabel(Order order)
         {
             //if (spawnedLabel != null) return false;
 
             spawnedLabel = _poolingService.GetGameObjectById(PoolID.LabelPrefab);
             spawnedLabel.transform.SetParent(spawnPoint);
             spawnedLabel.transform.localPosition = Vector3.zero;
-            spawnedLabel.GetComponent<Label>().SetSprite(item.itemData);
+            spawnedLabel.GetComponent<Label>().SetOrder(order);
 
-            Vector2 size = item.SmallestSide == 1 ? new Vector2(80, 80) : new Vector2(100, 100);
-            spawnedLabel.GetComponent<RectTransform>().sizeDelta = size;
+            /*Vector2 size = item.SmallestSide == 1 ? new Vector2(80, 80) : new Vector2(100, 100);
+            spawnedLabel.GetComponent<RectTransform>().sizeDelta = size;*/
             spawnedLabel.GetComponent<RectTransform>().DOAnchorPos(new Vector2(0, -125f), 1f);
             return true;
         }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace GameTemplate._Game.Scripts.Inventory
@@ -272,19 +273,24 @@ namespace GameTemplate._Game.Scripts.Inventory
             return count;
         }
 
-        public ItemData GetItemInside()
+        public List<ItemData> GetItemsInside()
         {
+            List<ItemData> items = new List<ItemData>();
+            
             for (int x = 0; x < gridSizeWidth; x++)
             {
                 for (int y = 0; y < gridSizeHeight; y++)
                 {
                     if (inventoryItemSlot[x, y] != null)
                     {
-                        return inventoryItemSlot[x, y].itemData;
+                        if (!items.Contains(inventoryItemSlot[x, y].itemData))
+                        {
+                            items.Add(inventoryItemSlot[x, y].itemData);
+                        }
                     }
                 }
             }
-            return null;
+            return items;
         }
     }
 }

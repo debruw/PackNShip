@@ -1,25 +1,25 @@
 using DG.Tweening;
 using GameTemplate._Game.Scripts.Inventory;
+using TMPro;
 using UnityEngine;
 
 namespace GameTemplate._Game.Scripts
 {
     public class Basket : MonoBehaviour
     {
-        ItemGrid itemGrid;
-        InventoryController _inventoryController;
+        public TextMeshProUGUI orderText;
+        [HideInInspector]
+        public Order _order = new Order();
 
-        private void Start()
-        {
-            itemGrid = GetComponentInChildren<ItemGrid>();
-            InitObjects();
-        }
+        ItemGrid _itemGrid;
+        InventoryController _inventoryController;
 
         void InitObjects()
         {
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 3; i++)
             {
-                _inventoryController.InsertRandomItem(itemGrid);
+                ItemData itemData = _inventoryController.InsertRandomItem(_itemGrid, _order.orderItems).itemData;
+                _order.orderItems.Add(itemData);
             }
         }
 
@@ -29,13 +29,18 @@ namespace GameTemplate._Game.Scripts
             GetComponentInParent<BasketSpawner>().SpawnNewBasket();
         }
 
-        public void InitInventory(InventoryController InventoryController)
+        public void InitInventory(InventoryController InventoryController, int orderCounter)
         {
             _inventoryController = InventoryController;
+            _order.orderID = orderCounter;
+            orderText.text = _order.orderID.ToString();
             GetComponentInChildren<GridInteract>().SetInventory(InventoryController);
-            
+
             GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 500);
             transform.DOLocalMoveY(0, 1f).SetDelay(.5f);
+            
+            _itemGrid = GetComponentInChildren<ItemGrid>();
+            InitObjects();
         }
     }
 }

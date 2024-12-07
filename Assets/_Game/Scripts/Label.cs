@@ -1,4 +1,7 @@
+using System;
+using System.Collections.Generic;
 using GameTemplate._Game.Scripts.Inventory;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -7,18 +10,34 @@ namespace GameTemplate._Game.Scripts
 {
     public class Label : MonoBehaviour
     {
+        public TextMeshProUGUI _label;
         [HideInInspector]
-        public ItemData _itemData;
-        public Image IconImage;
+        public int _orderNumber;
 
-        public void SetSprite(ItemData itemData)
+        private Order _order;
+
+        public void SetOrder(Order order)
         {
-            _itemData = itemData;
-            IconImage.sprite = itemData.itemIcon;
-            Vector2 size = new Vector2(itemData.width * ItemGrid.tileSizeWidth,
-                itemData.height * ItemGrid.tileSizeHeight);
-            IconImage.GetComponent<RectTransform>().sizeDelta = size;
-            IconImage.transform.localScale = Vector3.one * (.9f - (itemData.GetBigSide() * .2f));
+            _order = order;
+            _orderNumber = _order.orderID;
+            _label.text = _orderNumber.ToString();
+        }
+
+        public bool CheckItems(List<ItemData> itemsInTheBox)
+        {
+            int counter = 0;
+            for (int i = 0; i < _order.orderItems.Count; i++)
+            {
+                if (itemsInTheBox.Contains(_order.orderItems[i]))
+                {
+                    counter++;
+                }
+            }
+
+            if (counter == _order.orderItems.Count)
+                return true;
+
+            return false;
         }
     }
 }

@@ -76,7 +76,7 @@ namespace GameTemplate._Game.Scripts
                 return false;
             }
 
-            isLabelRight = label._itemData.itemType == _itemGrid.GetItemInside().itemType;
+            isLabelRight = label.CheckItems(_itemGrid.GetItemsInside());
 
             //isLabeled = true;
             labelTransform.SetParent(transform);
@@ -102,11 +102,6 @@ namespace GameTemplate._Game.Scripts
             boxStatistic.IsRightLabel = isLabelRight;
 
             OnBoxDelivered?.Invoke(boxStatistic);
-        }
-
-        public ItemData GetItemInside()
-        {
-            return _itemGrid.GetItemInside();
         }
 
         public void SetSize(Vector2Int vector2Int)

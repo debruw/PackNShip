@@ -51,15 +51,6 @@ namespace GameTemplate._Game.Scripts.Inventory
 
         private void Awake()
         {
-            /*if (_instance != null && _instance != this)
-            {
-                Destroy(this.gameObject);
-            }
-            else
-            {
-                _instance = this;
-            }*/
-
             inventoryHighlight = GetComponent<InventoryHighlight>();
 
             Timer.OnTimesUp += OnTimesUp;
@@ -87,19 +78,6 @@ namespace GameTemplate._Game.Scripts.Inventory
                 return;
 
             ItemIconDrag();
-
-            /*if (Input.GetKeyDown(KeyCode.Space))
-            {
-                if (selectedItem == null)
-                {
-                    CreateRandomItem();
-                }
-            }
-
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-                InsertRandomItem();
-            }*/
 
             if (Input.GetKeyDown(KeyCode.R))
             {
@@ -131,18 +109,10 @@ namespace GameTemplate._Game.Scripts.Inventory
             selectedItem.Rotate();
         }
 
-        public void InsertRandomItem()
+        public InventoryItem InsertRandomItem(ItemGrid grid, List<ItemData> orderItems)
         {
-            CreateRandomItem();
-            InventoryItem itemToInsert = selectedItem;
-            selectedItem.transform.DOScale(1f, .1f);
-            selectedItem = null;
-            InsertItem(itemToInsert);
-        }
-
-        public void InsertRandomItem(ItemGrid grid)
-        {
-            CreateRandomItem();
+            CreateRandomItem(orderItems);
+            
             InventoryItem itemToInsert = selectedItem;
             selectedItem.transform.DOScale(1f, .1f);
             selectedItem = null;
@@ -154,21 +124,7 @@ namespace GameTemplate._Game.Scripts.Inventory
             }
 
             InsertItem(itemToInsert, grid);
-        }
-
-        private void InsertItem(InventoryItem itemToInsert)
-        {
-            if (selectedItemGrid == null) return;
-
-            Vector2Int? posOnGrid = selectedItemGrid.FindSpaceForObject(itemToInsert);
-
-            if (posOnGrid == null)
-            {
-                Destroy(itemToInsert.gameObject);
-                return;
-            }
-
-            selectedItemGrid.PlaceItem(itemToInsert, posOnGrid.Value.x, posOnGrid.Value.y);
+            return itemToInsert;
         }
 
         private void InsertItem(InventoryItem itemToInsert, ItemGrid grid)
@@ -223,9 +179,10 @@ namespace GameTemplate._Game.Scripts.Inventory
             }
         }
 
-        private void CreateRandomItem()
+        private void CreateRandomItem(List<ItemData> orderItems)
         {
-            InventoryItem inventoryItem = _poolingService.GetGameObjectById(PoolID.ItemPrefab).GetComponent<InventoryItem>();
+            InventoryItem inventoryItem =
+                _poolingService.GetGameObjectById(PoolID.ItemPrefab).GetComponent<InventoryItem>();
             selectedItem = inventoryItem;
 
             rectTransform = inventoryItem.GetComponent<RectTransform>();
@@ -233,6 +190,11 @@ namespace GameTemplate._Game.Scripts.Inventory
             rectTransform.SetAsLastSibling();
 
             int selectedItemID = Random.Range(0, _itemsDataList.itemDatas.Count);
+            while (orderItems.Contains(_itemsDataList.itemDatas[selectedItemID]))
+            {
+                Debug.Log("same item");
+                selectedItemID = Random.Range(0, _itemsDataList.itemDatas.Count);
+            }
             inventoryItem.Set(_itemsDataList.itemDatas[selectedItemID]);
         }
 
