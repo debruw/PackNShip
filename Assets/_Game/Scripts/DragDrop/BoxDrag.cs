@@ -66,7 +66,7 @@ namespace GameTemplate._Game.Scripts
             if (RaycastHandler.RaycastConveyor())
             {
                 _box.DeliverBox();
-                gameObject.SetActive(false);
+                this.enabled = false;
             }
         }
     }
