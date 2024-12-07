@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DG.Tweening;
+using GameTemplate.Systems.Pooling;
 using UnityEngine;
 using VContainer;
 using Random = UnityEngine.Random;
@@ -37,13 +38,15 @@ namespace GameTemplate._Game.Scripts.Inventory
         public GameObject itemPrefab;
         public RectTransform canvasTransform;
         private InventoryHighlight inventoryHighlight;
+        private PoolingService _poolingService;
 
         private Vector2 offset;
 
         [Inject]
-        public void Construct(ItemsDataList ItemsDataList)
+        public void Construct(ItemsDataList itemsDataList, PoolingService poolingService)
         {
-            _itemsDataList = ItemsDataList;
+            _itemsDataList = itemsDataList;
+            _poolingService = poolingService;
         }
 
         private void Awake()
@@ -222,7 +225,7 @@ namespace GameTemplate._Game.Scripts.Inventory
 
         private void CreateRandomItem()
         {
-            InventoryItem inventoryItem = Instantiate(itemPrefab, transform).GetComponent<InventoryItem>();
+            InventoryItem inventoryItem = _poolingService.GetGameObjectById(PoolID.ItemPrefab).GetComponent<InventoryItem>();
             selectedItem = inventoryItem;
 
             rectTransform = inventoryItem.GetComponent<RectTransform>();

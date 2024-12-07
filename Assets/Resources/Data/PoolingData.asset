@@ -33,3 +33,8 @@ MonoBehaviour:
     poolName: TapePrefab
     objectCount: 20
     goBackOnDisable: 0
+  - objectPrefab: {fileID: 3300352228747199836, guid: e91db9d66bd810c43893386cd0f35f97,
+      type: 3}
+    poolName: ItemPrefab
+    objectCount: 25
+    goBackOnDisable: 0
