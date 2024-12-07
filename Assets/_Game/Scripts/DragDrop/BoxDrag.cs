@@ -47,13 +47,13 @@ namespace GameTemplate._Game.Scripts
                     return;
                 }
 
-                if (transform.childCount > 0)
+                /*if (transform.childCount > 0)
                 {
                     foreach (Transform child in transform)
                     {
                         child.SetParent(transform.parent);
                     }
-                }
+                }*/
 
                 _box.DestroyBox();
             }
