@@ -11,26 +11,29 @@ namespace GameTemplate._Game.Scripts
         public Transform targetObject;
         bool _canDrag;
         private Vector2 _pos;
+        private Vector2 offset;
 
         RectTransform _rectTransform;
         int _siblingIndex;
+
+        private void OnEnable()
+        {
+            _rectTransform = targetObject.GetComponent<RectTransform>();
+        }
 
         public virtual void OnBeginDrag(PointerEventData eventData)
         {
             _canDrag = true;
             targetObject.SetAsLastSibling();
-            if (_rectTransform == null)
-            {
-                _rectTransform = targetObject.GetComponent<RectTransform>();
-                _siblingIndex = targetObject.GetSiblingIndex();
-            }
+            offset = (Vector2)transform.position - eventData.position;
+            _siblingIndex = targetObject.GetSiblingIndex();
         }
 
         public virtual void OnDrag(PointerEventData eventData)
         {
             if (!_canDrag) return;
 
-            _pos = eventData.position;
+            _pos = eventData.position + offset;
 
             _pos.x = Mathf.Clamp(_pos.x, _rectTransform.rect.width / 2, Screen.width - (_rectTransform.rect.width / 2));
             _pos.y = Mathf.Clamp(_pos.y, _rectTransform.rect.height / 2,

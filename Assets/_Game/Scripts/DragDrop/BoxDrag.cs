@@ -1,5 +1,4 @@
 using System;
-using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -8,37 +7,38 @@ namespace GameTemplate._Game.Scripts
     public class BoxDrag : DragableUI
     {
         Box _box;
+        bool canMove = false;
 
         private void Start()
         {
-            _box = GetComponentInParent<Box>();
+            _box = GetComponent /*InParent*/<Box>();
         }
 
         public override void OnBeginDrag(PointerEventData eventData)
         {
+            canMove = _box.BeginDrag();
+            if (!canMove)
+                return;
+
             base.OnBeginDrag(eventData);
-            _box.BeginDrag();
         }
 
         public override void OnDrag(PointerEventData eventData)
         {
-            /*if (!_box.isClosed)
-            {
-                if (_box.IsEmpty)
-                {
-                    base.OnDrag(eventData);
-                }
+            if (!canMove)
                 return;
-            }*/
 
             base.OnDrag(eventData);
         }
 
         public override void OnEndDrag(PointerEventData eventData)
         {
+            if (!canMove)
+                return;
+
             base.OnEndDrag(eventData);
             _box.EndDrag();
-            
+
             if (RaycastHandler.RaycastTrash())
             {
                 if (!_box.IsEmpty)
@@ -46,7 +46,7 @@ namespace GameTemplate._Game.Scripts
                     _box.ShowWarning("Not empty!");
                     return;
                 }
-                
+
                 if (transform.childCount > 0)
                 {
                     foreach (Transform child in transform)
@@ -57,7 +57,7 @@ namespace GameTemplate._Game.Scripts
 
                 _box.DestroyBox();
             }
-            
+
             if (!_box.isClosed)
             {
                 return;

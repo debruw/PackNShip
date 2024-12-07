@@ -69,7 +69,7 @@ namespace GameTemplate._Game.Scripts
                 ShowWarning("Not Taped!");
                 return false;
             }*/
-            
+
             if (!isClosed)
             {
                 ShowWarning("Not Closed!");
@@ -120,13 +120,20 @@ namespace GameTemplate._Game.Scripts
             Destroy(gameObject);
         }
 
-        public void BeginDrag()
+        public bool BeginDrag()
         {
+            if (_inventoryController.selectedItem != null)
+                return false;
+
             _inventoryController.isMovingBox = true;
+            return true;
         }
 
         public void EndDrag()
         {
+            if (_inventoryController.selectedItem != null)
+                return;
+
             _inventoryController.isMovingBox = false;
         }
     }
