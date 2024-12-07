@@ -285,9 +285,12 @@ namespace GameTemplate._Game.Scripts.Inventory
             }
         }
 
+        //private Vector3 offset;
         private void PickUpItem(Vector2Int tileGridPosition)
         {
             selectedItem = selectedItemGrid.PickUpItem(tileGridPosition.x, tileGridPosition.y);
+            //offset = selectedItem.transform.position - Input.mousePosition;
+            
             if (selectedItem != null)
             {
                 selectedItem.transform.DOScale(1.1f, .1f);
@@ -302,7 +305,7 @@ namespace GameTemplate._Game.Scripts.Inventory
         {
             if (selectedItem != null)
             {
-                _pos = Input.mousePosition;
+                _pos = Input.mousePosition; //+ offset;
                 _pos.x = Mathf.Clamp(_pos.x, rectTransform.rect.width / 2, Screen.width - (rectTransform.rect.width / 2));
                 _pos.y = Mathf.Clamp(_pos.y, rectTransform.rect.height / 2, Screen.height - (rectTransform.rect.height / 2));
                 

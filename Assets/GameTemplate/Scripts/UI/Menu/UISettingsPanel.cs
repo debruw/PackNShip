@@ -1,16 +1,16 @@
+using System;
 using GameTemplate.Utils;
 using UnityEngine;
 
 namespace GameTemplate.Gameplay.UI
 {
-
     public class UISettingsPanel : MonoBehaviour
     {
-        [SerializeField]
-        private UISwitcher.UISwitcher m_SoundToggle;
+        [SerializeField] private UISwitcher.UISwitcher m_SoundToggle;
 
-        [SerializeField]
-        private UISwitcher.UISwitcher m_MusicToggle;
+        [SerializeField] private UISwitcher.UISwitcher m_MusicToggle;
+        
+        public static Action<bool> OnMusicStateChanged;
 
         private void OnEnable()
         {
@@ -31,14 +31,15 @@ namespace GameTemplate.Gameplay.UI
 
         private void OnSoundToggleChanged(bool state)
         {
-            Debug.Log(state);
+            Debug.Log("Sound : " + state);
             UserPrefs.SetSoundState(state);
         }
 
         private void OnMusicToggleChanged(bool state)
         {
+            Debug.Log("Music : " + state);
             UserPrefs.SetMusicState(state);
+            OnMusicStateChanged?.Invoke(state);
         }
     }
-
 }

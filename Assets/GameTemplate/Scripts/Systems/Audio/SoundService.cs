@@ -1,4 +1,5 @@
 using DG.Tweening;
+using GameTemplate.Gameplay.UI;
 using GameTemplate.Utils;
 using UnityEngine;
 using VContainer;
@@ -15,12 +16,44 @@ namespace GameTemplate.Systems.Audio
         
         AudioData _audioData;
         private Transform _Holder;
+        float _musicVolume;
 
         [Inject]
         public void Construct(AudioData audioData)
         {
             Debug.Log("Construct SoundService");
             _audioData = audioData;
+            
+            if (_MusicSource == null)
+            {
+                var clone = Object.Instantiate(_audioData.audioObject);
+                clone.name = "Music";
+                _MusicSource = clone.GetComponent<AudioSource>();
+                Object.DontDestroyOnLoad(_MusicSource.gameObject);
+            }
+            
+            if (_EffectSource == null)
+            {
+                var clone = Object.Instantiate(_audioData.audioObject);
+                clone.name = "Effects";
+                _EffectSource = clone.GetComponent<AudioSource>();
+                Object.DontDestroyOnLoad(_EffectSource.gameObject);
+            }
+            
+            _musicVolume = _MusicSource.volume;
+            UISettingsPanel.OnMusicStateChanged += OnMusicStateChanged;
+        }
+
+        private void OnMusicStateChanged(bool state)
+        {
+            if (state)
+            {
+                PlayThemeMusic(false);
+            }
+            else
+            {
+                StopThemeMusic();
+            }
         }
 
         public void PlayThemeMusic(bool restart)
@@ -49,9 +82,7 @@ namespace GameTemplate.Systems.Audio
             
             if (_EffectSource == null)
             {
-                var clone = Object.Instantiate(_audioData.audioObject);
-                _EffectSource = clone.GetComponent<AudioSource>();
-                Object.DontDestroyOnLoad(_EffectSource.gameObject);
+                Debug.LogError("Effect source is null!");
             }
 
             _EffectSource.clip = clip;
@@ -64,9 +95,7 @@ namespace GameTemplate.Systems.Audio
             
             if (_MusicSource == null)
             {
-                var clone = Object.Instantiate(_audioData.audioObject);
-                _MusicSource = clone.GetComponent<AudioSource>();
-                Object.DontDestroyOnLoad(_MusicSource.gameObject);
+                Debug.LogError("Music source is null!");
             }
             
             if (_MusicSource.isPlaying)
@@ -91,7 +120,7 @@ namespace GameTemplate.Systems.Audio
             _MusicSource.DOFade(0, 1).OnComplete(() =>
             {
                 _MusicSource.Stop();
-                _MusicSource.volume = 1;
+                _MusicSource.volume = _musicVolume;
             });
         }
     }
