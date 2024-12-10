@@ -111,13 +111,14 @@ namespace GameTemplate._Game.Scripts
 
         public void DestroyBox()
         {
-            _inventoryController.GetHighlighterFromBox();
+            _inventoryController.GetHighlighterToMainGrid();
+            _inventoryController.isMovingBox = false;
             Destroy(gameObject);
         }
 
         public bool BeginDrag()
         {
-            if (_inventoryController.selectedItem != null)
+            if (_inventoryController.SelectedItem != null)
                 return false;
 
             _inventoryController.isMovingBox = true;
@@ -126,7 +127,7 @@ namespace GameTemplate._Game.Scripts
 
         public void EndDrag()
         {
-            if (_inventoryController.selectedItem != null)
+            if (_inventoryController.SelectedItem != null)
                 return;
 
             _inventoryController.isMovingBox = false;

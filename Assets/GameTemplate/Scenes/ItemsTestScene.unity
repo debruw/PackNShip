@@ -592,9 +592,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemsDataList: {fileID: 11400000, guid: e579cd5c909d52b4a97798e85b2e48aa, type: 2}
+  mainItemGrid: {fileID: 1332074797}
   itemPrefab: {fileID: 3300352228747199836, guid: e91db9d66bd810c43893386cd0f35f97,
     type: 3}
   canvasTransform: {fileID: 276335671}
+  isMovingBox: 0
 --- !u!114 &276335673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3402,6 +3404,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BasketSpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 8202486944791665624, guid: 02a4652dd04743946a47e898d5e0f861,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4110,6 +4117,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Counter
+      objectReference: {fileID: 0}
+    - target: {fileID: 2671616194961822762, guid: 8b93b9983754a314193395029705da2c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -31,9 +31,29 @@ namespace GameTemplate._Game.Scripts.Inventory
             }
         }
 
-        [HideInInspector] public InventoryItem selectedItem;
+        private InventoryItem _selectedItem;
+
+        [HideInInspector]
+        public InventoryItem SelectedItem
+        {
+            get { return _selectedItem; }
+            set
+            {
+                _selectedItem = value;
+                if (SelectedItem != null)
+                {
+                    _selectedRectTransform = _selectedItem.GetComponent<RectTransform>();
+                }
+                else
+                {
+                    _selectedRectTransform = null;
+                }
+            }
+        }
+
         InventoryItem overlapItem;
-        RectTransform rectTransform;
+
+        private RectTransform _selectedRectTransform;
 
         public GameObject itemPrefab;
         public RectTransform canvasTransform;
@@ -74,7 +94,7 @@ namespace GameTemplate._Game.Scripts.Inventory
             if (!isPlaying)
                 return;
 
-            if (isMovingBox && selectedItem == null)
+            if (isMovingBox && SelectedItem == null)
                 return;
 
             ItemIconDrag();
@@ -104,27 +124,23 @@ namespace GameTemplate._Game.Scripts.Inventory
 
         private void RotateItem()
         {
-            if (selectedItem == null) return;
+            if (SelectedItem == null) return;
 
-            selectedItem.Rotate();
+            SelectedItem.Rotate();
         }
 
         public InventoryItem InsertRandomItem(ItemGrid grid, List<ItemData> orderItems)
         {
-            CreateRandomItem(orderItems);
-            
-            InventoryItem itemToInsert = selectedItem;
-            selectedItem.transform.DOScale(1f, .1f);
-            selectedItem = null;
+            InventoryItem newItem = CreateRandomItem(orderItems);
 
             // add random rotation to the object
             if (Random.Range(0, 10) < 5)
             {
-                itemToInsert.Rotate();
+                newItem.Rotate();
             }
 
-            InsertItem(itemToInsert, grid);
-            return itemToInsert;
+            InsertItem(newItem, grid);
+            return newItem;
         }
 
         private void InsertItem(InventoryItem itemToInsert, ItemGrid grid)
@@ -153,7 +169,7 @@ namespace GameTemplate._Game.Scripts.Inventory
                 return;
 
             oldPosition = positionOnTheGrid;
-            if (selectedItem == null)
+            if (SelectedItem == null)
             {
                 itemToHighlight = selectedItemGrid.GetItem(positionOnTheGrid.x, positionOnTheGrid.y);
 
@@ -171,38 +187,40 @@ namespace GameTemplate._Game.Scripts.Inventory
             else
             {
                 inventoryHighlight.Show(selectedItemGrid.BoundryCheck(positionOnTheGrid.x, positionOnTheGrid.y,
-                    selectedItem.Width, selectedItem.Height));
+                    SelectedItem.Width, SelectedItem.Height));
 
-                inventoryHighlight.SetSize(selectedItem);
-                inventoryHighlight.SetPosition(selectedItemGrid, selectedItem, positionOnTheGrid.x,
+                inventoryHighlight.SetSize(SelectedItem);
+                inventoryHighlight.SetPosition(selectedItemGrid, SelectedItem, positionOnTheGrid.x,
                     positionOnTheGrid.y);
             }
         }
 
-        private void CreateRandomItem(List<ItemData> orderItems)
+        private InventoryItem CreateRandomItem(List<ItemData> orderItems)
         {
             InventoryItem inventoryItem =
                 _poolingService.GetGameObjectById(PoolID.ItemPrefab).GetComponent<InventoryItem>();
-            selectedItem = inventoryItem;
 
-            rectTransform = inventoryItem.GetComponent<RectTransform>();
-            rectTransform.SetParent(canvasTransform);
-            rectTransform.SetAsLastSibling();
+            RectTransform itemRectTransform = inventoryItem.GetComponent<RectTransform>();
+            itemRectTransform = inventoryItem.GetComponent<RectTransform>();
+            itemRectTransform.SetParent(canvasTransform);
+            itemRectTransform.SetAsLastSibling();
 
             int selectedItemID = Random.Range(0, _itemsDataList.itemDatas.Count);
             while (orderItems.Contains(_itemsDataList.itemDatas[selectedItemID]))
             {
-                Debug.Log("same item");
                 selectedItemID = Random.Range(0, _itemsDataList.itemDatas.Count);
             }
+
             inventoryItem.Set(_itemsDataList.itemDatas[selectedItemID]);
+
+            return inventoryItem;
         }
 
         private void LeftMouseButtonDown()
         {
             var tileGridPosition = GetTileGridPosition();
 
-            if (selectedItem == null)
+            if (SelectedItem == null)
             {
                 PickUpItem(tileGridPosition);
                 selectedItemGrid.CheckBasket();
@@ -213,7 +231,7 @@ namespace GameTemplate._Game.Scripts.Inventory
         {
             var tileGridPosition = GetTileGridPosition();
 
-            if (selectedItem != null && tileGridPosition != null)
+            if (SelectedItem != null && tileGridPosition != null)
             {
                 PlaceItem(tileGridPosition);
             }
@@ -223,10 +241,10 @@ namespace GameTemplate._Game.Scripts.Inventory
         {
             Vector2 position = Input.mousePosition;
 
-            if (selectedItem != null)
+            if (SelectedItem != null)
             {
-                position.x -= (selectedItem.Width - 1) * ItemGrid.tileSizeWidth / 2;
-                position.y += (selectedItem.Height - 1) * ItemGrid.tileSizeHeight / 2;
+                position.x -= (SelectedItem.Width - 1) * ItemGrid.tileSizeWidth / 2;
+                position.y += (SelectedItem.Height - 1) * ItemGrid.tileSizeHeight / 2;
                 position = position + offset;
             }
 
@@ -236,34 +254,33 @@ namespace GameTemplate._Game.Scripts.Inventory
         private void PlaceItem(Vector2Int tileGridPosition)
         {
             bool complete =
-                selectedItemGrid.PlaceItem(selectedItem, tileGridPosition.x, tileGridPosition.y, ref overlapItem);
+                selectedItemGrid.PlaceItem(SelectedItem, tileGridPosition.x, tileGridPosition.y, ref overlapItem);
             if (complete)
             {
-                selectedItem.transform.DOScale(1, .1f);
-                selectedItem = null;
+                SelectedItem.transform.DOScale(1, .1f);
+                SelectedItem = null;
+
                 if (overlapItem != null)
                 {
-                    selectedItem = overlapItem;
-                    offset = selectedItem.transform.position - Input.mousePosition;
-                    selectedItem.transform.DOScale(1.1f, .1f);
+                    SelectedItem = overlapItem;
+                    offset = SelectedItem.transform.position - Input.mousePosition;
+                    SelectedItem.transform.DOScale(1.1f, .1f);
                     overlapItem = null;
-                    rectTransform = selectedItem.GetComponent<RectTransform>();
-                    rectTransform.SetAsLastSibling();
+                    _selectedRectTransform.SetAsLastSibling();
                 }
             }
         }
 
         private void PickUpItem(Vector2Int tileGridPosition)
         {
-            selectedItem = selectedItemGrid.PickUpItem(tileGridPosition.x, tileGridPosition.y);
+            SelectedItem = selectedItemGrid.PickUpItem(tileGridPosition.x, tileGridPosition.y);
 
-            if (selectedItem != null)
+            if (SelectedItem != null)
             {
-                offset = selectedItem.transform.position - Input.mousePosition;
-                selectedItem.transform.DOScale(1.1f, .1f);
-                rectTransform = selectedItem.GetComponent<RectTransform>();
-                rectTransform.SetParent(transform);
-                rectTransform.SetAsLastSibling();
+                offset = SelectedItem.transform.position - Input.mousePosition;
+                SelectedItem.transform.DOScale(1.1f, .1f);
+                _selectedRectTransform.SetParent(transform);
+                _selectedRectTransform.SetAsLastSibling();
             }
         }
 
@@ -271,23 +288,22 @@ namespace GameTemplate._Game.Scripts.Inventory
 
         private void ItemIconDrag()
         {
-            if (selectedItem != null)
+            if (SelectedItem != null)
             {
                 _pos = Input.mousePosition + (Vector3)offset;
-                _pos.x = Mathf.Clamp(_pos.x, rectTransform.rect.width / 2,
-                    Screen.width - (rectTransform.rect.width / 2));
-                _pos.y = Mathf.Clamp(_pos.y, rectTransform.rect.height / 2,
-                    Screen.height - (rectTransform.rect.height / 2));
+                _pos.x = Mathf.Clamp(_pos.x, _selectedRectTransform.rect.width / 2,
+                    Screen.width - (_selectedRectTransform.rect.width / 2));
+                _pos.y = Mathf.Clamp(_pos.y, _selectedRectTransform.rect.height / 2,
+                    Screen.height - (_selectedRectTransform.rect.height / 2));
 
-                rectTransform.transform.position = _pos;
+                _selectedRectTransform.transform.position = _pos;
             }
         }
 
-        public void GetHighlighterFromBox()
+        public void GetHighlighterToMainGrid()
         {
             SelectedItemGrid = null;
             inventoryHighlight.SetParent(mainItemGrid);
-            isMovingBox = false;
         }
 
 #if UNITY_EDITOR
@@ -301,24 +317,22 @@ namespace GameTemplate._Game.Scripts.Inventory
 
         private void InsertItemEditor(ItemGrid grid, int id)
         {
-            CreateItemEditor(id);
-            InventoryItem itemToInsert = selectedItem;
-            selectedItem = null;
+            InventoryItem itemToInsert = CreateItemEditor(id);
 
             InsertItem(itemToInsert, grid);
         }
 
-        private void CreateItemEditor(int id)
+        private InventoryItem CreateItemEditor(int id)
         {
             InventoryItem inventoryItem = Instantiate(itemPrefab, transform).GetComponent<InventoryItem>();
-            selectedItem = inventoryItem;
+            RectTransform rectTransform = inventoryItem.GetComponent<RectTransform>();
 
-            rectTransform = inventoryItem.GetComponent<RectTransform>();
             rectTransform.SetParent(canvasTransform);
             rectTransform.SetAsLastSibling();
 
             int selectedItemID = id;
             inventoryItem.Set(_itemsDataList.itemDatas[selectedItemID]);
+            return inventoryItem;
         }
 #endif
     }

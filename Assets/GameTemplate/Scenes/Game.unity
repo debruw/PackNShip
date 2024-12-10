@@ -594,7 +594,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemsDataList: {fileID: 0}
   mainItemGrid: {fileID: 1332074797}
-  selectedItem: {fileID: 0}
   itemPrefab: {fileID: 3300352228747199836, guid: e91db9d66bd810c43893386cd0f35f97,
     type: 3}
   canvasTransform: {fileID: 276335671}
@@ -1615,7 +1614,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1332074795
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1632,8 +1631,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -460, y: 16}
-  m_SizeDelta: {x: 500, y: 500}
+  m_AnchoredPosition: {x: -460, y: 147}
+  m_SizeDelta: {x: 500, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1332074797
 MonoBehaviour:
@@ -1648,7 +1647,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridSizeWidth: 5
-  gridSizeHeight: 5
+  gridSizeHeight: 3
   parentBox: {fileID: 0}
 --- !u!114 &1332074798
 MonoBehaviour:

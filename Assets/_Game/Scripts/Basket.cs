@@ -25,8 +25,13 @@ namespace GameTemplate._Game.Scripts
 
         public void Empty()
         {
-            transform.DOLocalMoveY(500, 1f).SetDelay(1).OnComplete(() => Destroy(gameObject));
-            GetComponentInParent<BasketSpawner>().SpawnNewBasket();
+            transform.DOLocalMoveY(500, 1f).SetDelay(1).OnComplete(
+                () =>
+                {
+                    _inventoryController.GetHighlighterToMainGrid();
+                    Destroy(gameObject);
+                });
+                
         }
 
         public void InitInventory(InventoryController InventoryController, int orderCounter)
