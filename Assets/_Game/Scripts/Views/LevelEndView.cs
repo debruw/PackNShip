@@ -36,15 +36,15 @@ namespace GameTemplate._Game.Scripts.Views
         public void InitializeAndShow()
         {
             Debug.Log("LevelEndView initialized");
-            txtPackagePacked.text = mSpace + _statistics.DeliveredBoxCount.ToString("000");
-            txtStolenItems.text = mSpace + _statistics.StolenItemsCount.ToString("000");
-            txtMoneyEarned.text = mSpace + _statistics.MoneyCount.ToString("000");
+            txtPackagePacked.text = mSpace + _statistics.DeliveredBoxCount;
+            txtStolenItems.text = mSpace + _statistics.StolenItemsCount;
+            txtMoneyEarned.text = mSpace + _statistics.MoneyCount;
 
-            txtEmptySpots.text = mSpace + _statistics.TotalEmptyCountCount.ToString("000");
-            txtWrongTape.text = mSpace + _statistics.TotalWrongTapeCount.ToString("000");
-            txtWrongLabel.text = mSpace + _statistics.TotalWrongLabelCount.ToString("000");
+            txtEmptySpots.text = mSpace + _statistics.TotalEmptyCountCount;
+            txtWrongTape.text = mSpace + _statistics.TotalWrongTapeCount;
+            txtWrongLabel.text = mSpace + _statistics.TotalWrongLabelCount;
 
-            txtTotal.text = mSpace + _statistics.TotalPoint.ToString("0000");
+            txtTotal.text = mSpace + _statistics.TotalPoint;
 
             ActivatePanel();
         }
