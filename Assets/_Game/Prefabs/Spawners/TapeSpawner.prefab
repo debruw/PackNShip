@@ -142,8 +142,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcd32a3f9d33424ba9f64bb1fb8e0644, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tapePrefab: {fileID: 7936984349627189546, guid: b19c6fc0e47d67742bc16b2bd74e753e,
-    type: 3}
   spawnPoint: {fileID: 3333186125496992367}
 --- !u!1 &5785489456981527386
 GameObject:
@@ -447,11 +445,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7872623541833379078, guid: b19c6fc0e47d67742bc16b2bd74e753e,
         type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 250
-      objectReference: {fileID: 0}
-    - target: {fileID: 7872623541833379078, guid: b19c6fc0e47d67742bc16b2bd74e753e,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -493,7 +486,7 @@ PrefabInstance:
     - target: {fileID: 7872623541833379078, guid: b19c6fc0e47d67742bc16b2bd74e753e,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 20.2
+      value: 48
       objectReference: {fileID: 0}
     - target: {fileID: 7872623541833379078, guid: b19c6fc0e47d67742bc16b2bd74e753e,
         type: 3}
@@ -514,6 +507,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TapePoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 8858217150896772310, guid: b19c6fc0e47d67742bc16b2bd74e753e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

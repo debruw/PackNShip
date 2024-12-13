@@ -8,6 +8,7 @@ namespace GameTemplate._Game.Scripts
     public class TapeDrag : DragableUI
     {
         RectTransform _rect;
+        public static Action OnTapeDestroyed;
         
         private void Start()
         {
@@ -28,7 +29,6 @@ namespace GameTemplate._Game.Scripts
             {
                 if (box.PutTape(transform))
                 {
-                    
                     _rect.anchorMin = new Vector2(.5f, .5f);
                     _rect.anchorMax = new Vector2(.5f, .5f);
                     _rect.anchoredPosition = Vector2.zero;
@@ -36,6 +36,11 @@ namespace GameTemplate._Game.Scripts
                     this.enabled = false;
                 }
             }
+        }
+
+        private void OnDestroy()
+        {
+            OnTapeDestroyed?.Invoke();
         }
     }
 }
