@@ -31,7 +31,6 @@ namespace GameTemplate._Game.Scripts
             spawnedTapeCount++;
             spawnedTape = _poolingService.GetGameObjectById(PoolID.TapePrefab);
 
-
             RectTransform rectTransform = spawnedTape.GetComponent<RectTransform>();
             rectTransform.SetParent(spawnPoint);
             rectTransform.anchoredPosition = Vector2.zero;

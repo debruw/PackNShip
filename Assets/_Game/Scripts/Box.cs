@@ -22,6 +22,8 @@ namespace GameTemplate._Game.Scripts
         public bool isTapeRight, isLabelRight;
         Vector2Int boxSize;
 
+        public static Action OnBoxDestroyed;
+
         public bool IsEmpty => _itemGrid.IsEmpty();
 
         [HideInInspector] public InventoryController _inventoryController;
@@ -131,6 +133,11 @@ namespace GameTemplate._Game.Scripts
                 return;
 
             _inventoryController.isMovingBox = false;
+        }
+
+        private void OnDestroy()
+        {
+            OnBoxDestroyed?.Invoke();
         }
     }
 }

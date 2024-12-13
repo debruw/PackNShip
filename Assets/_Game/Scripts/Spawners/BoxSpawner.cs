@@ -12,7 +12,8 @@ namespace GameTemplate._Game.Scripts
         public TextMeshProUGUI sizeText;
 
         public Vector2Int boxSize = new Vector2Int(0, 0);
-        
+        private int spawnedBoxCount;
+
         InventoryController _inventoryController;
         PoolingService _poolingService;
 
@@ -22,15 +23,23 @@ namespace GameTemplate._Game.Scripts
             Debug.Log("Construct BoxSpawner");
             _inventoryController = inventoryController;
             _poolingService = poolingService;
+
+            Box.OnBoxDestroyed += () => spawnedBoxCount--;
         }
 
         public void SpawnBox()
         {
-            GameObject box = _poolingService.GetGameObjectById(PoolID.BoxPrefab);
+            if (spawnedBoxCount > 10)
+                return;
+
+            spawnedBoxCount++;
+            
+            Box box = _poolingService.GetGameObjectById(PoolID.BoxPrefab).GetComponent<Box>();
             box.transform.SetParent(spawnPoint);
             box.transform.localPosition = Vector3.zero;
-            box.GetComponent<Box>().SetSize(boxSize);
-            box.GetComponent<Box>()._inventoryController = _inventoryController;
+            box.SetSize(boxSize);
+            box._inventoryController = _inventoryController;
+            
             ItemGrid itemGrid = box.GetComponentInChildren<ItemGrid>();
             itemGrid.GetComponent<GridInteract>().SetInventory(_inventoryController);
             itemGrid.SetSize(boxSize.x, boxSize.y);
@@ -53,7 +62,7 @@ namespace GameTemplate._Game.Scripts
         public void GetBoxButtonClick()
         {
             if (boxSize.x == 0 || boxSize.y == 0) return;
-            
+
             SpawnBox();
             ResetSize();
         }
@@ -66,7 +75,7 @@ namespace GameTemplate._Game.Scripts
         void ResetSize()
         {
             boxSize = new Vector2Int(0, 0);
-                        sizeText.text = "[" + boxSize.x + "," + boxSize.y + "]";
+            sizeText.text = "[" + boxSize.x + "," + boxSize.y + "]";
         }
     }
 }
