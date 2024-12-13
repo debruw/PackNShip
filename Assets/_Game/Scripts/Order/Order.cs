@@ -8,5 +8,6 @@ namespace GameTemplate._Game.Scripts
     {
         public int orderID;
         public List<ItemData> orderItems = new List<ItemData>();
+        public GameObject label;
     }
 }

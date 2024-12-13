@@ -12,8 +12,10 @@ namespace GameTemplate._Game.Scripts
         {
             if (other.TryGetComponent(out Barcode barcode))
             {
-                if (LabelSpawner.SpawnLabel(barcode.GetComponentInParent<Basket>()._order))
+                Order _order = barcode.GetComponentInParent<Basket>()._order;
+                if (_order.label == null)
                 {
+                    _order.label = LabelSpawner.SpawnLabel(_order);
                     barcode.FlashRed();
                 }
             }

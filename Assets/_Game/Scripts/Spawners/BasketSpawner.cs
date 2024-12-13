@@ -65,7 +65,5 @@ namespace GameTemplate._Game.Scripts
             await UniTask.Delay(waitTime);
             SpawnBox();
         }
-
-        
     }
 }
