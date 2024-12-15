@@ -18,7 +18,7 @@ namespace GameTemplate._Game.Scripts
         public override void OnEndDrag(PointerEventData eventData)
         {
             base.OnEndDrag(eventData);
-            if (RaycastHandler.RaycastTrash())
+            if (RaycastHandler.RaycastTrash(_rect.position))
             {
                 Destroy(gameObject);
                 return;

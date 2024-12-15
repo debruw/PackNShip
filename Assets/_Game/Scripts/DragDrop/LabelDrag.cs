@@ -10,7 +10,7 @@ namespace GameTemplate._Game.Scripts
         {
             base.OnEndDrag(eventData);
             
-            if (RaycastHandler.RaycastTrash())
+            if (RaycastHandler.RaycastTrash(GetComponent<RectTransform>().position))
             {
                 Destroy(gameObject);
                 return;

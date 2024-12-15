@@ -37,10 +37,10 @@ namespace GameTemplate._Game.Scripts
             return null;
         }
         
-        public static bool RaycastConveyor()
+        public static bool RaycastConveyor(Vector2 point)
         {
             _PointerEventData = new PointerEventData(_EventSystem);
-            _PointerEventData.position = Input.mousePosition;
+            _PointerEventData.position = point;
 
             _Raycaster.Raycast(_PointerEventData, results);
 
@@ -55,7 +55,7 @@ namespace GameTemplate._Game.Scripts
             return false;
         }
         
-        public static bool RaycastTrash()
+        public static bool RaycastTrash(Vector2 point)
         {
             results.Clear();
             _PointerEventData = new PointerEventData(_EventSystem);

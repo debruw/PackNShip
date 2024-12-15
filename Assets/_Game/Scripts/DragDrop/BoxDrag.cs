@@ -39,7 +39,7 @@ namespace GameTemplate._Game.Scripts
             base.OnEndDrag(eventData);
             _box.EndDrag();
 
-            if (RaycastHandler.RaycastTrash())
+            if (RaycastHandler.RaycastTrash(GetComponent<RectTransform>().position))
             {
                 if (!_box.IsEmpty)
                 {
@@ -63,7 +63,7 @@ namespace GameTemplate._Game.Scripts
                 return;
             }
 
-            if (RaycastHandler.RaycastConveyor())
+            if (RaycastHandler.RaycastConveyor(GetComponent<RectTransform>().position))
             {
                 _box.DeliverBox();
                 this.enabled = false;
