@@ -42,8 +42,8 @@ namespace GameTemplate._Game.Scripts.Inventory
             _image.sprite = itemData.itemIcon;
 
             Vector2 size = new Vector2();
-            size.x = itemData.width * ItemGrid.tileSizeWidth;
-            size.y = itemData.height * ItemGrid.tileSizeHeight;
+            size.x = itemData.width * GlobalVariables.tileSizeWidth;
+            size.y = itemData.height * GlobalVariables.tileSizeHeight;
             _rectTransform.sizeDelta = size;
         }
 

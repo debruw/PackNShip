@@ -36,7 +36,7 @@ namespace GameTemplate._Game.Scripts
             rectTransform.anchoredPosition = Vector2.zero;
 
             Vector2 sizeVec = rectTransform.sizeDelta;
-            sizeVec.x = size * ItemGrid.tileSizeWidth;
+            sizeVec.x = size * GlobalVariables.tileSizeWidth;
 
             rectTransform.sizeDelta = sizeVec;
             rectTransform.anchoredPosition = new Vector2(sizeVec.x / 2, rectTransform.anchoredPosition.y);

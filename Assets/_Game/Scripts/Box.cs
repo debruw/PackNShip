@@ -3,8 +3,6 @@ using DG.Tweening;
 using GameTemplate._Game.Scripts.Inventory;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
-using VContainer;
 using VContainer.Unity;
 
 namespace GameTemplate._Game.Scripts
@@ -14,13 +12,15 @@ namespace GameTemplate._Game.Scripts
         public static Action<BoxStatistic> OnBoxDelivered;
 
         [SerializeField] private GameObject packButton;
-        public Sprite ClosedBox;
         public TextMeshProUGUI WarningText;
+        public RectTransform CapWidth0, CapWidth1;
+        public RectTransform CapHeight0, CapHeight1;
 
         ItemGrid _itemGrid;
         public bool isClosed;
         public bool isTapeRight, isLabelRight;
         Vector2Int boxSize;
+        RectTransform _rectTransform;
 
         public static Action OnBoxDestroyed;
 
@@ -30,7 +30,7 @@ namespace GameTemplate._Game.Scripts
 
         public void Start()
         {
-            _itemGrid = GetComponentInChildren<ItemGrid>();
+            
         }
 
         public void PackButtonClick()
@@ -41,7 +41,7 @@ namespace GameTemplate._Game.Scripts
                 return;
             }
 
-            GetComponent<Image>().sprite = ClosedBox;
+            GetComponent<Animator>().SetTrigger("Close");
             _itemGrid.gameObject.SetActive(false);
             packButton.SetActive(false);
             isClosed = true;
@@ -59,7 +59,7 @@ namespace GameTemplate._Game.Scripts
             tapeTransform.SetParent(transform);
 
             isTapeRight = Mathf.Approximately((tapeTransform.GetComponent<RectTransform>().rect.width /
-                                               ItemGrid.tileSizeWidth), boxSize.x);
+                                               GlobalVariables.tileSizeWidth), boxSize.x);
 
             return true;
         }
@@ -108,7 +108,21 @@ namespace GameTemplate._Game.Scripts
 
         public void SetSize(Vector2Int vector2Int)
         {
+            _itemGrid = GetComponentInChildren<ItemGrid>();
+            _rectTransform = GetComponent<RectTransform>();
+            
             boxSize = vector2Int;
+            Vector2 size = vector2Int;
+            size.x *= GlobalVariables.tileSizeWidth;
+            size.y *= GlobalVariables.tileSizeHeight;
+            _rectTransform.sizeDelta = size;
+            // 300 200 100
+            // 150 100 50
+            CapWidth0.sizeDelta = new Vector2(size.x / 2 - 5, CapWidth0.sizeDelta.y);
+            CapWidth1.sizeDelta = new Vector2(size.x / 2 - 5, CapWidth1.sizeDelta.y);
+            
+            CapHeight0.sizeDelta = new Vector2(CapHeight0.sizeDelta.x, size.y / 2 - 5);
+            CapHeight1.sizeDelta = new Vector2(CapHeight1.sizeDelta.x, size.y / 2 - 5);
         }
 
         public void DestroyBox()

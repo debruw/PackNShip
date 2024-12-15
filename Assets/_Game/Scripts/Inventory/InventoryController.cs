@@ -243,8 +243,8 @@ namespace GameTemplate._Game.Scripts.Inventory
 
             if (SelectedItem != null)
             {
-                position.x -= (SelectedItem.Width - 1) * ItemGrid.tileSizeWidth / 2;
-                position.y += (SelectedItem.Height - 1) * ItemGrid.tileSizeHeight / 2;
+                position.x -= (SelectedItem.Width - 1) * GlobalVariables.tileSizeWidth / 2;
+                position.y += (SelectedItem.Height - 1) * GlobalVariables.tileSizeHeight / 2;
                 position = position + offset;
             }
 

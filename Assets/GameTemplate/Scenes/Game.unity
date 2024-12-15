@@ -1648,7 +1648,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridSizeWidth: 5
   gridSizeHeight: 3
-  parentBox: {fileID: 0}
 --- !u!114 &1332074798
 MonoBehaviour:
   m_ObjectHideFlags: 0

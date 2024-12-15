@@ -6,9 +6,7 @@ namespace GameTemplate._Game.Scripts.Inventory
 {
     public class ItemGrid : MonoBehaviour
     {
-        public const float tileSizeWidth = 100, tileSizeHeight = 100;
         public int gridSizeWidth = 15, gridSizeHeight = 10;
-        public RectTransform parentBox;
         RectTransform rectTransform;
         public InventoryItem[,] inventoryItemSlot;
         bool isInitialized;
@@ -34,14 +32,14 @@ namespace GameTemplate._Game.Scripts.Inventory
             gridSizeHeight = height;
 
             inventoryItemSlot = new InventoryItem[width, height];
-            Vector2 size = new Vector2(width * tileSizeWidth, height * tileSizeHeight);
+            Vector2 size = new Vector2(width * GlobalVariables.tileSizeWidth, height * GlobalVariables.tileSizeHeight);
             rectTransform.sizeDelta = size;
-
-            if (parentBox != null)
+            
+            /*if (parentBox != null)
             {
                 parentBox.sizeDelta = size + new Vector2(50 * width, 50 * height);
                 rectTransform.anchoredPosition = new Vector2((50f * width) / 2, -((50f * height) / 2));
-            }
+            }*/
         }
 
         public void SetSize(int width, int height)
@@ -57,8 +55,8 @@ namespace GameTemplate._Game.Scripts.Inventory
             positionOnTheGrid.x = mousePosition.x - rectTransform.position.x;
             positionOnTheGrid.y = rectTransform.position.y - mousePosition.y;
 
-            tileGridPosition.x = (int)(positionOnTheGrid.x / tileSizeWidth);
-            tileGridPosition.y = (int)(positionOnTheGrid.y / tileSizeHeight);
+            tileGridPosition.x = (int)(positionOnTheGrid.x / GlobalVariables.tileSizeWidth);
+            tileGridPosition.y = (int)(positionOnTheGrid.y / GlobalVariables.tileSizeHeight);
 
             return tileGridPosition;
         }
@@ -108,8 +106,8 @@ namespace GameTemplate._Game.Scripts.Inventory
         public Vector2 CalculatePositionOnGrid(InventoryItem inventoryItem, int posX, int posY)
         {
             Vector2 position = new Vector2();
-            position.x = posX * tileSizeWidth + tileSizeWidth * inventoryItem.Width / 2;
-            position.y = -(posY * tileSizeHeight + tileSizeHeight * inventoryItem.Height / 2);
+            position.x = posX * GlobalVariables.tileSizeWidth + GlobalVariables.tileSizeWidth * inventoryItem.Width / 2;
+            position.y = -(posY * GlobalVariables.tileSizeHeight + GlobalVariables.tileSizeHeight * inventoryItem.Height / 2);
             return position;
         }
 
@@ -276,7 +274,7 @@ namespace GameTemplate._Game.Scripts.Inventory
         public List<ItemData> GetItemsInside()
         {
             List<ItemData> items = new List<ItemData>();
-            
+
             for (int x = 0; x < gridSizeWidth; x++)
             {
                 for (int y = 0; y < gridSizeHeight; y++)
@@ -290,6 +288,7 @@ namespace GameTemplate._Game.Scripts.Inventory
                     }
                 }
             }
+
             return items;
         }
     }

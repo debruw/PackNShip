@@ -9,8 +9,8 @@ namespace GameTemplate._Game.Scripts.Inventory
         public void SetSize(InventoryItem targetItem)
         {
             Vector2 size = new Vector2();
-            size.x = targetItem.Width * ItemGrid.tileSizeWidth;
-            size.y = targetItem.Height * ItemGrid.tileSizeHeight;
+            size.x = targetItem.Width * GlobalVariables.tileSizeWidth;
+            size.y = targetItem.Height * GlobalVariables.tileSizeHeight;
             highlighter.sizeDelta = size;
         }
 

@@ -18,7 +18,7 @@ MonoBehaviour:
     poolName: BasketPrefab
     objectCount: 10
     goBackOnDisable: 0
-  - objectPrefab: {fileID: 1263888429219676067, guid: fb998ec4970066d47b4e0e343f57c687,
+  - objectPrefab: {fileID: 8975960628408767463, guid: 0718b270c964baa42930e57926b98e43,
       type: 3}
     poolName: BoxPrefab
     objectCount: 20
