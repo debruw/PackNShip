@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
-  m_EffectDistance: {x: 5, y: -10}
+  m_EffectDistance: {x: 5, y: -5}
   m_UseGraphicAlpha: 1
 --- !u!1 &5209777434437691906
 GameObject:
@@ -407,6 +407,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4599912749557944226, guid: b19c6fc0e47d67742bc16b2bd74e753e,
+        type: 3}
+      propertyPath: m_EffectDistance.y
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 7872623541833379078, guid: b19c6fc0e47d67742bc16b2bd74e753e,
         type: 3}

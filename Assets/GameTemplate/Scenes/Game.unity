@@ -2035,7 +2035,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
-  m_EffectDistance: {x: 5, y: -10}
+  m_EffectDistance: {x: 5, y: -5}
   m_UseGraphicAlpha: 1
 --- !u!224 &1864772078 stripped
 RectTransform:
@@ -2394,36 +2394,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7177305566023693838, guid: 0598525dac87e0140b7b8cb5d04eafc2,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7177305566023693838, guid: 0598525dac87e0140b7b8cb5d04eafc2,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7177305566023693838, guid: 0598525dac87e0140b7b8cb5d04eafc2,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7177305566023693838, guid: 0598525dac87e0140b7b8cb5d04eafc2,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7177305566023693838, guid: 0598525dac87e0140b7b8cb5d04eafc2,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7732972036512132157, guid: 0598525dac87e0140b7b8cb5d04eafc2,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 437737878}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2475,7 +2445,7 @@ PrefabInstance:
     - target: {fileID: 2908986137908225820, guid: 035902eaa72519b43b54f51ac1aa70fa,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 2908986137908225820, guid: 035902eaa72519b43b54f51ac1aa70fa,
         type: 3}
