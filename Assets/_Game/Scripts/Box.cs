@@ -15,6 +15,7 @@ namespace GameTemplate._Game.Scripts
         public TextMeshProUGUI WarningText;
         public RectTransform CapWidth0, CapWidth1;
         public RectTransform CapHeight0, CapHeight1;
+        public RectTransform BoxCenter;
 
         ItemGrid _itemGrid;
         public bool isClosed;
@@ -123,6 +124,8 @@ namespace GameTemplate._Game.Scripts
             
             CapHeight0.sizeDelta = new Vector2(CapHeight0.sizeDelta.x, size.y / 2 - 5);
             CapHeight1.sizeDelta = new Vector2(CapHeight1.sizeDelta.x, size.y / 2 - 5);
+
+            BoxCenter.sizeDelta = new Vector2(8f * boxSize.x, 8f * boxSize.y);
         }
 
         public void DestroyBox()

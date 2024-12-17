@@ -8,8 +8,7 @@ namespace GameTemplate._Game.Scripts
     public class Basket : MonoBehaviour
     {
         public TextMeshProUGUI orderText;
-        [HideInInspector]
-        public Order _order = new Order();
+        [HideInInspector] public Order _order = new Order();
 
         ItemGrid _itemGrid;
         InventoryController _inventoryController;
@@ -25,7 +24,7 @@ namespace GameTemplate._Game.Scripts
 
         public void Empty()
         {
-            transform.DOLocalMoveY(500, 1f).SetDelay(1).OnComplete(
+            transform.DOLocalMoveY(500, 1f).SetDelay(3).OnComplete(
                 () =>
                 {
                     _inventoryController.GetHighlighterToMainGrid();

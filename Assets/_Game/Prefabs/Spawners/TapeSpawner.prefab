@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
-  m_EffectDistance: {x: 10, y: -15}
+  m_EffectDistance: {x: 5, y: -10}
   m_UseGraphicAlpha: 1
 --- !u!1 &5209777434437691906
 GameObject:
@@ -277,7 +277,7 @@ PrefabInstance:
     - target: {fileID: 5828272296937321900, guid: 018f354e20f8e7f4eb5747cab03bea07,
         type: 3}
       propertyPath: m_fontSize
-      value: 62.1
+      value: 41.1
       objectReference: {fileID: 0}
     - target: {fileID: 6648216498246878638, guid: 018f354e20f8e7f4eb5747cab03bea07,
         type: 3}
@@ -586,7 +586,7 @@ PrefabInstance:
     - target: {fileID: 5828272296937321900, guid: 018f354e20f8e7f4eb5747cab03bea07,
         type: 3}
       propertyPath: m_fontSize
-      value: 62.1
+      value: 41.1
       objectReference: {fileID: 0}
     - target: {fileID: 6648216498246878638, guid: 018f354e20f8e7f4eb5747cab03bea07,
         type: 3}
@@ -756,7 +756,7 @@ PrefabInstance:
     - target: {fileID: 5828272296937321900, guid: 018f354e20f8e7f4eb5747cab03bea07,
         type: 3}
       propertyPath: m_fontSize
-      value: 62.1
+      value: 41.1
       objectReference: {fileID: 0}
     - target: {fileID: 6648216498246878638, guid: 018f354e20f8e7f4eb5747cab03bea07,
         type: 3}
