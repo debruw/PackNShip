@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,18 +7,18 @@ namespace GameTemplate._Game.Scripts
 {
     public class Barcode : MonoBehaviour
     {
-        private Image _image;
+        private TextMeshProUGUI _text;
 
         private void Start()
         {
-            _image = GetComponent<Image>();
+            _text = GetComponent<TextMeshProUGUI>();
         }
         
         public async UniTask FlashRed()
         {
-            _image.color = Color.red;
+            _text.color = Color.red;
             await UniTask.Delay(200);
-            _image.color = Color.white;
+            _text.color = Color.white;
         }
     }
 }

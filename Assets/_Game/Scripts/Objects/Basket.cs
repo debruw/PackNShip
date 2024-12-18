@@ -7,7 +7,7 @@ namespace GameTemplate._Game.Scripts
 {
     public class Basket : MonoBehaviour
     {
-        public TextMeshProUGUI orderText;
+        public TextMeshProUGUI barcodeText;
         public Order _order = new Order();
 
         ItemGrid _itemGrid;
@@ -39,7 +39,7 @@ namespace GameTemplate._Game.Scripts
         {
             _inventoryController = InventoryController;
             _order.orderID = orderCounter;
-            orderText.text = _order.orderID.ToString();
+            barcodeText.text = "Order " + _order.orderID.ToString("000");
             GetComponentInChildren<GridInteract>().SetInventory(InventoryController);
 
             GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 500);
