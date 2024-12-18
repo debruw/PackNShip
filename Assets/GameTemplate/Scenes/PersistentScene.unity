@@ -211,6 +211,7 @@ MonoBehaviour:
   levelData: {fileID: 11400000, guid: f2a32ec78bd7f6d4c84819b8768e0eea, type: 2}
   poolingData: {fileID: 11400000, guid: 30a9fa7922dfa474f9edaa76281c1a60, type: 2}
   itemsDataList: {fileID: 11400000, guid: e579cd5c909d52b4a97798e85b2e48aa, type: 2}
+  rankData: {fileID: 11400000, guid: 78e1f380644ddf1478943eccb5d4cf35, type: 2}
 --- !u!1 &281978369
 GameObject:
   m_ObjectHideFlags: 0

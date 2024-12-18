@@ -14,6 +14,8 @@ namespace GameTemplate.Utils
         const string k_MusicStateKey = "MusicState";
         const string k_LevelIdKey = "LevelId";
         const string k_CurrencyKey = "Currency";
+        const string k_ExperienceKey = "Experience";
+        const string k_RankKey = "Rank";
 
         public static void SetFirstPlayFalse()
         {
@@ -63,6 +65,26 @@ namespace GameTemplate.Utils
         public static void SetCurrency(int currencyId, int newCurrencyAmount)
         {
             PlayerPrefs.SetInt(k_CurrencyKey + currencyId, newCurrencyAmount);
+        }
+        
+        public static int GetExperience()
+        {
+            return PlayerPrefs.GetInt(k_ExperienceKey);
+        }
+
+        public static void SetExperience(int newExperience)
+        {
+            PlayerPrefs.SetInt(k_ExperienceKey, newExperience);
+        }
+        
+        public static int GetRank()
+        {
+            return PlayerPrefs.GetInt(k_RankKey);
+        }
+
+        public static void SetRank(int newRank)
+        {
+            PlayerPrefs.SetInt(k_RankKey, newRank);
         }
 
         public static void DeleteAll()

@@ -20,11 +20,13 @@ namespace GameTemplate._Game.Scripts.Views
         CanvasGroup _canvasGroup;
 
         private Statistics _statistics;
+        RankSystem _rankSystem;
 
         [Inject]
-        public void Construct(Statistics Statistics)
+        public void Construct(Statistics Statistics, RankSystem rankSystem)
         {
             _statistics = Statistics;
+            _rankSystem = rankSystem;
         }
 
         private void Start()
@@ -44,7 +46,10 @@ namespace GameTemplate._Game.Scripts.Views
             txtWrongTape.text = mSpace + _statistics.TotalWrongTapeCount;
             txtWrongLabel.text = mSpace + _statistics.TotalWrongLabelCount;
 
-            txtTotal.text = mSpace + _statistics.TotalPoint;
+            int totalPoint = _statistics.TotalPoint;
+            txtTotal.text = mSpace + totalPoint;
+            
+            _rankSystem.AddPoints(totalPoint);
 
             ActivatePanel();
         }

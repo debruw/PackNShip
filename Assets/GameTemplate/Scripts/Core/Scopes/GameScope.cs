@@ -1,6 +1,7 @@
 using System;
 using AssetKits.ParticleImage;
 using Cysharp.Threading.Tasks;
+using GameTemplate._Game;
 using GameTemplate._Game.Scripts;
 using GameTemplate._Game.Scripts.Inventory;
 using GameTemplate._Game.Scripts.Views;
@@ -56,6 +57,7 @@ namespace GameTemplate.Core.Scopes
 
             builder.RegisterComponentInHierarchy<InventoryController>();
             builder.RegisterComponentInHierarchy<Statistics>();
+            builder.RegisterComponentInHierarchy<RankSystem>();
 
             builder.RegisterComponentInHierarchy<BoxSpawner>();
             builder.RegisterComponentInHierarchy<BasketSpawner>();
