@@ -8,7 +8,7 @@ namespace GameTemplate._Game.Scripts
     public class Basket : MonoBehaviour
     {
         public TextMeshProUGUI orderText;
-        [HideInInspector] public Order _order = new Order();
+        public Order _order = new Order();
 
         ItemGrid _itemGrid;
         InventoryController _inventoryController;
@@ -17,8 +17,11 @@ namespace GameTemplate._Game.Scripts
         {
             for (int i = 0; i < 3; i++)
             {
-                ItemData itemData = _inventoryController.InsertRandomItem(_itemGrid, _order.orderItems).itemData;
-                _order.orderItems.Add(itemData);
+                InventoryItem item = _inventoryController.InsertRandomItem(_itemGrid, _order.orderItems);
+                if (item != null)
+                {
+                    _order.orderItems.Add(item.itemData);
+                }
             }
         }
 
@@ -30,7 +33,6 @@ namespace GameTemplate._Game.Scripts
                     _inventoryController.GetHighlighterToMainGrid();
                     Destroy(gameObject);
                 });
-                
         }
 
         public void InitInventory(InventoryController InventoryController, int orderCounter)
@@ -42,7 +44,7 @@ namespace GameTemplate._Game.Scripts
 
             GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 500);
             transform.DOLocalMoveY(0, 1f).SetDelay(.5f);
-            
+
             _itemGrid = GetComponentInChildren<ItemGrid>();
             InitObjects();
         }

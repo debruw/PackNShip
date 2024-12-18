@@ -139,23 +139,24 @@ namespace GameTemplate._Game.Scripts.Inventory
                 newItem.Rotate();
             }
 
-            InsertItem(newItem, grid);
-            return newItem;
+            bool isInserted = InsertItem(newItem, grid);
+            return isInserted ? newItem : null;
         }
 
-        private void InsertItem(InventoryItem itemToInsert, ItemGrid grid)
+        private bool InsertItem(InventoryItem itemToInsert, ItemGrid grid)
         {
-            if (grid == null) return;
+            if (grid == null) return false;
 
             Vector2Int? posOnGrid = grid.FindSpaceForObject(itemToInsert);
 
             if (posOnGrid == null)
             {
                 Destroy(itemToInsert.gameObject);
-                return;
+                return false;
             }
 
             grid.PlaceItem(itemToInsert, posOnGrid.Value.x, posOnGrid.Value.y);
+            return true;
         }
 
         private Vector2Int oldPosition;

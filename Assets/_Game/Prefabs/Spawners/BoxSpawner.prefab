@@ -711,7 +711,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '[<color="red">0<color="blue"> , 0<color="white">]'
+  m_text: '[<color=#FF7A19>0,<color=#2AAAFD>0<color=white>]'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b741db7ac3d1c423aad5b49a9780ca2d, type: 2}
   m_sharedMaterial: {fileID: 5568139486216784236, guid: b741db7ac3d1c423aad5b49a9780ca2d,
@@ -940,7 +940,7 @@ PrefabInstance:
     - target: {fileID: 6648216498246878638, guid: 018f354e20f8e7f4eb5747cab03bea07,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 40
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6648216498246878638, guid: 018f354e20f8e7f4eb5747cab03bea07,
         type: 3}
@@ -1070,7 +1070,7 @@ PrefabInstance:
     - target: {fileID: 6648216498246878638, guid: 018f354e20f8e7f4eb5747cab03bea07,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 40
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6648216498246878638, guid: 018f354e20f8e7f4eb5747cab03bea07,
         type: 3}
@@ -1205,7 +1205,7 @@ PrefabInstance:
     - target: {fileID: 6648216498246878638, guid: 018f354e20f8e7f4eb5747cab03bea07,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 40
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6648216498246878638, guid: 018f354e20f8e7f4eb5747cab03bea07,
         type: 3}
@@ -1340,7 +1340,7 @@ PrefabInstance:
     - target: {fileID: 6648216498246878638, guid: 018f354e20f8e7f4eb5747cab03bea07,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 40
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6648216498246878638, guid: 018f354e20f8e7f4eb5747cab03bea07,
         type: 3}
@@ -1475,7 +1475,7 @@ PrefabInstance:
     - target: {fileID: 6648216498246878638, guid: 018f354e20f8e7f4eb5747cab03bea07,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 40
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6648216498246878638, guid: 018f354e20f8e7f4eb5747cab03bea07,
         type: 3}
@@ -1610,7 +1610,7 @@ PrefabInstance:
     - target: {fileID: 6648216498246878638, guid: 018f354e20f8e7f4eb5747cab03bea07,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 40
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6648216498246878638, guid: 018f354e20f8e7f4eb5747cab03bea07,
         type: 3}

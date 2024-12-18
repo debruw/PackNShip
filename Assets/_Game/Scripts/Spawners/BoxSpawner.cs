@@ -13,6 +13,7 @@ namespace GameTemplate._Game.Scripts
 
         public Vector2Int boxSize = new Vector2Int(0, 0);
         private int spawnedBoxCount;
+        private const string Blue = "<color=#2AAAFD>", Orange = "<color=#FF7A19>", White = "<color=white>";
 
         InventoryController _inventoryController;
         PoolingService _poolingService;
@@ -43,20 +44,20 @@ namespace GameTemplate._Game.Scripts
             ItemGrid itemGrid = box.GetComponentInChildren<ItemGrid>();
             itemGrid.GetComponent<GridInteract>().SetInventory(_inventoryController);
             itemGrid.SetSize(boxSize.x, boxSize.y);
+            
+            //ResetSize();
         }
 
         public void NumberXButtonClick(int number)
         {
             boxSize.x = number;
-
-            sizeText.text = "[<color=\"red\">" + boxSize.x + "<color=\"blue\">," + boxSize.y + "<color=\"white\">]";
+            SetText();
         }
 
         public void NumberYButtonClick(int number)
         {
             boxSize.y = number;
-
-            sizeText.text = "[<color=\"red\">" + boxSize.x + "<color=\"blue\">," + boxSize.y + "<color=\"white\">]";
+            SetText();
         }
 
         public void GetBoxButtonClick()
@@ -64,7 +65,7 @@ namespace GameTemplate._Game.Scripts
             if (boxSize.x == 0 || boxSize.y == 0) return;
 
             SpawnBox();
-            ResetSize();
+            SetText();
         }
 
         public void ResetButtonClick()
@@ -75,7 +76,12 @@ namespace GameTemplate._Game.Scripts
         void ResetSize()
         {
             boxSize = new Vector2Int(0, 0);
-            sizeText.text = "[<color=\"red\">" + boxSize.x + "<color=\"blue\">," + boxSize.y + "<color=\"white\">]";
+            SetText();
+        }
+
+        void SetText()
+        {
+            sizeText.text = "[" + Blue + boxSize.x + "," + Orange + boxSize.y + White + "]";
         }
     }
 }

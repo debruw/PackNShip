@@ -11,10 +11,9 @@ namespace GameTemplate._Game.Scripts
     public class Label : MonoBehaviour
     {
         public TextMeshProUGUI _label;
-        [HideInInspector]
-        public int _orderNumber;
+        [HideInInspector] public int _orderNumber;
 
-        private Order _order;
+        public Order _order;
 
         public void SetOrder(Order order)
         {
