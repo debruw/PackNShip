@@ -5,4 +5,5 @@ public enum PoolID
 	LabelPrefab,
 	TapePrefab,
 	ItemPrefab,
+	FloatingText,
 }

@@ -72,7 +72,7 @@ namespace GameTemplate._Game.Scripts
             Box.OnBoxDelivered -= OnBoxDelivered;
         }
 
-        private void OnBoxDelivered(BoxStatistic boxStatistic)
+        private void OnBoxDelivered(BoxStatistic boxStatistic, Transform boxTransform)
         {
             _deliveredBoxCount++;
 

@@ -9,7 +9,7 @@ namespace GameTemplate._Game.Scripts
 {
     public class Box : MonoBehaviour, IStartable
     {
-        public static Action<BoxStatistic> OnBoxDelivered;
+        public static Action<BoxStatistic, Transform> OnBoxDelivered;
 
         [SerializeField] private GameObject packButton;
         public TextMeshProUGUI WarningText;
@@ -104,7 +104,7 @@ namespace GameTemplate._Game.Scripts
             boxStatistic.IsRightTape = isTapeRight;
             boxStatistic.IsRightLabel = isLabelRight;
 
-            OnBoxDelivered?.Invoke(boxStatistic);
+            OnBoxDelivered?.Invoke(boxStatistic, transform);
         }
 
         public void SetSize(Vector2Int vector2Int)

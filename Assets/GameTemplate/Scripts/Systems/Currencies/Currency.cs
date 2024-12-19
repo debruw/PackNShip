@@ -33,24 +33,29 @@ namespace GameTemplate.Systems.Currencies
         public void Reset(EventArgs args)
         {
             currencyAmount = 0;
-            SetPlayerPref();
+            SetAmountToSave();
         }
 
         public void Spend(int spentAmount)
         {
             currencyAmount -= spentAmount;
-            SetPlayerPref();
+            SetAmountToSave();
         }
 
         public void Earn(int earningsAmount)
         {
             currencyAmount += earningsAmount;
-            SetPlayerPref();
+            SetAmountToSave();
         }
 
-        public void SetPlayerPref()
+        public void SetAmountToSave()
         {
             UserPrefs.SetCurrency(currencyId, currencyAmount);
+        }
+        
+        public int GetAmountFromSave()
+        {
+            return UserPrefs.GetCurrency(currencyId, currencyAmount);
         }
     }
 }

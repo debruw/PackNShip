@@ -3,6 +3,7 @@ using GameTemplate._Game.Scripts.Inventory;
 using UnityEngine;
 using GameTemplate.Systems.Audio;
 using GameTemplate.Systems.Currencies;
+using GameTemplate.Systems.FloatingText;
 using GameTemplate.Systems.Level;
 using GameTemplate.Systems.Pooling;
 using GameTemplate.Systems.Scene;
@@ -41,7 +42,9 @@ namespace GameTemplate.Core.Scopes
             builder.Register<SoundService>(Lifetime.Singleton);
             builder.Register<LevelService>(Lifetime.Singleton);
             builder.Register<PoolingService>(Lifetime.Singleton);
+            builder.RegisterComponentInHierarchy<ApplicationCanvas>();
             builder.Register<ISceneService, SceneService>(Lifetime.Singleton);
+            builder.Register<FloatingTextService>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.RegisterComponentInHierarchy<LoadingScreen>();
 
             builder.Register<PersistentGameState>(Lifetime.Singleton);

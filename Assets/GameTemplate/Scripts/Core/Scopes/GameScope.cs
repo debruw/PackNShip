@@ -1,4 +1,5 @@
 using System;
+using _Game.Scripts.Currency;
 using AssetKits.ParticleImage;
 using Cysharp.Threading.Tasks;
 using GameTemplate._Game;
@@ -66,6 +67,7 @@ namespace GameTemplate.Core.Scopes
 
             builder.RegisterComponentInHierarchy<DayText>();
             builder.RegisterComponentInHierarchy<Timer>();
+            builder.RegisterComponentInHierarchy<CurrencyUIGame>();
             
             builder.RegisterComponentInHierarchy<UIGameCanvas>();
             builder.RegisterComponentInHierarchy<LevelEndView>();

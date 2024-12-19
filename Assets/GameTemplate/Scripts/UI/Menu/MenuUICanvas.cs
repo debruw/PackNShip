@@ -29,7 +29,7 @@ namespace GameTemplate.Gameplay.UI
         public void Construct(ISceneService sceneLoader, SoundService soundService, LevelService levelService,
             ICurrencyService currencyManager)
         {
-            Debug.Log("Construct UICanvas");
+            Debug.Log("Construct MenuUICanvas");
             _SceneService = sceneLoader;
             _soundService = soundService;
             _levelService = levelService;

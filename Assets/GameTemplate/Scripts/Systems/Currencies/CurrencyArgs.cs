@@ -6,13 +6,11 @@ namespace GameTemplate.Systems.Currencies
     {
         public int currencyId;
         public int changeAmount;
-        public bool addIncrementally;
 
-        public CurrencyArgs(int currencyId, int changeAmount, bool addIncrementally)
+        public CurrencyArgs(int currencyId, int changeAmount)
         {
             this.currencyId = currencyId;
             this.changeAmount = changeAmount;
-            this.addIncrementally = addIncrementally;
         }
     }
 }

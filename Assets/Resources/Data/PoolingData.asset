@@ -38,3 +38,8 @@ MonoBehaviour:
     poolName: ItemPrefab
     objectCount: 25
     goBackOnDisable: 0
+  - objectPrefab: {fileID: 4285020042119709556, guid: 5734a873959c8b54b943612fa20c27db,
+      type: 3}
+    poolName: FloatingText
+    objectCount: 20
+    goBackOnDisable: 0

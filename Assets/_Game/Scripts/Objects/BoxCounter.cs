@@ -30,7 +30,7 @@ namespace GameTemplate._Game.Scripts
             Box.OnBoxDelivered -= OnBoxDelivered;
         }
 
-        private void OnBoxDelivered(BoxStatistic boxStatistic)
+        private void OnBoxDelivered(BoxStatistic boxStatistic, Transform boxTransform)
         {
             counterText.text = "<mspace=55>" + _statistics.DeliveredBoxCount.ToString("000") + "</mspace>";
         }

@@ -13,7 +13,7 @@ namespace GameTemplate.UI
         {
             int randomEarning = Random.Range(10, 20);
             EarnedCoinText.text = "+" + randomEarning;
-            return new CurrencyArgs(0, randomEarning, false);
+            return new CurrencyArgs(0, randomEarning);
         }
     }
 }
