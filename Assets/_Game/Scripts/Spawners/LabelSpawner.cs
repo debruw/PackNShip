@@ -28,7 +28,10 @@ namespace GameTemplate._Game.Scripts
             spawnedLabel.transform.localPosition = Vector3.zero;
             spawnedLabel.GetComponent<Label>().SetOrder(order);
 
-            spawnedLabel.GetComponent<RectTransform>().DOAnchorPos(new Vector2(0, -125f), 1f);
+            spawnedLabel.GetComponent<RectTransform>().DOAnchorPos(new Vector2(0, -125f), 1f).OnComplete(() =>
+            {
+                spawnedLabel.GetComponent<BoxCollider2D>().isTrigger = false;
+            });
             return spawnedLabel;
         }
     }

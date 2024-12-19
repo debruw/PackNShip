@@ -51,8 +51,12 @@ namespace GameTemplate._Game.Scripts
 
             rectTransform.sizeDelta = sizeVec;
             rectTransform.anchoredPosition = new Vector2(sizeVec.x / 2, rectTransform.anchoredPosition.y);
+            rectTransform.GetComponent<BoxCollider2D>().size = sizeVec;
 
-            rectTransform.DOAnchorPosX(-sizeVec.x / 2, .5f);
+            rectTransform.DOAnchorPosX(-sizeVec.x / 2, .5f).OnComplete(() =>
+            {
+                rectTransform.GetComponent<BoxCollider2D>().isTrigger = false;
+            });
         }
     }
 }
