@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using GameTemplate._Game.Scripts.Inventory;
 using GameTemplate.Systems.Pooling;
@@ -20,7 +21,17 @@ namespace GameTemplate._Game.Scripts
         {
             Debug.Log("Construct TapeSpawner");
             _poolingService = poolingService;
-            TapeDrag.OnTapeDestroyed += () => spawnedTapeCount--;
+            TapeDrag.OnTapeDestroyed += OnTapeDestroyed;
+        }
+
+        private void OnTapeDestroyed()
+        {
+            spawnedTapeCount--;
+        }
+
+        private void OnDestroy()
+        {
+            TapeDrag.OnTapeDestroyed -= OnTapeDestroyed;
         }
 
         public void SpawnTape(int size)

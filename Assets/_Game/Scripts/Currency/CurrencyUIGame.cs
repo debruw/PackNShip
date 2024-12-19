@@ -1,4 +1,5 @@
 using System;
+using GameTemplate._Game.Scripts;
 using GameTemplate.Systems.Currencies;
 using TMPro;
 using UnityEngine;
@@ -21,6 +22,13 @@ namespace _Game.Scripts.Currency
 
             UpdateText();
             CurrencyService.OnCurrencyChanged += OnCurrencyChanged;
+            Timer.OnTimesUp += OnTimesUp;
+        }
+
+        private void OnTimesUp()
+        {
+            CurrencyService.OnCurrencyChanged -= OnCurrencyChanged;
+            Timer.OnTimesUp -= OnTimesUp;
         }
 
         private void OnCurrencyChanged(int currencyId)

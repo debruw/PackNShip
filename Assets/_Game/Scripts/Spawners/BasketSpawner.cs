@@ -1,9 +1,7 @@
 using Cysharp.Threading.Tasks;
-using DG.Tweening;
 using GameTemplate._Game.Scripts.Inventory;
 using GameTemplate.Systems.Pooling;
 using UnityEngine;
-using UnityEngine.Serialization;
 using VContainer;
 
 namespace GameTemplate._Game.Scripts
@@ -13,8 +11,9 @@ namespace GameTemplate._Game.Scripts
         public Transform[] spawnPoints;
 
         private Basket basket;
-        
+
         int orderCounter = 0;
+        bool canSpawn = true;
 
         InventoryController _inventoryController;
         PoolingService _poolingService;
@@ -25,15 +24,26 @@ namespace GameTemplate._Game.Scripts
             Debug.Log("Construct BasketSpawner");
             _inventoryController = inventoryController;
             _poolingService = poolingService;
+
+            Timer.OnTimesUp += OnTimesUp;
+        }
+
+        private void OnTimesUp()
+        {
+            canSpawn = false;
+            Timer.OnTimesUp -= OnTimesUp;
         }
 
         private void Awake()
         {
-            SpawnBox();
+            SpawnBasket();
         }
 
-        void SpawnBox()
+        void SpawnBasket()
         {
+            if (!canSpawn)
+                return;
+
             Transform parent = GetParent();
 
             if (parent != null)
@@ -59,11 +69,11 @@ namespace GameTemplate._Game.Scripts
 
             return null;
         }
-        
+
         public async UniTask SpawnNewBasket(int waitTime = 2000)
         {
             await UniTask.Delay(waitTime);
-            SpawnBox();
+            SpawnBasket();
         }
     }
 }

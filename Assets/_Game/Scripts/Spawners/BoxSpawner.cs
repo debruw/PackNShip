@@ -1,3 +1,4 @@
+using System;
 using GameTemplate._Game.Scripts.Inventory;
 using GameTemplate.Systems.Pooling;
 using TMPro;
@@ -25,7 +26,17 @@ namespace GameTemplate._Game.Scripts
             _inventoryController = inventoryController;
             _poolingService = poolingService;
 
-            Box.OnBoxDestroyed += () => spawnedBoxCount--;
+            Box.OnBoxDestroyed += OnBoxDestroyed;
+        }
+
+        private void OnBoxDestroyed()
+        {
+            spawnedBoxCount--;
+        }
+
+        private void OnDestroy()
+        {
+            Box.OnBoxDestroyed -= OnBoxDestroyed;
         }
 
         public void SpawnBox()

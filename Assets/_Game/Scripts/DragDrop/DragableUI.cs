@@ -19,6 +19,13 @@ namespace GameTemplate._Game.Scripts
         private void OnEnable()
         {
             _rectTransform = targetObject.GetComponent<RectTransform>();
+             Timer.OnTimesUp += OnTimesUp;
+        }
+
+        private void OnTimesUp()
+        {
+            Timer.OnTimesUp -= OnTimesUp;
+            this.enabled = false;
         }
 
         public virtual void OnBeginDrag(PointerEventData eventData)

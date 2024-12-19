@@ -21,7 +21,6 @@ namespace GameTemplate.Core.Scopes
     public class GameScope : GameStateScope
     {
         public override GameState ActiveState => GameState.Game;
-        public static Action OnFirstTouch;
 
         [SerializeField] private Transform _levelPrefabParent;
         [SerializeField] private UIGameCanvas _uiGameCanvas;
@@ -77,7 +76,6 @@ namespace GameTemplate.Core.Scopes
         {
             base.OnDestroy();
             LevelPrefab.OnGameFinished -= OnGameFinished;
-            OnFirstTouch = null;
         }
 
         public void OnGameFinished(bool isWin)

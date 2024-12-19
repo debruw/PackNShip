@@ -32,11 +32,17 @@ namespace GameTemplate.Systems.FloatingText
             _applicationCanvas = applicationCanvas;
 
             Box.OnBoxDelivered += OnBoxDelivered;
+            Timer.OnTimesUp += OnTimesUp;
+        }
+
+        private void OnTimesUp()
+        {
+            Box.OnBoxDelivered -= OnBoxDelivered;
+            Timer.OnTimesUp -= OnTimesUp;
         }
 
         private void OnBoxDelivered(BoxStatistic statistics, Transform boxTransform)
         {
-            Debug.Log("spawnText");
             SpawnText("50$", Color.green, boxTransform.position);
             _currencyService.EarnCurrency(new CurrencyArgs((int)CurrencyService.CurrencyType.Money, 50));
         }
