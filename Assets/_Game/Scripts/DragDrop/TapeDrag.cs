@@ -33,6 +33,7 @@ namespace GameTemplate._Game.Scripts
                     _rect.anchorMax = new Vector2(.5f, .5f);
                     _rect.anchoredPosition = Vector2.zero;
                     GetComponent<Shadow>().enabled = false;
+                    GetComponent<Rigidbody2D>().simulated = false;
                     this.enabled = false;
                 }
             }

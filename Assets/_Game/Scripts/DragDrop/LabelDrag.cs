@@ -23,6 +23,7 @@ namespace GameTemplate._Game.Scripts
                 {
                     GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
                     GetComponent<Shadow>().enabled = false;
+                    GetComponent<Rigidbody2D>().simulated = false;
                     this.enabled = false;
                 }
             }

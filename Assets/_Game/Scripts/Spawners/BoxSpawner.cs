@@ -10,11 +10,11 @@ namespace GameTemplate._Game.Scripts
     public class BoxSpawner : MonoBehaviour
     {
         public Transform spawnPoint;
-        public TextMeshProUGUI sizeText;
+        public TextMeshProUGUI sizeXText, sizeYText;
 
         public Vector2Int boxSize = new Vector2Int(0, 0);
         private int spawnedBoxCount;
-        private const string Blue = "<color=#2AAAFD>", Orange = "<color=#FF7A19>", White = "<color=white>";
+        private const string Blue = "<color=#2AAAFD>", Orange = "<color=#FF7A19>";
 
         InventoryController _inventoryController;
         PoolingService _poolingService;
@@ -92,7 +92,8 @@ namespace GameTemplate._Game.Scripts
 
         void SetText()
         {
-            sizeText.text = "[" + Blue + boxSize.x + "," + Orange + boxSize.y + White + "]";
+            sizeXText.text = Blue + boxSize.x;
+            sizeYText.text = Orange + boxSize.y;
         }
     }
 }
