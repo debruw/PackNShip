@@ -21,7 +21,7 @@ namespace GameTemplate.Utils
         {
             PlayerPrefs.SetInt(k_FirstPlayKey, 0);
         }
-        
+
         public static bool IsFirstPlay()
         {
             return PlayerPrefs.GetInt(k_FirstPlayKey, 1) == 1;
@@ -51,12 +51,12 @@ namespace GameTemplate.Utils
         {
             return PlayerPrefs.GetInt(k_LevelIdKey, 0);
         }
-        
+
         public static void SetLevelId(int newLevelId)
         {
             PlayerPrefs.SetInt(k_LevelIdKey, newLevelId);
         }
-        
+
         public static int GetCurrency(int currencyId, int currencyAmount)
         {
             return PlayerPrefs.GetInt(k_CurrencyKey + currencyId, currencyAmount);
@@ -66,7 +66,7 @@ namespace GameTemplate.Utils
         {
             PlayerPrefs.SetInt(k_CurrencyKey + currencyId, newCurrencyAmount);
         }
-        
+
         public static int GetExperience()
         {
             return PlayerPrefs.GetInt(k_ExperienceKey);
@@ -76,7 +76,7 @@ namespace GameTemplate.Utils
         {
             PlayerPrefs.SetInt(k_ExperienceKey, newExperience);
         }
-        
+
         public static int GetRank()
         {
             return PlayerPrefs.GetInt(k_RankKey);
@@ -85,6 +85,16 @@ namespace GameTemplate.Utils
         public static void SetRank(int newRank)
         {
             PlayerPrefs.SetInt(k_RankKey, newRank);
+        }
+
+        public static bool GetUpgradeState(string key)
+        {
+            return PlayerPrefs.GetInt(k_RankKey) == 1;
+        }
+
+        public static void SetUpgradeState(string key, bool isBuyed)
+        {
+            PlayerPrefs.SetInt(k_RankKey, isBuyed ? 1 : 0);
         }
 
         public static void DeleteAll()

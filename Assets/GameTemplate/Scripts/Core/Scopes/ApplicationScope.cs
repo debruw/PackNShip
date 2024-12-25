@@ -1,3 +1,4 @@
+using _Game.Scripts.Upgrades;
 using GameTemplate._Game;
 using GameTemplate._Game.Scripts.Inventory;
 using UnityEngine;
@@ -25,6 +26,7 @@ namespace GameTemplate.Core.Scopes
         public PoolingData poolingData;
         public ItemsDataList itemsDataList;
         public RankData rankData;
+        public UpgradeData upgradeData;
 
         protected override void Configure(IContainerBuilder builder)
         {
@@ -37,6 +39,7 @@ namespace GameTemplate.Core.Scopes
             builder.RegisterInstance(poolingData);
             builder.RegisterInstance(itemsDataList);
             builder.RegisterInstance(rankData);
+            builder.RegisterInstance(upgradeData);
 
             builder.Register<CurrencyService>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<SoundService>(Lifetime.Singleton);

@@ -6,4 +6,5 @@ public enum PoolID
 	TapePrefab,
 	ItemPrefab,
 	FloatingText,
+	UpgradeGridItem,
 }

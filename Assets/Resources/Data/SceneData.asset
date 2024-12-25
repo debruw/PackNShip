@@ -16,20 +16,30 @@ MonoBehaviour:
   - scene:
       m_AssetGUID: 99c9720ab356a0642a771bea13969a05
       m_SubObjectName: 
+      m_SubObjectGUID: 
       m_SubObjectType: 
       m_EditorAssetChanged: 1
     sceneName: PersistentScene
   - scene:
       m_AssetGUID: 4503f4ae01df63741a401dbf96efa23e
       m_SubObjectName: 
+      m_SubObjectGUID: 
       m_SubObjectType: 
       m_EditorAssetChanged: 1
     sceneName: MainMenu
   - scene:
       m_AssetGUID: c36a4eb67c178014594ef64d3870a34a
       m_SubObjectName: 
+      m_SubObjectGUID: 
       m_SubObjectType: 
       m_EditorAssetChanged: 1
     sceneName: Game
+  - scene:
+      m_AssetGUID: 11f764bdb0f087c4ba5a55f8d68dcd40
+      m_SubObjectName: 
+      m_SubObjectGUID: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
+    sceneName: Upgrades
   nameOfSceneToLoadOnOpening: MainMenu
   nameOfSceneUIScene: 

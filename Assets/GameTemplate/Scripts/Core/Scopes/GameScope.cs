@@ -20,6 +20,7 @@ namespace GameTemplate.Core.Scopes
 {
     public class GameScope : GameStateScope
     {
+        public override bool Persists => false;
         public override GameState ActiveState => GameState.Game;
 
         [SerializeField] private Transform _levelPrefabParent;

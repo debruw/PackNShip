@@ -175,6 +175,7 @@ MonoBehaviour:
   poolingData: {fileID: 11400000, guid: 30a9fa7922dfa474f9edaa76281c1a60, type: 2}
   itemsDataList: {fileID: 11400000, guid: e579cd5c909d52b4a97798e85b2e48aa, type: 2}
   rankData: {fileID: 11400000, guid: 78e1f380644ddf1478943eccb5d4cf35, type: 2}
+  upgradeData: {fileID: 11400000, guid: 35f2156251aabff4cb7f9c62c556d2a9, type: 2}
 --- !u!1 &1696188482
 GameObject:
   m_ObjectHideFlags: 0

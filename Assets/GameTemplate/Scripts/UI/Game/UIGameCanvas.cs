@@ -1,4 +1,3 @@
-using System;
 using DG.Tweening;
 using GameTemplate._Game.Scripts;
 using GameTemplate._Game.Scripts.Views;
@@ -6,7 +5,6 @@ using GameTemplate.Core.Scopes;
 using GameTemplate.Systems.Level;
 using GameTemplate.Systems.Scene;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using VContainer;
 
 namespace GameTemplate.UI
@@ -82,7 +80,7 @@ namespace GameTemplate.UI
             _levelService.SetNextLevel();
             _SceneService.LoadScene(new SceneLoadData
             {
-                sceneName = "Game",
+                sceneName = "Upgrades",
                 unloadCurrent = true,
                 activateLoadingCanvas = true,
                 setActiveScene = true

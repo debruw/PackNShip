@@ -8,11 +8,8 @@ namespace GameTemplate.Core.Scopes
     /// </summary>
     public class MainMenuScope : GameStateScope
     {
-        #region Variables
-
+        public override bool Persists => false;
         public override GameState ActiveState => GameState.MainMenu;
-
-        #endregion
 
         protected override void Configure(IContainerBuilder builder)
         {

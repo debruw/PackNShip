@@ -6,7 +6,8 @@ namespace GameTemplate.Core.Scopes
     public enum GameState
     {
         MainMenu,
-        Game
+        Game,
+        Upgrades
     }
 
     /// <summary>

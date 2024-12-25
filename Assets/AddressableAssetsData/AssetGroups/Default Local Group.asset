@@ -13,12 +13,10 @@ MonoBehaviour:
   m_Name: Default Local Group
   m_EditorClassIdentifier: 
   m_GroupName: Default Local Group
-  m_Data:
-    m_SerializedData: []
   m_GUID: b6ceb814cda6bd442aaad6d642abef94
   m_SerializeEntries:
-  - m_GUID: c36a4eb67c178014594ef64d3870a34a
-    m_Address: Assets/Scenes/Game.unity
+  - m_GUID: 11f764bdb0f087c4ba5a55f8d68dcd40
+    m_Address: Assets/GameTemplate/Scenes/Upgrades.unity
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -32,9 +30,14 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c36a4eb67c178014594ef64d3870a34a
+    m_Address: Assets/Scenes/Game.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d62dbdcc1a74eb14d8334c74874d087a, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: ce3ce6e24a5a7ce4f9df52429675a4c2, type: 2}
     - {fileID: 11400000, guid: 52ff0847e4109984ebebe391d29f3224, type: 2}
+    - {fileID: 11400000, guid: ce3ce6e24a5a7ce4f9df52429675a4c2, type: 2}
