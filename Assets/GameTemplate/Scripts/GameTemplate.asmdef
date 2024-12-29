@@ -7,13 +7,12 @@
         "Unity.TextMeshPro",
         "UISwitcher",
         "DOTween.Modules",
-        "Flexalon",
         "ParticleImage",
         "Unity.Addressables",
         "Unity.ResourceManager",
         "UniTask",
         "UniTask.Addressables",
-        "_Game"
+        "ToolbarExtender.Editor"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

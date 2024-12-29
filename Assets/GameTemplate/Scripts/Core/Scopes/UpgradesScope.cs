@@ -1,5 +1,5 @@
 using _Game.Scripts.Upgrades;
-using UnityEngine;
+using GameTemplate.UI.Currency;
 using VContainer;
 using VContainer.Unity;
 
@@ -15,6 +15,7 @@ namespace GameTemplate.Core.Scopes
             base.Configure(builder);
 
             builder.RegisterComponentInHierarchy<UpgradeCanvasView>();
+            builder.RegisterComponentInHierarchy<CurrecyViewSpawner>();
             builder.Register<UpgradeService>(Lifetime.Singleton).AsImplementedInterfaces();
         }
     }

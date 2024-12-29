@@ -10,10 +10,8 @@ namespace GameTemplate.Systems.Currencies
         #region Variables
 
         public Sprite currencyImage;
-        public string currencySign;
         public int currencyAmount;
         public bool isBuyable;
-        [HideInInspector] public int currencyHoldAmount;
 
         private int currencyId;
 

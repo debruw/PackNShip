@@ -1,6 +1,8 @@
 using System;
+using _Game.Scripts.Upgrades;
 using Cysharp.Threading.Tasks;
 using GameTemplate.Systems.Level;
+using GameTemplate.Utils;
 using TMPro;
 using UnityEngine;
 using VContainer;
@@ -20,14 +22,13 @@ namespace GameTemplate._Game.Scripts
         private bool timerPaused;
         private bool firstTick = true;
 
-        private LevelService _levelService;
-
+        
         [Inject]
-        public void Contruct(LevelService LevelService)
+        public void Contruct()
         {
             Debug.Log("Construct timer");
-            _levelService = LevelService;
-            SetTimer(_levelService.CurrentLevelData.LevelTime);
+            
+            SetTimer(UserPrefs.GetLevelDuration());
         }
 
         private void Start()

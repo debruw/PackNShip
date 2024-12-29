@@ -8,7 +8,7 @@ namespace GameTemplate.Systems.Currencies
     public class CurrencyService : ICurrencyService
     {
         private CurrencyData _CurrencyData;
-        public static Action<int> OnCurrencyChanged;
+        public static Action<int, int> OnCurrencyChanged;
 
         public enum CurrencyType
         {
@@ -31,7 +31,7 @@ namespace GameTemplate.Systems.Currencies
         {
             var currencyValue = eventArgs as CurrencyArgs;
             _CurrencyData.currencies[currencyValue.currencyId].Earn(currencyValue.changeAmount);
-            OnCurrencyChanged?.Invoke(currencyValue.currencyId);
+            OnCurrencyChanged?.Invoke(currencyValue.currencyId, _CurrencyData.currencies[currencyValue.currencyId].GetAmountFromSave());
         }
 
         public List<Currency> GetCurrencies()
@@ -43,7 +43,7 @@ namespace GameTemplate.Systems.Currencies
         {
             var currencyValue = eventArgs as CurrencyArgs;
             _CurrencyData.currencies[currencyValue.currencyId].Spend(currencyValue.changeAmount);
-            OnCurrencyChanged?.Invoke(currencyValue.currencyId);
+            OnCurrencyChanged?.Invoke(currencyValue.currencyId, _CurrencyData.currencies[currencyValue.currencyId].GetAmountFromSave());
         }
 
         public int GetCurrencyValue(CurrencyType currencyType)

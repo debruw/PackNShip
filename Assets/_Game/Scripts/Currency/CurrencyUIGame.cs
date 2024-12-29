@@ -31,7 +31,7 @@ namespace _Game.Scripts.Currency
             Timer.OnTimesUp -= OnTimesUp;
         }
 
-        private void OnCurrencyChanged(int currencyId)
+        private void OnCurrencyChanged(int currencyId, int i)
         {
             if (currencyId == (int)currencyType)
             {

@@ -68,7 +68,6 @@ namespace GameTemplate._Game
 
                 await UniTask.Delay(1000);
 
-                Debug.Log(CurrentExperience == _rankData.rankLimits[CurrentRank]);
                 if (CurrentExperience == _rankData.rankLimits[CurrentRank])
                 {
                     rankFill.fillAmount = 0;

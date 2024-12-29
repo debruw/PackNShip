@@ -1,17 +1,17 @@
-using System;
 using GameTemplate.Systems.Currencies;
 using GameTemplate.Utils;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using VContainer;
 using VContainer.Unity;
 
 namespace _Game.Scripts.Upgrades
 {
-    public class UpgradeGridItem : MonoBehaviour, IStartable
+    public class UpgradeGridItem : MonoBehaviour
     {
-        public TextMeshProUGUI nameText;
+        [FormerlySerializedAs("nameText")] public TextMeshProUGUI descriptionText;
         public TextMeshProUGUI costText;
         public TextMeshProUGUI levelText;
         public Image iconImg;
@@ -20,25 +20,19 @@ namespace _Game.Scripts.Upgrades
         UpgradeSO _upgradeSO;
 
         CurrencyService _CurrencyService;
-        UpgradeService _UpgradeService;
 
         [Inject]
-        public void Construct(ICurrencyService currencyService, UpgradeService upgradeService)
+        public void Construct(ICurrencyService currencyService)
         {
+            Debug.Log("Construct UpgradeGridItem");
             _CurrencyService = currencyService as CurrencyService;
-            _UpgradeService = upgradeService;
-        }
-
-        public void Start()
-        {
         }
 
         public void Initialize(UpgradeSO upgradeSO)
         {
-            Debug.Log("asdasda");
             _upgradeSO = upgradeSO;
 
-            nameText.text = _upgradeSO.name;
+            descriptionText.text = _upgradeSO.upgradeDescription;
             costText.text = _upgradeSO.upgradeCost.ToString();
             levelText.text = "Need lvl." + _upgradeSO.upgradeLevelRequirement;
             iconImg.sprite = _upgradeSO.upgradeIcon;
@@ -51,11 +45,12 @@ namespace _Game.Scripts.Upgrades
 
         public void BuyButtonClick()
         {
-            if (_CurrencyService.GetCurrencyValue(CurrencyService.CurrencyType.Money) >= _upgradeSO.upgradeCost)
+            if (_CurrencyService.GetCurrencyValue(_upgradeSO.upgradeCurrency) >= _upgradeSO.upgradeCost)
             {
                 _CurrencyService.SpendCurrency(new CurrencyArgs((int)CurrencyService.CurrencyType.Money,
                     _upgradeSO.upgradeCost));
-                _UpgradeService.BuyUpgrade(_upgradeSO);
+                _upgradeSO.isBuyed = true;
+                gameObject.SetActive(false);
             }
         }
     }

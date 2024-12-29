@@ -15,6 +15,6 @@ MonoBehaviour:
   currencies:
   - currencyImage: {fileID: 21300000, guid: 68c6dd55fbff84c598bad2cd9fa46a66, type: 3}
     currencySign: Money
-    currencyAmount: 50
+    currencyAmount: 0
     isBuyable: 0
     currencyHoldAmount: 0
