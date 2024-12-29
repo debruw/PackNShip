@@ -15,7 +15,9 @@ MonoBehaviour:
   upgradeType: 1
   upgradeLevelRequirement: 0
   upgradeDescription: Music Player
-  upgradeIcon: {fileID: 21300000, guid: bd615dc74314a7648b9b4b3981de7bd0, type: 3}
+  upgradeIcon: {fileID: 21300000, guid: 8f52a2ca72295b1419b11e2015270483, type: 3}
   upgradeCurrency: 0
-  upgradeCost: 100
+  upgradeCost: 1000
   upgradeValue: 30
+  upgradeSpawnable: {fileID: 7390846770951290872, guid: 1818380d0ea6c0b4d84593db8f64903d,
+    type: 3}

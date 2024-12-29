@@ -57,7 +57,6 @@ namespace GameTemplate.Gameplay.UI
 
         public void LoadLevelScene()
         {
-            _soundService.StopThemeMusic();
             _SceneService.LoadScene(new SceneLoadData
             {
                 sceneName = "Game",

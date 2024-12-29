@@ -18,7 +18,7 @@ namespace GameTemplate.Systems.Audio
         public void Construct(SoundService soundService)
         {
             _soundService = soundService;
-            _soundService.PlayThemeMusic(m_Restart);
+            _soundService.StartMenuThemeMusic(m_Restart);
         }
     }
 }

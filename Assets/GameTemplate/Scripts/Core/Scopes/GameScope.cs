@@ -1,4 +1,3 @@
-using System;
 using _Game.Scripts.Currency;
 using AssetKits.ParticleImage;
 using Cysharp.Threading.Tasks;

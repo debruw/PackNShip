@@ -17,5 +17,6 @@ MonoBehaviour:
   upgradeDescription: +30 Second
   upgradeIcon: {fileID: 21300000, guid: 69917d7e7d9f30445ad4be55100b2d05, type: 3}
   upgradeCurrency: 0
-  upgradeCost: 50
+  upgradeCost: 500
   upgradeValue: 30
+  upgradeSpawnable: {fileID: 0}

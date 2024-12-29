@@ -88,3 +88,8 @@ MonoBehaviour:
       Data: 
   audioObject: {fileID: 90362005414443727, guid: b845cd8fb3ccfee498d6b3518ecd63f1,
     type: 3}
+  MusicPlayerMusics:
+  - {fileID: 8300000, guid: 221db0ab1398efe4c80925cb2157aacb, type: 3}
+  - {fileID: 8300000, guid: cf9dcaeb4037818469db92a0f5211aaa, type: 3}
+  - {fileID: 8300000, guid: 83e5ea376b38e724a84298ac48cb4b9d, type: 3}
+  - {fileID: 8300000, guid: 1a9eb99f3ba121641b68e3e23e1fa9d4, type: 3}

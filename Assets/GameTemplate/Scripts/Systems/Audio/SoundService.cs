@@ -50,7 +50,7 @@ namespace GameTemplate.Systems.Audio
         {
             if (state)
             {
-                PlayThemeMusic(false);
+                StartMenuThemeMusic(false);
             }
             else
             {
@@ -58,9 +58,26 @@ namespace GameTemplate.Systems.Audio
             }
         }
 
-        public void PlayThemeMusic(bool restart)
+        public void StartMenuThemeMusic(bool restart)
         {
-            PlayTrack(_audioData.GetAudio(AudioID.Music), true, restart);
+            PlayTrack(_audioData.GetAudio(AudioID.MenuMusic), true, restart);
+        }
+        public void StartGameThemeMusic(int orderId)
+        {
+            AudioClip firstClip = _audioData.GetMusicPlayerMusics(orderId);
+            PlayTrack(firstClip, true, true);
+        }
+
+        public void ChangeGameThemeState(int orderId)
+        {
+            if (_MusicSource.isPlaying)
+            {
+                StopThemeMusic();
+            }
+            else
+            {
+                StartGameThemeMusic(orderId);
+            }
         }
         
         public void StopThemeMusic()
@@ -110,7 +127,9 @@ namespace GameTemplate.Systems.Audio
 
                 _MusicSource.Stop();
             }
+            Debug.Log("play track");
 
+            _MusicSource.volume = _musicVolume;
             _MusicSource.clip = clip;
             _MusicSource.loop = looping;
             _MusicSource.time = 0;

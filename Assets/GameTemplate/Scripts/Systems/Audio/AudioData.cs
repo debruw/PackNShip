@@ -12,9 +12,16 @@ namespace GameTemplate.Systems.Audio
         [DictionaryDrawerSettings(KeyLabel = "AudioID", ValueLabel = "AudioClip")]
         public Dictionary<AudioID, AudioClip> AudioClips = new Dictionary<AudioID, AudioClip>();
 
+        public List<AudioClip> MusicPlayerMusics = new List<AudioClip>();
+
         public AudioClip GetAudio(AudioID timesUp)
         {
             return AudioClips[timesUp];
+        }
+
+        public AudioClip GetMusicPlayerMusics(int orderId)
+        {
+            return MusicPlayerMusics[orderId];
         }
     }
 }

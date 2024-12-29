@@ -1,8 +1,6 @@
 public enum AudioID
 {
-    Music,
+    MenuMusic,
     Win,
     Lose,
-    Ticking,
-    TimesUp
 }

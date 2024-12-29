@@ -13,7 +13,7 @@ namespace _Game.Scripts.Upgrades
         public enum UpgradeType
         {
             Time,
-            MusicPlayer
+            Spawnable
         }
 
         public bool isBuyed
@@ -29,7 +29,7 @@ namespace _Game.Scripts.Upgrades
                         case UpgradeType.Time:
                             UserPrefs.SetLevelDuration(UserPrefs.GetLevelDuration() + upgradeValue);
                             break;
-                        case UpgradeType.MusicPlayer:
+                        case UpgradeType.Spawnable:
                             break;
                         default:
                             throw new ArgumentOutOfRangeException();
@@ -47,5 +47,8 @@ namespace _Game.Scripts.Upgrades
 
         [EnableIf("@upgradeType == UpgradeType.Time")]
         public int upgradeValue;
+        
+        [EnableIf("@upgradeType == UpgradeType.Spawnable")]
+        public GameObject upgradeSpawnable;
     }
 }

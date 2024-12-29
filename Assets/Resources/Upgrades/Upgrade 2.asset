@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2d5505c9e8b41099139d6aa86d5db60, type: 3}
   m_Name: Upgrade 2
   m_EditorClassIdentifier: 
+  upgradeType: 0
   upgradeLevelRequirement: 2
-  upgradeName: Music Player
+  upgradeDescription: 
   upgradeIcon: {fileID: 21300000, guid: bd615dc74314a7648b9b4b3981de7bd0, type: 3}
   upgradeCurrency: 0
-  upgradeCost: 200
+  upgradeCost: 10000
+  upgradeValue: 0
+  upgradeSpawnable: {fileID: 0}
