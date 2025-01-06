@@ -24,13 +24,11 @@ namespace GameTemplate._Game.Scripts.Inventory
         public bool rotated;
         private Image _image;
         RectTransform _rectTransform;
-        Shadow _shadow;
 
         public void Set(ItemData item)
         {
             _image = GetComponent<Image>();
             _rectTransform = GetComponent<RectTransform>();
-            _shadow = GetComponent<Shadow>();
             
             itemData = item;
 
@@ -52,7 +50,6 @@ namespace GameTemplate._Game.Scripts.Inventory
             rotated = !rotated;
 
             _rectTransform.rotation = Quaternion.Euler(0, 0, rotated ? 90 : 0);
-            _shadow.effectDistance = rotated ? new Vector2(-10, -5) : new Vector2(5, -10);
         }
     }
 }
