@@ -143,22 +143,5 @@ namespace GameTemplate.Core.Scopes
                 setActiveScene = false
             });
         }
-
-#if UNITY_EDITOR
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.N))
-            {
-                //_levelService.SetNextLevel();
-                RetryButtonClick();
-            }
-
-            if (Input.GetKeyDown(KeyCode.P))
-            {
-                //_levelService.SetPreviousLevel();
-                RetryButtonClick();
-            }
-        }
-#endif
     }
 }

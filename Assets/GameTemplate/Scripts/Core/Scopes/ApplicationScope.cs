@@ -55,9 +55,7 @@ namespace GameTemplate.Core.Scopes
 
         public void Start()
         {
-            //DontDestroyOnLoad(gameObject);
             Application.targetFrameRate = 60;
-            //SceneManager.LoadScene(sceneData.scenes[SceneType.MainMenu]);
         }
     }
 }
