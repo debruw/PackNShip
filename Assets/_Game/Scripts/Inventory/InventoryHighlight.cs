@@ -39,6 +39,7 @@ namespace GameTemplate._Game.Scripts.Inventory
             if (targetGrid == null) return;
             
             highlighter.SetParent(targetGrid.GetComponent<RectTransform>());
+            highlighter.SetAsFirstSibling();
         }
     }
 }
