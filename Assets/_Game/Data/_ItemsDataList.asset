@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 955df4a2b81d4c07aeccee5ab21e60dd, type: 3}
-  m_Name: -ItemsDataList
+  m_Name: _ItemsDataList
   m_EditorClassIdentifier: 
+  fillerData: {fileID: 11400000, guid: 23346e2e111659e458a4090f956f5d3f, type: 2}
   itemDatas:
   - {fileID: 11400000, guid: 183b99e7376ed0748b977999f7568953, type: 2}
   - {fileID: 11400000, guid: af0bbf6c91fce96448ec7ee2b83c6acc, type: 2}

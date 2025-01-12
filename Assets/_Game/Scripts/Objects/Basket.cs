@@ -30,7 +30,7 @@ namespace GameTemplate._Game.Scripts
             transform.DOLocalMoveY(500, 1f).SetDelay(3).OnComplete(
                 () =>
                 {
-                    _inventoryController.GetHighlighterToMainGrid();
+                    _inventoryController.GetHighlighterToFillerGrid();
                     Destroy(gameObject);
                 });
         }

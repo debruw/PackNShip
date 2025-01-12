@@ -130,7 +130,7 @@ namespace GameTemplate._Game.Scripts
 
         public void DestroyBox()
         {
-            _inventoryController.GetHighlighterToMainGrid();
+            _inventoryController.GetHighlighterToFillerGrid();
             _inventoryController.isMovingBox = false;
             Destroy(gameObject);
         }

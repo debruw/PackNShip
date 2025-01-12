@@ -59,7 +59,9 @@ namespace GameTemplate.Core.Scopes
             builder.RegisterComponentInHierarchy<Statistics>();
             builder.RegisterComponentInHierarchy<RankSystem>();
 
-            builder.RegisterComponentInHierarchy<BoxSpawner>();
+            //builder.RegisterComponentInHierarchy<BoxSpawner>();
+            builder.RegisterComponentInHierarchy<SimpleBoxSpawner>();
+            builder.RegisterComponentInHierarchy<FillerSpawner>();
             builder.RegisterComponentInHierarchy<BasketSpawner>();
             builder.RegisterComponentInHierarchy<TapeSpawner>();
             builder.RegisterComponentInHierarchy<LabelSpawner>();

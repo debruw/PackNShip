@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using GameTemplate.Systems.Pooling;
 using UnityEngine;
+using UnityEngine.Serialization;
 using VContainer;
 using Random = UnityEngine.Random;
 
@@ -17,7 +18,7 @@ namespace GameTemplate._Game.Scripts.Inventory
             get { return _instance; }
         }*/
         public ItemsDataList _itemsDataList;
-        public ItemGrid mainItemGrid;
+        public ItemGrid fillerItemGrid;
 
         private ItemGrid selectedItemGrid;
 
@@ -301,10 +302,31 @@ namespace GameTemplate._Game.Scripts.Inventory
             }
         }
 
-        public void GetHighlighterToMainGrid()
+        public void GetHighlighterToFillerGrid()
         {
             SelectedItemGrid = null;
-            inventoryHighlight.SetParent(mainItemGrid);
+            inventoryHighlight.SetParent(fillerItemGrid);
+        }
+        
+        private InventoryItem CreateFilling()
+        {
+            InventoryItem inventoryItem =
+                _poolingService.GetGameObjectById(PoolID.ItemPrefab).GetComponent<InventoryItem>();
+
+            RectTransform itemRectTransform = inventoryItem.GetComponent<RectTransform>();
+            itemRectTransform = inventoryItem.GetComponent<RectTransform>();
+            itemRectTransform.SetParent(canvasTransform);
+            itemRectTransform.SetAsLastSibling();
+            
+            inventoryItem.Set(_itemsDataList.fillerData);
+
+            return inventoryItem;
+        }
+        
+        public void InsertFilling(ItemGrid itemGrid)
+        {
+            InventoryItem newItem = CreateFilling();
+            InsertItem(newItem, itemGrid);
         }
 
 #if UNITY_EDITOR
