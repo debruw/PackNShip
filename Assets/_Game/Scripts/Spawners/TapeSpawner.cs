@@ -49,10 +49,12 @@ namespace GameTemplate._Game.Scripts
             Vector2 sizeVec = rectTransform.sizeDelta;
             sizeVec.x = size * GlobalVariables.tileSizeWidth;
 
-            rectTransform.sizeDelta = sizeVec;
+            rectTransform.sizeDelta = new Vector2(100, sizeVec.y);
             rectTransform.anchoredPosition = new Vector2(sizeVec.x / 2, rectTransform.anchoredPosition.y);
             rectTransform.GetComponent<BoxCollider2D>().size = sizeVec;
-
+            
+            rectTransform.DOSizeDelta(sizeVec, .5f);
+            
             rectTransform.DOAnchorPosX(-sizeVec.x / 2, .5f).OnComplete(() =>
             {
                 rectTransform.GetComponent<BoxCollider2D>().isTrigger = false;
