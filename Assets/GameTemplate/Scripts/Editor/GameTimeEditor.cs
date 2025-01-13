@@ -1,9 +1,14 @@
+
+#if UNITY_EDITOR
 using QuantumForgeStudio.EasyScreenshotTool;
 using UnityEditor;
+#endif
+
 using UnityEngine;
 
 namespace GameTemplate.Scripts.Editor
 {
+#if UNITY_EDITOR
     [InitializeOnLoad]
     public class GameTimeEditorPlus
     {
@@ -51,4 +56,5 @@ namespace GameTemplate.Scripts.Editor
             Time.timeScale = 1f;
         }
     }
+#endif
 }
