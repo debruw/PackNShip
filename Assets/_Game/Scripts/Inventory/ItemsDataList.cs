@@ -14,7 +14,7 @@ namespace GameTemplate._Game.Scripts.Inventory
         public List<ItemData> itemDatas = new List<ItemData>();
         
 #if UNITY_EDITOR
-        [PropertyTooltip("Set all items image and add to list. Click Apply Items button. System is creating and setting necessery details")]
+        [InfoBox("Set all items image and add to list. Click Apply Items button. System is creating and setting necessery details")]
         
         [Button("Apply Items")]
         public void Generate()
