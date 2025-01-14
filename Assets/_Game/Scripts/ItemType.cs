@@ -1,0 +1,20 @@
+public enum ItemType
+{
+	BabyRattle,
+	Car,
+	CoffeeBag,
+	Cutlery,
+	Glue,
+	Hoodie,
+	Lipstick,
+	Mug,
+	Parfume,
+	Remote,
+	Robot,
+	RubberDuck,
+	Slippers,
+	Speaker,
+	TeddyBear,
+	Thumbler,
+	Train,
+}
