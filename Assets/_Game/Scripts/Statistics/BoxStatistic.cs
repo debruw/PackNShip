@@ -7,5 +7,6 @@ namespace GameTemplate._Game.Scripts
         public int EmptyCount;
         public bool IsRightTape;
         public bool IsRightLabel;
+        public int BoxValue;
     }
 }

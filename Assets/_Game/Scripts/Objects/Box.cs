@@ -103,6 +103,7 @@ namespace GameTemplate._Game.Scripts
             boxStatistic.EmptyCount = _itemGrid.GetEmptyCount();
             boxStatistic.IsRightTape = isTapeRight;
             boxStatistic.IsRightLabel = isLabelRight;
+            boxStatistic.BoxValue = _itemGrid.gridSizeWidth * 10;
 
             OnBoxDelivered?.Invoke(boxStatistic, transform);
         }

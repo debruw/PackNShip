@@ -43,8 +43,8 @@ namespace GameTemplate.Systems.FloatingText
 
         private void OnBoxDelivered(BoxStatistic statistics, Transform boxTransform)
         {
-            SpawnText("50$", Color.green, boxTransform.position);
-            _currencyService.EarnCurrency(new CurrencyArgs((int)CurrencyService.CurrencyType.Money, 50));
+            SpawnText(statistics.BoxValue + "$", Color.green, boxTransform.position);
+            _currencyService.EarnCurrency(new CurrencyArgs((int)CurrencyService.CurrencyType.Money, statistics.BoxValue));
         }
 
         public async UniTask SpawnText(string text, Color clr, Vector3 position)

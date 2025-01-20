@@ -15,7 +15,8 @@ namespace GameTemplate._Game.Scripts
 
         void InitObjects()
         {
-            for (int i = 0; i < 3; i++)
+            int random = Random.Range(1, 4);
+            for (int i = 0; i < random; i++)
             {
                 InventoryItem item = _inventoryController.InsertRandomItem(_itemGrid, _order.orderItems);
                 if (item != null)
