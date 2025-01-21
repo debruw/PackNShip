@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: BabyRattle
   m_EditorClassIdentifier: 
   itemType: 0
+  itemName: Baby Rattle
   width: 1
-  height: 2
+  height: 1
   itemIcon: {fileID: 21300000, guid: ee1dc9742e1677d4d992f9f702a2b6df, type: 3}

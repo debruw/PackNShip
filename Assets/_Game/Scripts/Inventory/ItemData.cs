@@ -14,7 +14,7 @@ namespace GameTemplate._Game.Scripts.Inventory
         public int width = 1;
         [ReadOnly]
         public int height = 1;
-
+        [ReadOnly]
         public Sprite itemIcon;
     }
 }

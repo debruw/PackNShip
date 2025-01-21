@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb90fee8ec94f3592c09aeb48b79e26, type: 3}
-  m_Name: Remote
+  m_Name: Tumbler
   m_EditorClassIdentifier: 
-  itemType: 7
+  itemType: 0
+  itemName: Tumbler
   width: 1
-  height: 2
-  itemIcon: {fileID: 21300000, guid: d4f5547977c80704f8de10d379ea8bee, type: 3}
+  height: 1
+  itemIcon: {fileID: 21300000, guid: 728a1990ac767714db375c8d474a019b, type: 3}

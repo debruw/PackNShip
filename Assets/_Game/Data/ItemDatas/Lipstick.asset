@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceb90fee8ec94f3592c09aeb48b79e26, type: 3}
   m_Name: Lipstick
   m_EditorClassIdentifier: 
-  itemType: 2
+  itemType: 0
+  itemName: Lipstick
   width: 1
   height: 1
   itemIcon: {fileID: 21300000, guid: 42106104d730b8740afe4e738fed74ff, type: 3}

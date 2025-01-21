@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceb90fee8ec94f3592c09aeb48b79e26, type: 3}
   m_Name: Hoodie
   m_EditorClassIdentifier: 
-  itemType: 5
-  width: 2
-  height: 2
+  itemType: 0
+  itemName: Hoodie
+  width: 1
+  height: 1
   itemIcon: {fileID: 21300000, guid: caa49b5f4ac9e274a9cb5dd2095aeb5f, type: 3}
