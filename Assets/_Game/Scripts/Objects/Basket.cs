@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using DG.Tweening;
 using GameTemplate._Game.Scripts.Inventory;
+using GameTemplate.Utils;
 using TMPro;
 using UnityEngine;
 
@@ -15,6 +17,17 @@ namespace GameTemplate._Game.Scripts
 
         void InitObjects()
         {
+            if (UserPrefs.IsFirstPlay())
+            {
+                List<InventoryItem> items = _inventoryController.InsertItemsForTutorial(_itemGrid);
+                for (int i = 0; i < items.Count; i++)
+                {
+                    _order.orderItems.Add(items[i].itemData);
+                }
+
+                return;
+            }
+
             int random = Random.Range(1, 4);
             for (int i = 0; i < random; i++)
             {

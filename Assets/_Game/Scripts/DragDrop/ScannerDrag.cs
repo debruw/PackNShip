@@ -6,6 +6,8 @@ namespace GameTemplate._Game.Scripts
 {
     public class ScannerDrag : DragableUI
     {
+        public static Action OnScan;
+        
         public LabelSpawner LabelSpawner;
         
         private void OnTriggerEnter2D(Collider2D other)
@@ -17,6 +19,7 @@ namespace GameTemplate._Game.Scripts
                 {
                     _order.label = LabelSpawner.SpawnLabel(_order);
                     barcode.FlashRed();
+                    OnScan?.Invoke();
                 }
             }
         }

@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using GameTemplate._Game.Scripts.Inventory;
 using GameTemplate.Systems.Pooling;
@@ -9,6 +10,8 @@ namespace GameTemplate._Game.Scripts
 {
     public class SimpleBoxSpawner : MonoBehaviour
     {
+        public static Action OnBoxSpawn;
+        
         public Transform spawnPoint;
 
         public Vector2Int boxSize = new Vector2Int(0, 0);
@@ -55,6 +58,8 @@ namespace GameTemplate._Game.Scripts
             itemGrid.SetSize(boxSize.x, boxSize.y);
 
             box.GetComponent<RectTransform>().DOAnchorPosY(0, 1);
+            
+            OnBoxSpawn?.Invoke();
         }
         
         public void Spawn1X1ButtonClick()

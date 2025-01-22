@@ -37,6 +37,7 @@ namespace GameTemplate._Game.Scripts
             {
                 _inventoryController.InsertFilling(_itemGrid);
             }
+            
         }
     }
 }

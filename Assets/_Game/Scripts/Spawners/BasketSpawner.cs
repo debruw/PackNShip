@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using GameTemplate._Game.Scripts.Inventory;
 using GameTemplate.Systems.Pooling;
+using GameTemplate.Utils;
 using UnityEngine;
 using VContainer;
 
@@ -54,7 +55,10 @@ namespace GameTemplate._Game.Scripts
                 basket.GetComponent<Basket>().InitInventory(_inventoryController, orderCounter);
             }
 
-            SpawnNewBasket(5000);
+            if (!UserPrefs.IsFirstPlay())
+            {
+                SpawnNewBasket(5000);
+            }
         }
 
         public Transform GetParent()

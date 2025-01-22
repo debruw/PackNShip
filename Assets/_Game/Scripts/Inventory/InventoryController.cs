@@ -11,12 +11,9 @@ namespace GameTemplate._Game.Scripts.Inventory
 {
     public class InventoryController : MonoBehaviour
     {
-        /*private static InventoryController _instance;
-
-        public static InventoryController Instance
-        {
-            get { return _instance; }
-        }*/
+        public static Action OnItemDrop;
+        public static Action OnFillingDrop;
+        
         public ItemsDataList _itemsDataList;
         public ItemGrid fillerItemGrid;
 
@@ -159,6 +156,20 @@ namespace GameTemplate._Game.Scripts.Inventory
             grid.PlaceItem(itemToInsert, posOnGrid.Value.x, posOnGrid.Value.y);
             return true;
         }
+        
+        public List<InventoryItem> InsertItemsForTutorial(ItemGrid grid)
+        {
+            List<InventoryItem> items = new List<InventoryItem>();
+            for (int i = 0; i < 2; i++)
+            {
+                InventoryItem newItem = CreateItem(i);
+                items.Add(newItem);
+
+                InsertItem(newItem, grid);
+            }
+
+            return items;
+        }
 
         private Vector2Int oldPosition;
         private InventoryItem itemToHighlight;
@@ -217,6 +228,21 @@ namespace GameTemplate._Game.Scripts.Inventory
 
             return inventoryItem;
         }
+        
+        private InventoryItem CreateItem(int itemId)
+        {
+            InventoryItem inventoryItem =
+                _poolingService.GetGameObjectById(PoolID.ItemPrefab).GetComponent<InventoryItem>();
+
+            RectTransform itemRectTransform = inventoryItem.GetComponent<RectTransform>();
+            itemRectTransform = inventoryItem.GetComponent<RectTransform>();
+            itemRectTransform.SetParent(canvasTransform);
+            itemRectTransform.SetAsLastSibling();
+
+            inventoryItem.Set(_itemsDataList.itemDatas[itemId]);
+
+            return inventoryItem;
+        }
 
         private void LeftMouseButtonDown()
         {
@@ -259,6 +285,18 @@ namespace GameTemplate._Game.Scripts.Inventory
                 selectedItemGrid.PlaceItem(SelectedItem, tileGridPosition.x, tileGridPosition.y, ref overlapItem);
             if (complete)
             {
+                if (SelectedItem.itemData.itemType == ItemType.Filling)
+                {
+                    if (selectedItemGrid.name.Contains("Box"))
+                    {
+                        OnFillingDrop?.Invoke();
+                    }
+                    else
+                    {
+                        OnItemDrop?.Invoke();
+                    }
+                }
+                
                 SelectedItem.transform.DOScale(1, .1f);
                 SelectedItem = null;
 
@@ -318,7 +356,7 @@ namespace GameTemplate._Game.Scripts.Inventory
             itemRectTransform.SetParent(canvasTransform);
             itemRectTransform.SetAsLastSibling();
             
-            inventoryItem.Set(_itemsDataList.fillerData);
+            inventoryItem.Set(_itemsDataList.fillingData);
 
             return inventoryItem;
         }

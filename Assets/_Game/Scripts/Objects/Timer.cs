@@ -22,18 +22,24 @@ namespace GameTemplate._Game.Scripts
         private bool timerPaused;
         private bool firstTick = true;
 
-        
+
         [Inject]
         public void Contruct()
         {
             Debug.Log("Construct timer");
-            
-            SetTimer(UserPrefs.GetLevelDuration());
+
+            if (!UserPrefs.IsFirstPlay())
+            {
+                SetTimer(UserPrefs.GetLevelDuration());
+            }
         }
 
         private void Start()
         {
-            StartTimer();
+            if (!UserPrefs.IsFirstPlay())
+            {
+                StartTimer();
+            }
         }
 
         public void SetTimer(float durationInSeconds)
@@ -52,10 +58,10 @@ namespace GameTemplate._Game.Scripts
         public void StartTimer()
         {
             UpdateTimerText();
-            
+
             _ = StartTimerCor();
         }
-        
+
         private async UniTask StartTimerCor()
         {
             while (_timer > 0)
@@ -63,14 +69,14 @@ namespace GameTemplate._Game.Scripts
                 if (!timerPaused)
                 {
                     _timer -= Time.deltaTime;
-                    
+
                     UpdateTimerText();
                 }
-                
+
                 await UniTask.Yield();
             }
 
-            //Game Finished LOSE
+            //Game Finished
             txtTimer.text = "00:00";
             OnTimesUp?.Invoke();
             txtTimer.color = Color.white;

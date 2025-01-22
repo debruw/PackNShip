@@ -1,5 +1,6 @@
 public enum ItemType
 {
+	Filling,
 	BabyRattle,
 	CoffeBag,
 	Cutlery,

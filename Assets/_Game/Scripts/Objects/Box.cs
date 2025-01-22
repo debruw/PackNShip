@@ -9,6 +9,9 @@ namespace GameTemplate._Game.Scripts
 {
     public class Box : MonoBehaviour, IStartable
     {
+        public static Action OnBoxClosed;
+        public static Action OnTapePut;
+        public static Action OnLabelPut;
         public static Action<BoxStatistic, Transform> OnBoxDelivered;
 
         [SerializeField] private GameObject packButton;
@@ -31,7 +34,6 @@ namespace GameTemplate._Game.Scripts
 
         public void Start()
         {
-            
         }
 
         public void PackButtonClick()
@@ -46,6 +48,8 @@ namespace GameTemplate._Game.Scripts
             _itemGrid.gameObject.SetActive(false);
             packButton.SetActive(false);
             isClosed = true;
+
+            OnBoxClosed?.Invoke();
         }
 
         public bool PutTape(Transform tapeTransform)
@@ -61,7 +65,7 @@ namespace GameTemplate._Game.Scripts
 
             isTapeRight = Mathf.Approximately((tapeTransform.GetComponent<RectTransform>().rect.width /
                                                GlobalVariables.tileSizeWidth), boxSize.x);
-
+            OnTapePut?.Invoke();
             return true;
         }
 
@@ -83,6 +87,7 @@ namespace GameTemplate._Game.Scripts
 
             //isLabeled = true;
             labelTransform.SetParent(transform);
+            OnLabelPut?.Invoke();
             return true;
         }
 
@@ -112,7 +117,7 @@ namespace GameTemplate._Game.Scripts
         {
             _itemGrid = GetComponentInChildren<ItemGrid>();
             _rectTransform = GetComponent<RectTransform>();
-            
+
             boxSize = vector2Int;
             Vector2 size = vector2Int;
             size.x *= GlobalVariables.tileSizeWidth;
@@ -122,7 +127,7 @@ namespace GameTemplate._Game.Scripts
             // 150 100 50
             CapWidth0.sizeDelta = new Vector2(size.x / 2 - 5, CapWidth0.sizeDelta.y);
             CapWidth1.sizeDelta = new Vector2(size.x / 2 - 5, CapWidth1.sizeDelta.y);
-            
+
             CapHeight0.sizeDelta = new Vector2(CapHeight0.sizeDelta.x, size.y / 2 - 5);
             CapHeight1.sizeDelta = new Vector2(CapHeight1.sizeDelta.x, size.y / 2 - 5);
 

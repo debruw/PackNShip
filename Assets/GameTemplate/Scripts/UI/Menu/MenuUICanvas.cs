@@ -38,7 +38,7 @@ namespace GameTemplate.Gameplay.UI
                 return;
             }
 
-            UserPrefs.SetFirstPlayFalse();
+            //UserPrefs.SetFirstPlayFalse();
             UserPrefs.SetLevelDuration(180);
 
             LoadLevelScene();

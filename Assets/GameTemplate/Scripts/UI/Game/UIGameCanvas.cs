@@ -4,6 +4,7 @@ using GameTemplate._Game.Scripts.Views;
 using GameTemplate.Core.Scopes;
 using GameTemplate.Systems.Level;
 using GameTemplate.Systems.Scene;
+using GameTemplate.Utils;
 using UnityEngine;
 using VContainer;
 
@@ -13,6 +14,8 @@ namespace GameTemplate.UI
     {
         [SerializeField]
         private GameObject TopPanel, WinPanel, LosePanel;
+        [SerializeField]
+        private GameObject TutorialPanel;
 
         [SerializeField] private LevelEndView levelEndView;
 
@@ -25,6 +28,11 @@ namespace GameTemplate.UI
             Debug.Log("Construct UIGameCanvas");
             _levelService = LevelService;
             _SceneService = SceneService;
+
+            if (UserPrefs.IsFirstPlay())
+            {
+                Instantiate(TutorialPanel, transform);
+            }
         }
 
         private void Start()

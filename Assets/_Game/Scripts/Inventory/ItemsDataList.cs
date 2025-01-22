@@ -14,7 +14,7 @@ namespace GameTemplate._Game.Scripts.Inventory
         public string ItemTypeFilePath;
         [Sirenix.OdinInspector.FolderPath]
         public string SOFilePath;
-        public ItemData fillerData;
+        public ItemData fillingData;
         public List<ItemData> itemDatas = new List<ItemData>();
         
 #if UNITY_EDITOR
@@ -25,10 +25,12 @@ namespace GameTemplate._Game.Scripts.Inventory
             {
                 streamWriter.WriteLine("public enum ItemType");
                 streamWriter.WriteLine("{");
+                streamWriter.WriteLine("\t" + "Filling" + ",");
                 for (int i = 0; i < itemSprites.Count; i++)
                 {
                     streamWriter.WriteLine("\t" + itemSprites[i].name.Replace(" ", "") + ",");
                 }
+                
                 streamWriter.WriteLine("}");
             }
             
