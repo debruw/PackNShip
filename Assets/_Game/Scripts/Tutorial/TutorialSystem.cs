@@ -11,8 +11,9 @@ namespace _Game.Scripts.Tutorial
         public GameObject missionUiPrefab;
         public List<string> MissionTexts = new List<string>();
         public List<TutorialMissionUI> tutorialMissionUIs = new List<TutorialMissionUI>();
-        
+
         private int currentMissionIndex = 0;
+        int itemCount = 2;// For tutorial there should be two items for drop to the box
 
         private void Awake()
         {
@@ -56,7 +57,7 @@ namespace _Game.Scripts.Tutorial
             if (!tutorialMissionUIs[currentMissionIndex].isCompleted)
             {
                 tutorialMissionUIs[currentMissionIndex].Complete();
-                            currentMissionIndex++;
+                currentMissionIndex++;
             }
         }
 
@@ -68,11 +69,15 @@ namespace _Game.Scripts.Tutorial
                 currentMissionIndex++;
             }
         }
-        
+
         private void OnItemDrop()
         {
             if (!tutorialMissionUIs[currentMissionIndex].isCompleted)
             {
+                itemCount--;
+                if (itemCount > 0)
+                    return;
+                
                 tutorialMissionUIs[currentMissionIndex].Complete();
                 currentMissionIndex++;
             }
@@ -121,6 +126,7 @@ namespace _Game.Scripts.Tutorial
                 tutorialMissionUIs[currentMissionIndex].Complete();
                 currentMissionIndex++;
             }
+            // TODO : tutorial completed
         }
     }
 }

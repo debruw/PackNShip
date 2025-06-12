@@ -612,6 +612,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highlighter: {fileID: 162593528}
+  image: {fileID: 162593529}
 --- !u!114 &276335674
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceb90fee8ec94f3592c09aeb48b79e26, type: 3}
   m_Name: Speaker
   m_EditorClassIdentifier: 
-  itemType: 0
+  itemType: 2
   itemName: Speaker
-  width: 1
-  height: 1
+  size: {x: 1, y: 2}
+  structure:
+  - {x: 0, y: 0}
+  - {x: 0, y: 1}
   itemIcon: {fileID: 21300000, guid: d15a2a9e9c58680499d9c00f033ffd61, type: 3}

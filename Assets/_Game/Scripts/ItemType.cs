@@ -1,21 +1,5 @@
 public enum ItemType
 {
-	Filling,
-	BabyRattle,
-	CoffeBag,
-	Cutlery,
-	Glue,
-	Hoodie,
-	Lipstick,
-	Mug,
-	Perfume,
-	RemoteControl,
-	RubberDuck,
-	Slippers,
-	Speaker,
-	TeddyBear,
-	ToyCar,
-	ToyRobot,
-	ToyTrain,
-	Tumbler,
+	Filling = 1,
+	Objects = 2
 }

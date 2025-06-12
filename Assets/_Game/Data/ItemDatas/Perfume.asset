@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceb90fee8ec94f3592c09aeb48b79e26, type: 3}
   m_Name: Perfume
   m_EditorClassIdentifier: 
-  itemType: 0
+  itemType: 2
   itemName: Perfume
-  width: 1
-  height: 1
+  size: {x: 1, y: 1}
+  structure:
+  - {x: 0, y: 0}
   itemIcon: {fileID: 21300000, guid: e8b3efd2bc5c65f4780c0e2db120336c, type: 3}
