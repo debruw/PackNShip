@@ -17,7 +17,7 @@ namespace GameTemplate._Game.Scripts.Inventory
         public ItemData fillingData;
         public List<ItemData> itemDatas = new List<ItemData>();
         
-#if UNITY_EDITOR
+#if false//UNITY_EDITOR
         async UniTask Generate()
         {
             await UniTask.Delay(2000);
@@ -46,8 +46,8 @@ namespace GameTemplate._Game.Scripts.Inventory
                 
                 Debug.Log(i + ") " + data.name);
 
-                data.width = data.itemIcon.texture.width / 512;
-                data.height = data.itemIcon.texture.height / 512;
+                data.size.x = data.itemIcon.texture.width / 512;
+                data.size.y = data.itemIcon.texture.height / 512;
             }
             
             Debug.LogError("FINISHED!");
