@@ -1,37 +1,15 @@
 using System;
 using System.Collections.Generic;
-using Sirenix.OdinInspector;
-using Sirenix.Utilities;
 using UnityEngine;
 
 namespace GameTemplate._Game.Scripts.Inventory
 {
-    public class ItemGrid : SerializedMonoBehaviour
+    public class ItemGrid : MonoBehaviour
     {
         public int gridSizeWidth = 15, gridSizeHeight = 10;
         RectTransform rectTransform;
-
-        [TableMatrix(DrawElementMethod = "DrawColoredEnumElement", SquareCells = true, IsReadOnly = true)]
         public InventoryItem[,] inventoryItemSlot;
-
         bool isInitialized;
-
-#if UNITY_EDITOR
-
-        private static InventoryItem DrawColoredEnumElement(Rect rect, InventoryItem item)
-        {
-            if (item)
-            {
-                UnityEditor.EditorGUI.DrawPreviewTexture(rect.Padding(1), item.itemData.itemIcon.texture);
-            }
-            else
-            {
-                UnityEditor.EditorGUI.DrawRect(rect.Padding(1), Color.clear);
-            }
-
-            return item;
-        }
-#endif
 
         private void Awake()
         {
@@ -56,7 +34,7 @@ namespace GameTemplate._Game.Scripts.Inventory
             inventoryItemSlot = new InventoryItem[width, height];
             Vector2 size = new Vector2(width * GlobalVariables.tileSizeWidth, height * GlobalVariables.tileSizeHeight);
             rectTransform.sizeDelta = size;
-
+            
             /*if (parentBox != null)
             {
                 parentBox.sizeDelta = size + new Vector2(50 * width, 50 * height);
@@ -83,14 +61,22 @@ namespace GameTemplate._Game.Scripts.Inventory
             return tileGridPosition;
         }
 
-        public bool CheckPlaceable(InventoryItem inventoryItem, int posX, int posY)
+        public bool PlaceItem(InventoryItem inventoryItem, int posX, int posY, ref InventoryItem overlapItem)
         {
-            if (BoundaryCheck(posX, posY, inventoryItem.Width, inventoryItem.Height) == false)
+            if (BoundryCheck(posX, posY, inventoryItem.Width, inventoryItem.Height) == false)
                 return false;
 
-            if (CheckAvailableSpace(posX, posY, inventoryItem.Width, inventoryItem.Height, inventoryItem.itemData.structure) ==
-                false)
+            if (OverlapCheck(posX, posY, inventoryItem.Width, inventoryItem.Height,
+                    ref overlapItem) == false)
+            {
+                overlapItem = null;
                 return false;
+            }
+
+            if (overlapItem != null)
+            {
+                CleanGridReference(overlapItem);
+            }
 
             PlaceItem(inventoryItem, posX, posY);
             return true;
@@ -101,17 +87,12 @@ namespace GameTemplate._Game.Scripts.Inventory
             RectTransform rectTransform = inventoryItem.GetComponent<RectTransform>();
             rectTransform.SetParent(this.rectTransform);
 
-            /*for (int x = 0; x < inventoryItem.Width; x++)
+            for (int x = 0; x < inventoryItem.Width; x++)
             {
                 for (int y = 0; y < inventoryItem.Height; y++)
                 {
                     inventoryItemSlot[posX + x, posY + y] = inventoryItem;
                 }
-            }*/
-
-            foreach (var structure in inventoryItem.itemData.structure)
-            {
-                inventoryItemSlot[posX + structure.x, posY + structure.y] = inventoryItem;
             }
 
             inventoryItem.onGridPositionX = posX;
@@ -126,11 +107,37 @@ namespace GameTemplate._Game.Scripts.Inventory
         {
             Vector2 position = new Vector2();
             position.x = posX * GlobalVariables.tileSizeWidth + GlobalVariables.tileSizeWidth * inventoryItem.Width / 2;
-            position.y = -(posY * GlobalVariables.tileSizeHeight +
-                           GlobalVariables.tileSizeHeight * inventoryItem.Height / 2);
+            position.y = -(posY * GlobalVariables.tileSizeHeight + GlobalVariables.tileSizeHeight * inventoryItem.Height / 2);
             return position;
         }
-        
+
+        private bool OverlapCheck(int posX, int posY, int itemDataWidth, int itemDataHeight,
+            ref InventoryItem overlapItem)
+        {
+            for (int x = 0; x < itemDataWidth; x++)
+            {
+                for (int y = 0; y < itemDataHeight; y++)
+                {
+                    if (inventoryItemSlot[posX + x, posY + y] != null)
+                    {
+                        if (overlapItem == null)
+                        {
+                            overlapItem = inventoryItemSlot[posX + x, posY + y];
+                        }
+                        else
+                        {
+                            if (overlapItem != inventoryItemSlot[posX + x, posY + y])
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return true;
+        }
+
         public InventoryItem PickUpItem(int posX, int posY)
         {
             InventoryItem toReturn = inventoryItemSlot[posX, posY];
@@ -144,17 +151,12 @@ namespace GameTemplate._Game.Scripts.Inventory
 
         private void CleanGridReference(InventoryItem item)
         {
-            /*for (int x = 0; x < item.Width; x++)
+            for (int x = 0; x < item.Width; x++)
             {
                 for (int y = 0; y < item.Height; y++)
                 {
                     inventoryItemSlot[item.onGridPositionX + x, item.onGridPositionY + y] = null;
                 }
-            }*/
-
-            foreach (var structure in item.itemData.structure)
-            {
-                inventoryItemSlot[item.onGridPositionX + structure.x, item.onGridPositionY + structure.y] = null;
             }
         }
 
@@ -173,8 +175,7 @@ namespace GameTemplate._Game.Scripts.Inventory
             return true;
         }
 
-        // is object in the boundary of current grid
-        public bool BoundaryCheck(int posX, int posY, int width, int height)
+        public bool BoundryCheck(int posX, int posY, int width, int height)
         {
             if (PositionCheck(posX, posY) == false) return false;
 
@@ -200,7 +201,7 @@ namespace GameTemplate._Game.Scripts.Inventory
             {
                 for (int x = 0; x < width; x++)
                 {
-                    if (CheckAvailableSpace(x, y, itemToInsert.Width, itemToInsert.Height, itemToInsert.itemData.structure))
+                    if (CheckAvailableSpace(x, y, itemToInsert.Width, itemToInsert.Height))
                     {
                         return new Vector2Int(x, y);
                     }
@@ -210,16 +211,16 @@ namespace GameTemplate._Game.Scripts.Inventory
             return null;
         }
 
-        private bool CheckAvailableSpace(int posX, int posY, int itemDataWidth, int itemDataHeight, Vector2Int[] structure)
+        private bool CheckAvailableSpace(int posX, int posY, int itemDataWidth, int itemDataHeight)
         {
-            for (int i = 0; i < structure.Length; i++)
+            for (int x = 0; x < itemDataWidth; x++)
             {
-                //Debug.Log(inventoryItemSlot[posX + structure[i].x, posY + structure[i].y].itemData.itemName);
-                Debug.Log((posX + structure[i].x) + " // " + (posY + structure[i].y));
-                if (inventoryItemSlot[posX + structure[i].x, posY + structure[i].y] != null)
+                for (int y = 0; y < itemDataHeight; y++)
                 {
-                    Debug.Log("cant place item");
-                    return false;
+                    if (inventoryItemSlot[posX + x, posY + y] != null)
+                    {
+                        return false;
+                    }
                 }
             }
 

@@ -410,18 +410,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e42b37a20ce74478bf7a95d3f491bf07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects: []
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes:
-    - Name: inventoryItemSlot
-      Entry: 6
-      Data: 
   gridSizeWidth: 2
   gridSizeHeight: 2
 --- !u!114 &486335825425717826

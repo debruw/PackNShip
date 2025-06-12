@@ -1,13 +1,10 @@
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
 
 namespace GameTemplate._Game.Scripts.Inventory
 {
     public class InventoryHighlight : MonoBehaviour
     {
         [SerializeField] private RectTransform highlighter;
-        [SerializeField] private Image image;
 
         public void SetSize(InventoryItem targetItem)
         {
@@ -35,10 +32,6 @@ namespace GameTemplate._Game.Scripts.Inventory
         public void Show(bool show)
         {
             highlighter.gameObject.SetActive(show);
-            /*if (!show)
-            {
-                SetColor(true);
-            }*/
         }
 
         public void SetParent(ItemGrid targetGrid)
@@ -48,10 +41,5 @@ namespace GameTemplate._Game.Scripts.Inventory
             highlighter.SetParent(targetGrid.GetComponent<RectTransform>());
             highlighter.SetAsFirstSibling();
         }
-        /*
-        public void SetColor(bool isPlaceable)
-        {
-            image.color = isPlaceable ? Color.white : Color.red;
-        }*/
     }
 }
