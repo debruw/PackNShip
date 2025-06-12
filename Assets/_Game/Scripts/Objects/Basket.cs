@@ -41,13 +41,12 @@ namespace GameTemplate._Game.Scripts
 
         public void Empty()
         {
-            // TODO : player should put empty basket to the conveyor
-            /*transform.DOLocalMoveY(500, 1f).SetDelay(3).OnComplete(
+            transform.DOLocalMoveY(500, 1f).SetDelay(3).OnComplete(
                 () =>
                 {
                     _inventoryController.GetHighlighterToFillerGrid();
                     Destroy(gameObject);
-                });*/
+                });
         }
 
         public void InitInventory(InventoryController InventoryController, int orderCounter)

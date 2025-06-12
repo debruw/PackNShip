@@ -13,7 +13,7 @@ namespace GameTemplate._Game.Scripts.Inventory
     {
         public static Action OnItemDrop;
         public static Action OnFillingDrop;
-
+        
         public ItemsDataList _itemsDataList;
         public ItemGrid fillerItemGrid;
 
@@ -29,7 +29,6 @@ namespace GameTemplate._Game.Scripts.Inventory
             }
         }
 
-        [SerializeField]
         private InventoryItem _selectedItem;
 
         [HideInInspector]
@@ -50,16 +49,14 @@ namespace GameTemplate._Game.Scripts.Inventory
             }
         }
 
+        InventoryItem overlapItem;
+
         private RectTransform _selectedRectTransform;
 
         public GameObject itemPrefab;
         public RectTransform canvasTransform;
         private InventoryHighlight inventoryHighlight;
         private PoolingService _poolingService;
-        
-        //these two value is needed for returning item to the original place when there is no room for it
-        Vector2Int pickedGridPosition;
-        ItemGrid pickedItemGrid;
 
         private Vector2 offset;
 
@@ -104,11 +101,6 @@ namespace GameTemplate._Game.Scripts.Inventory
             {
                 RotateItem();
             }
-            
-            if (Input.GetMouseButtonUp(0))
-            {
-                LeftMouseButtonUp();
-            }
 
             if (selectedItemGrid == null)
             {
@@ -122,7 +114,10 @@ namespace GameTemplate._Game.Scripts.Inventory
             {
                 LeftMouseButtonDown();
             }
-            
+            else if (Input.GetMouseButtonUp(0))
+            {
+                LeftMouseButtonUp();
+            }
         }
 
         private void RotateItem()
@@ -161,7 +156,7 @@ namespace GameTemplate._Game.Scripts.Inventory
             grid.PlaceItem(itemToInsert, posOnGrid.Value.x, posOnGrid.Value.y);
             return true;
         }
-
+        
         public List<InventoryItem> InsertItemsForTutorial(ItemGrid grid)
         {
             List<InventoryItem> items = new List<InventoryItem>();
@@ -204,10 +199,9 @@ namespace GameTemplate._Game.Scripts.Inventory
             }
             else
             {
-                inventoryHighlight.Show(selectedItemGrid.BoundaryCheck(positionOnTheGrid.x, positionOnTheGrid.y,
+                inventoryHighlight.Show(selectedItemGrid.BoundryCheck(positionOnTheGrid.x, positionOnTheGrid.y,
                     SelectedItem.Width, SelectedItem.Height));
 
-                //////inventoryHighlight.SetColor(selectedItemGrid.OverlapCheck(positionOnTheGrid.x,positionOnTheGrid.y,SelectedItem.Width, SelectedItem.Height,SelectedItem.itemData.structure));
                 inventoryHighlight.SetSize(SelectedItem);
                 inventoryHighlight.SetPosition(selectedItemGrid, SelectedItem, positionOnTheGrid.x,
                     positionOnTheGrid.y);
@@ -234,7 +228,7 @@ namespace GameTemplate._Game.Scripts.Inventory
 
             return inventoryItem;
         }
-
+        
         private InventoryItem CreateItem(int itemId)
         {
             InventoryItem inventoryItem =
@@ -261,24 +255,13 @@ namespace GameTemplate._Game.Scripts.Inventory
             }
         }
 
-        // This function is called before selectedItemGrid check on update function
-        
         private void LeftMouseButtonUp()
         {
-            if (selectedItemGrid == null)
-            {
-                // if item is not dropped on a grid send it back to where its picked
-                PlaceItemToWhereItsPicked();
-                SelectedItem.transform.DOScale(1, .1f);
-                SelectedItem = null;
-                return;
-            }
-            
             var tileGridPosition = GetTileGridPosition();
 
             if (SelectedItem != null && tileGridPosition != null)
             {
-                TryPlaceItem(tileGridPosition);
+                PlaceItem(tileGridPosition);
             }
         }
 
@@ -296,34 +279,41 @@ namespace GameTemplate._Game.Scripts.Inventory
             return selectedItemGrid.GetTileGridPosition(position);
         }
 
-        private void TryPlaceItem(Vector2Int tileGridPosition)
+        private void PlaceItem(Vector2Int tileGridPosition)
         {
-            bool isPlaced = selectedItemGrid.CheckPlaceable(SelectedItem, tileGridPosition.x, tileGridPosition.y);
-            if (isPlaced)
+            bool complete =
+                selectedItemGrid.PlaceItem(SelectedItem, tileGridPosition.x, tileGridPosition.y, ref overlapItem);
+            if (complete)
             {
-                if (selectedItemGrid.name.Contains("Box"))
+                if (SelectedItem.itemData.itemType == ItemType.Filling)
                 {
-                    OnFillingDrop?.Invoke(); // For tutorial
+                    if (selectedItemGrid.name.Contains("Box"))
+                    {
+                        OnFillingDrop?.Invoke();
+                    }
+                    else
+                    {
+                        OnItemDrop?.Invoke();
+                    }
                 }
-                else
-                {
-                    OnItemDrop?.Invoke(); // For tutorial
-                }
-                pickedGridPosition = Vector2Int.zero;
-            }
-            else
-            {
-                PlaceItemToWhereItsPicked();
-            }
+                
+                SelectedItem.transform.DOScale(1, .1f);
+                SelectedItem = null;
 
-            SelectedItem.transform.DOScale(1, .1f);
-            SelectedItem = null;
+                if (overlapItem != null)
+                {
+                    SelectedItem = overlapItem;
+                    offset = SelectedItem.transform.position - Input.mousePosition;
+                    SelectedItem.transform.DOScale(1.1f, .1f);
+                    overlapItem = null;
+                    _selectedRectTransform.SetAsLastSibling();
+                }
+            }
         }
 
         private void PickUpItem(Vector2Int tileGridPosition)
         {
             SelectedItem = selectedItemGrid.PickUpItem(tileGridPosition.x, tileGridPosition.y);
-            Debug.Log(SelectedItem.gameObject.name);
 
             if (SelectedItem != null)
             {
@@ -331,16 +321,7 @@ namespace GameTemplate._Game.Scripts.Inventory
                 SelectedItem.transform.DOScale(1.1f, .1f);
                 _selectedRectTransform.SetParent(transform);
                 _selectedRectTransform.SetAsLastSibling();
-                pickedGridPosition = tileGridPosition;
-                pickedItemGrid = selectedItemGrid;
             }
-        }
-
-        private void PlaceItemToWhereItsPicked()
-        {
-            // place item to where its picked 
-            Vector2Int? posOnGrid = pickedItemGrid.FindSpaceForObject(SelectedItem);
-            pickedItemGrid.PlaceItem(SelectedItem, posOnGrid.Value.x, posOnGrid.Value.y);
         }
 
         private Vector2 _pos;
@@ -364,7 +345,7 @@ namespace GameTemplate._Game.Scripts.Inventory
             SelectedItemGrid = null;
             inventoryHighlight.SetParent(fillerItemGrid);
         }
-
+        
         private InventoryItem CreateFilling()
         {
             InventoryItem inventoryItem =
@@ -374,12 +355,12 @@ namespace GameTemplate._Game.Scripts.Inventory
             itemRectTransform = inventoryItem.GetComponent<RectTransform>();
             itemRectTransform.SetParent(canvasTransform);
             itemRectTransform.SetAsLastSibling();
-
+            
             inventoryItem.Set(_itemsDataList.fillingData);
 
             return inventoryItem;
         }
-
+        
         public void InsertFilling(ItemGrid itemGrid)
         {
             InventoryItem newItem = CreateFilling();
