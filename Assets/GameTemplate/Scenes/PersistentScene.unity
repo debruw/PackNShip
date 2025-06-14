@@ -173,9 +173,6 @@ MonoBehaviour:
   sceneData: {fileID: 11400000, guid: c6f8dc7ead0552a4a9e71a960f5a90d2, type: 2}
   levelData: {fileID: 11400000, guid: f2a32ec78bd7f6d4c84819b8768e0eea, type: 2}
   poolingData: {fileID: 11400000, guid: 30a9fa7922dfa474f9edaa76281c1a60, type: 2}
-  itemsDataList: {fileID: 11400000, guid: e579cd5c909d52b4a97798e85b2e48aa, type: 2}
-  rankData: {fileID: 11400000, guid: 78e1f380644ddf1478943eccb5d4cf35, type: 2}
-  upgradeData: {fileID: 11400000, guid: 35f2156251aabff4cb7f9c62c556d2a9, type: 2}
 --- !u!1 &1696188482
 GameObject:
   m_ObjectHideFlags: 0
@@ -302,16 +299,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LoadingScreen
-      objectReference: {fileID: 0}
-    - target: {fileID: 1019957779883080222, guid: c8aa83fbfc5cadb42b40a6d6e6eb7ad2,
-        type: 3}
-      propertyPath: m_BlockingMask.m_Bits
-      value: 55
-      objectReference: {fileID: 0}
-    - target: {fileID: 1068325525984145855, guid: c8aa83fbfc5cadb42b40a6d6e6eb7ad2,
-        type: 3}
-      propertyPath: m_Alpha
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6372814093357648475, guid: c8aa83fbfc5cadb42b40a6d6e6eb7ad2,
         type: 3}

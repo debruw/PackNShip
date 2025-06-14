@@ -1,10 +1,5 @@
-using _Game.Scripts.Currency;
 using AssetKits.ParticleImage;
 using Cysharp.Threading.Tasks;
-using GameTemplate._Game;
-using GameTemplate._Game.Scripts;
-using GameTemplate._Game.Scripts.Inventory;
-using GameTemplate._Game.Scripts.Views;
 using GameTemplate.Systems.Audio;
 using GameTemplate.Systems.Currencies;
 using GameTemplate.Systems.Level;
@@ -54,24 +49,8 @@ namespace GameTemplate.Core.Scopes
         protected override void Configure(IContainerBuilder builder)
         {
             base.Configure(builder);
-
-            builder.RegisterComponentInHierarchy<InventoryController>();
-            builder.RegisterComponentInHierarchy<Statistics>();
-            builder.RegisterComponentInHierarchy<RankSystem>();
-
-            //builder.RegisterComponentInHierarchy<BoxSpawner>();
-            builder.RegisterComponentInHierarchy<SimpleBoxSpawner>();
-            builder.RegisterComponentInHierarchy<FillerSpawner>();
-            builder.RegisterComponentInHierarchy<BasketSpawner>();
-            builder.RegisterComponentInHierarchy<TapeSpawner>();
-            builder.RegisterComponentInHierarchy<LabelSpawner>();
-
-            builder.RegisterComponentInHierarchy<DayText>();
-            builder.RegisterComponentInHierarchy<Timer>();
-            builder.RegisterComponentInHierarchy<CurrencyUIGame>();
             
             builder.RegisterComponentInHierarchy<UIGameCanvas>();
-            builder.RegisterComponentInHierarchy<LevelEndView>();
         }
 
         protected override void OnDestroy()

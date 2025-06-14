@@ -15,11 +15,6 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: b6ceb814cda6bd442aaad6d642abef94
   m_SerializeEntries:
-  - m_GUID: 11f764bdb0f087c4ba5a55f8d68dcd40
-    m_Address: Assets/GameTemplate/Scenes/Upgrades.unity
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4503f4ae01df63741a401dbf96efa23e
     m_Address: Assets/Scenes/MainMenu.unity
     m_ReadOnly: 0

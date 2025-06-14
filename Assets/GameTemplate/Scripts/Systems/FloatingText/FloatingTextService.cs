@@ -1,10 +1,8 @@
 using System;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using GameTemplate._Game.Scripts;
 using GameTemplate.Systems.Currencies;
 using GameTemplate.Systems.Pooling;
-using GameTemplate.UI;
 using TMPro;
 using UnityEngine;
 using VContainer;
@@ -31,20 +29,6 @@ namespace GameTemplate.Systems.FloatingText
             _currencyService = currencyService as CurrencyService;
             _applicationCanvas = applicationCanvas;
 
-            Box.OnBoxDelivered += OnBoxDelivered;
-            Timer.OnTimesUp += OnTimesUp;
-        }
-
-        private void OnTimesUp()
-        {
-            Box.OnBoxDelivered -= OnBoxDelivered;
-            Timer.OnTimesUp -= OnTimesUp;
-        }
-
-        private void OnBoxDelivered(BoxStatistic statistics, Transform boxTransform)
-        {
-            SpawnText(statistics.BoxValue + "$", Color.green, boxTransform.position);
-            _currencyService.EarnCurrency(new CurrencyArgs((int)CurrencyService.CurrencyType.Money, statistics.BoxValue));
         }
 
         public async UniTask SpawnText(string text, Color clr, Vector3 position)

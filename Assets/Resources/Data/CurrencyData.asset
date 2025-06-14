@@ -12,7 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbb9da54278f4e789a868d286d81c053, type: 3}
   m_Name: CurrencyData
   m_EditorClassIdentifier: 
-  currencies:
-  - currencyImage: {fileID: 21300000, guid: 025a571c8d18da3498e673d9e689d16c, type: 3}
-    currencyAmount: 0
-    isBuyable: 0
+  currencies: []

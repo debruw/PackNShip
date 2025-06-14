@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using GameTemplate.Systems.Scene;
 using UnityEngine;
@@ -12,8 +13,10 @@ namespace GameTemplate.UI
         [SerializeField] float m_DelayBeforeFadeOut = 0.5f;
 
         [SerializeField] float m_FadeOutDuration = 0.1f;
+        
+        public GameObject CameraObject;
 
-        bool m_LoadingScreenRunning;
+        bool m_LoadingScreenActive = true;
 
         Coroutine m_FadeOutCoroutine;
 
@@ -22,16 +25,25 @@ namespace GameTemplate.UI
         [Inject]
         public void Construct(ISceneService sceneService)
         {
+            Debug.Log("Construct LoadingScreen");
             _sceneService = sceneService;
             _sceneService.OnBeforeSceneLoad += OpenLoadingScreen;
             _sceneService.OnSceneLoaded += CloseLoadingScreen;
         }
 
+        private void OnDestroy()
+        {
+            _sceneService.OnBeforeSceneLoad -= OpenLoadingScreen;
+            _sceneService.OnSceneLoaded -= CloseLoadingScreen;
+        }
+
         public void OpenLoadingScreen()
         {
             SetCanvasVisibility(true);
-            m_LoadingScreenRunning = true;
-            if (m_LoadingScreenRunning)
+            m_LoadingScreenActive = true;
+            CameraObject.SetActive(true);
+            Debug.LogError("open canvas");
+            if (m_LoadingScreenActive)
             {
                 if (m_FadeOutCoroutine != null)
                 {
@@ -43,7 +55,9 @@ namespace GameTemplate.UI
 
         public void CloseLoadingScreen()
         {
-            if (m_LoadingScreenRunning)
+            Debug.LogError("close canvas");
+            CameraObject.SetActive(false);
+            if (m_LoadingScreenActive)
             {
                 if (m_FadeOutCoroutine != null)
                 {
@@ -64,7 +78,7 @@ namespace GameTemplate.UI
         IEnumerator FadeOutCoroutine()
         {
             yield return new WaitForSeconds(m_DelayBeforeFadeOut);
-            m_LoadingScreenRunning = false;
+            m_LoadingScreenActive = false;
 
             float currentTime = 0;
             while (currentTime < m_FadeOutDuration)

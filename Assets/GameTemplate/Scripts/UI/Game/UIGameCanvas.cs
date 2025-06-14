@@ -1,6 +1,4 @@
 using DG.Tweening;
-using GameTemplate._Game.Scripts;
-using GameTemplate._Game.Scripts.Views;
 using GameTemplate.Core.Scopes;
 using GameTemplate.Systems.Level;
 using GameTemplate.Systems.Scene;
@@ -14,10 +12,6 @@ namespace GameTemplate.UI
     {
         [SerializeField]
         private GameObject TopPanel, WinPanel, LosePanel;
-        [SerializeField]
-        private GameObject TutorialPanel;
-
-        [SerializeField] private LevelEndView levelEndView;
 
         private LevelService _levelService;
         ISceneService _SceneService;
@@ -28,26 +22,6 @@ namespace GameTemplate.UI
             Debug.Log("Construct UIGameCanvas");
             _levelService = LevelService;
             _SceneService = SceneService;
-
-            if (UserPrefs.IsFirstPlay())
-            {
-                Instantiate(TutorialPanel, transform);
-            }
-        }
-
-        private void Start()
-        {
-            Timer.OnTimesUp += OnTimesUp;
-        }
-
-        private void OnDestroy()
-        {
-            Timer.OnTimesUp -= OnTimesUp;
-        }
-        
-        private void OnTimesUp()
-        {
-            levelEndView.InitializeAndShow();
         }
 
         public void Initialize(int UIlevelID)

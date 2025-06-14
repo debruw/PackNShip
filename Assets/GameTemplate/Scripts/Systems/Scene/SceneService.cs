@@ -5,10 +5,11 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
 using VContainer;
+using VContainer.Unity;
 
 namespace GameTemplate.Systems.Scene
 {
-    public class SceneService : ISceneService
+    public class SceneService : ISceneService, IStartable
     {
         public event Action OnBeforeSceneLoad = delegate { };
 
@@ -23,6 +24,7 @@ namespace GameTemplate.Systems.Scene
             Debug.Log("Construct SceneService");
             _data = data;
             
+            Debug.LogError("Initialize SceneService");
             LoadScene(new SceneLoadData
             {
                 sceneName = _data.nameOfSceneToLoadOnOpening,
@@ -30,17 +32,23 @@ namespace GameTemplate.Systems.Scene
                 activateLoadingCanvas = true,
                 setActiveScene = true
             });
-
+            
             /*LoadScene(new SceneLoadData
             {
                 sceneName = _data.nameOfSceneUIScene
             });*/
+        }
+        
+        public void Start()
+        {
+            
         }
 
         public async void LoadScene(SceneLoadData sceneLoadData)
         {
             if (sceneLoadData.activateLoadingCanvas)
             {
+                Debug.Log("Loading Scene");
                 OnBeforeSceneLoad?.Invoke();
             }
 

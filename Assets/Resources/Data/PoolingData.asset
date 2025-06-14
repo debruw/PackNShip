@@ -12,39 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06b0dd107206401db1a85c44adeccc4f, type: 3}
   m_Name: PoolingData
   m_EditorClassIdentifier: 
-  poolObjects:
-  - objectPrefab: {fileID: 709528546707997484, guid: 0a33288538cc7474dba5a6b522b7fc2b,
-      type: 3}
-    poolName: BasketPrefab
-    objectCount: 10
-    goBackOnDisable: 0
-  - objectPrefab: {fileID: 8975960628408767463, guid: 0718b270c964baa42930e57926b98e43,
-      type: 3}
-    poolName: BoxPrefab
-    objectCount: 20
-    goBackOnDisable: 0
-  - objectPrefab: {fileID: 2750746876408593398, guid: 27be25929f29d3848986b68f926d57a2,
-      type: 3}
-    poolName: LabelPrefab
-    objectCount: 20
-    goBackOnDisable: 0
-  - objectPrefab: {fileID: 7936984349627189546, guid: b19c6fc0e47d67742bc16b2bd74e753e,
-      type: 3}
-    poolName: TapePrefab
-    objectCount: 20
-    goBackOnDisable: 0
-  - objectPrefab: {fileID: 3300352228747199836, guid: e91db9d66bd810c43893386cd0f35f97,
-      type: 3}
-    poolName: ItemPrefab
-    objectCount: 25
-    goBackOnDisable: 0
-  - objectPrefab: {fileID: 4285020042119709556, guid: 5734a873959c8b54b943612fa20c27db,
-      type: 3}
-    poolName: FloatingText
-    objectCount: 20
-    goBackOnDisable: 0
-  - objectPrefab: {fileID: 7813317893691292551, guid: 647df2716a505e7438005ce6fa758881,
-      type: 3}
-    poolName: UpgradeGridItem
-    objectCount: 10
-    goBackOnDisable: 0
+  poolObjects: []
